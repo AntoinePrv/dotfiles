@@ -1,0 +1,5 @@
+# Infinity loop guard
+if [$BASHRC_SOURCED != 1]; then
+	find ~/.config/bash -type f -exec source {} \;
+fi
+BASHRC_SOURCED=1
