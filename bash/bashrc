@@ -1,5 +1,7 @@
-# Infinity loop guard
-if [$BASHRC_SOURCED != 1]; then
-	find ~/.config/bash -type f -exec source {} \;
-fi
-BASHRC_SOURCED=1
+# This files just source all other files
+for file in $(find -L ~/.config/bash -type f); do
+	# Avoid sourcing itself
+	if [ $(basename $file) != "bashrc" ]; then
+		source "$file"
+	fi
+done
