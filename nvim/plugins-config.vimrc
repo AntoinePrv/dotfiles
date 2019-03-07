@@ -1,6 +1,4 @@
-" nerdcommenter
-nnoremap <F3> :NumbersToggle<CR>
-nnoremap <F4> :NumbersOnOff<CR>
+" NerdCommenter
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
@@ -26,9 +24,6 @@ augroup nerd_tree
 augroup end
 " Auto delete buffer of deleted file
 let NERDTreeAutoDeleteBuffer = 1
-" Mappings
-nnoremap <Leader>t :NERDTreeToggle<Enter>
-nnoremap <silent> <Leader>f :NERDTreeFind<CR>
 
 
 " airline
