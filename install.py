@@ -57,6 +57,7 @@ def main(
         HOME_DIR/".bashrc": PROJECT_DIR/"bash/bashrc",
         HOME_DIR/".bash_profile": PROJECT_DIR/"bash/bashrc",
         HOME_DIR/".config/bash": PROJECT_DIR/"bash",
+        HOME_DIR/".config/nvim": PROJECT_DIR/"nvim"
     }
     for dest, source in installs.items():
         prompt_install(source=source, dest=dest, dry_run=dry_run)

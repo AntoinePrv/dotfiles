@@ -1,0 +1,4 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/antoine/mega/Mackup/Github/learn2cut'
+let g:netrw_dirhist_2='/Users/antoine/.vim/plugged/vim-monokai'
