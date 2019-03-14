@@ -1,2 +1,5 @@
 # nvim artifact
 .netrwhist
+
+# Secrets and tokens
+bash/secrets.bashrc
