@@ -1,7 +1,4 @@
-# This files just source all other files
-for file in $(find -L ~/.config/bash -type f); do
-	# Avoid sourcing itself
-	if [ $(basename $file) != "bashrc" ]; then
-		source "$file"
-	fi
+# This files just source all other files in bash folder ending in .bashrc
+for file in $(find -L ~/.config/bash -type f -name '*.bashrc'); do
+	source "$file"
 done
