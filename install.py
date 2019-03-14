@@ -25,14 +25,14 @@ def prompt_install(
 ) -> None:
     # Deal with previous file
     if dest.exists():
-        answer = input(f"File {dest.name} already exists. Replace? [y/n]")
+        answer = input(f"File {dest} already exists. Replace? [y/n]")
         override = answer.lower().strip().startswith("y")
         if not override:
             return
         if not dry_run:
             if symlinks:
                 if override:
-                    if dest.is_symlink():
+                    if dest.is_symlink() or dest.is_file():
                         dest.unlink()
                     else:
                         shutil.rmtree(dest)
@@ -54,10 +54,12 @@ def main(
     dry_run: bool = True,
 ) -> None:
     installs = {
-        HOME_DIR/".bashrc": PROJECT_DIR/"bash/bashrc",
-        HOME_DIR/".bash_profile": PROJECT_DIR/"bash/bashrc",
         HOME_DIR/".config/bash": PROJECT_DIR/"bash",
-        HOME_DIR/".config/nvim": PROJECT_DIR/"nvim"
+        HOME_DIR/".bashrc": HOME_DIR/".config/bash/bashrc",
+        HOME_DIR/".bash_profile": HOME_DIR/".config/bash/bashrc",
+        HOME_DIR/".config/nvim": PROJECT_DIR/"nvim",
+        HOME_DIR/".config/tmux": PROJECT_DIR/"tmux",
+        HOME_DIR/".tmux.conf": HOME_DIR/".config/tmux/tmux.conf"
     }
     for dest, source in installs.items():
         prompt_install(source=source, dest=dest, dry_run=dry_run)
