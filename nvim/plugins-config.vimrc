@@ -28,6 +28,7 @@ let NERDTreeAutoDeleteBuffer = 1
 
 " airline
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#enabled=0
 let g:airline_section_z = '%l/%L'
 
 
@@ -61,7 +62,36 @@ let g:ale_sign_warning = ''
 let g:ale_completion_enabled = 1
 let g:ale_linters = {'python': ['pyls', 'pydocstyle']}
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['autopep8'],
+	\'*': ['remove_trailing_lines', 'trim_whitespace'],
+	\'python': ['autopep8'],
 \}
 let g:ale_fix_on_save = 1
+
+
+" Tmuxline
+let g:tmuxline_preset = {
+	\'a'    : ['#h', ' #S'],
+	\'cwin' : '#I:#W#F',
+	\'win'  : '#I:#W',
+	\'x'    : '#(cd #{pane_current_path}; (git rev-parse --abbrev-ref HEAD && echo "") | tail -r | paste -sd " " -)',
+	\'y'    : ' #(cd #{pane_current_path}; pwd | xargs basename)',
+	\'z'    : '%R %a',
+	\'options' : {'status-justify': 'left'}
+\}
+
+
+" Promptline
+" Small prompt for inside tmux
+let g:promptline_preset = {
+	\'a'    : [ '\W' ],
+	\'b'    : [ promptline#slices#jobs() ],
+	\'warn' : [ promptline#slices#last_exit_code() ]
+\}
+" Full prompt putide tmux
+let g:promptline_preset = {
+	\'a'    : [ promptline#slices#host({ 'only_if_ssh': 1 }), '\W'],
+	\'b'    : [ promptline#slices#vcs_branch(), promptline#slices#git_status() ],
+	\'c'    : [ promptline#slices#python_virtualenv() ],
+	\'x'    : [ promptline#slices#jobs() ],
+	\'warn' : [ promptline#slices#last_exit_code() ]
+\}

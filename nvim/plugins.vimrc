@@ -31,6 +31,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sheerun/vim-polyglot'
 	Plug 'w0rp/ale'
 
+	" Plugins for outside of vim
+	Plug 'edkolev/tmuxline.vim'
+	Plug 'edkolev/promptline.vim'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
-
