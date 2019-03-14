@@ -16,9 +16,8 @@ if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
 fi
 
 # Add path for executable
-export PATH=/usr/local/opt/python/libexec/bin:$PATH
-export PATH=$PATH:/usr/local/bin:~/bin
-
+export PATH="$HOME"'/.local/bin':"$PATH"
+export PATH=$PATH:/usr/local/bin
 
 # Python tools
 export PYTHONBREAKPOINT="ipdb.set_trace"
