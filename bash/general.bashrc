@@ -1,3 +1,7 @@
+# Useful variables
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+
 # Set vim editing style and editor
 set -o vi
 export EDITOR=nvim
@@ -7,12 +11,10 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Prompt
-function _update_ps1() {
-	PS1=$(powerline-shell $?)
-}
-
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-	PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+if [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; then
+	source "${DIR}/tmux-prompt.sh"
+else
+	source "${DIR}/default-prompt.sh"
 fi
 
 # Add path for executable
