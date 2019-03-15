@@ -84,7 +84,7 @@ let g:tmuxline_preset = {
 " Small prompt for inside tmux
 let g:promptline_preset = {
 	\'a'    : [ '\W' ],
-	\'b'    : [ promptline#slices#jobs() ],
+	\'x'    : [ promptline#slices#jobs() ],
 	\'warn' : [ promptline#slices#last_exit_code() ]
 \}
 " Full prompt putide tmux
