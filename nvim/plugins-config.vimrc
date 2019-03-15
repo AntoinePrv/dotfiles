@@ -73,7 +73,7 @@ let g:tmuxline_preset = {
 	\'a'    : ['#h', ' #S'],
 	\'cwin' : '#I:#W#F',
 	\'win'  : '#I:#W',
-	\'x'    : '#(cd #{pane_current_path}; (git rev-parse --abbrev-ref HEAD && echo "") | tail -r | paste -sd " " -)',
+	\'x'    : '#(cd #{pane_current_path}; (git rev-parse --abbrev-ref HEAD && echo "") | sed ''1!G;h;$!d''  | paste -sd " " -)',
 	\'y'    : ' #(cd #{pane_current_path}; pwd | xargs basename)',
 	\'z'    : '%R %a',
 	\'options' : {'status-justify': 'left'}
