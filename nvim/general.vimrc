@@ -1,6 +1,10 @@
 " Default encoding
 set encoding=utf-8
 
+" Default position for opening
+set splitbelow
+set splitright
+
 " Format based on file type
 filetype on
 filetype indent on

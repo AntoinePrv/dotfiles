@@ -31,6 +31,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sheerun/vim-polyglot'
 	Plug 'w0rp/ale'
 
+	" Tmux panes navigation
+	Plug 'christoomey/vim-tmux-navigator'
+
 	" Plugins for outside of vim
 	Plug 'edkolev/tmuxline.vim'
 	Plug 'edkolev/promptline.vim'
