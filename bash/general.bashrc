@@ -11,7 +11,7 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Prompt
-if [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; then
+if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
 	source "${DIR}/tmux-prompt.sh"
 else
 	source "${DIR}/default-prompt.sh"
