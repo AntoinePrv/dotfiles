@@ -59,7 +59,8 @@ def main(
         HOME_DIR/".bash_profile": HOME_DIR/".config/bash/bashrc",
         HOME_DIR/".config/nvim": PROJECT_DIR/"nvim",
         HOME_DIR/".config/tmux": PROJECT_DIR/"tmux",
-        HOME_DIR/".tmux.conf": HOME_DIR/".config/tmux/tmux.conf"
+        HOME_DIR/".tmux.conf": HOME_DIR/".config/tmux/tmux.conf",
+        HOME_DIR/".config/git": PROJECT_DIR/"git"
     }
     for dest, source in installs.items():
         prompt_install(source=source, dest=dest, dry_run=dry_run)
