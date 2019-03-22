@@ -1,2 +1,5 @@
+# nvim artifact
+.netrwhist
+
 # Python et al.
 .ipynb_checkpoints
