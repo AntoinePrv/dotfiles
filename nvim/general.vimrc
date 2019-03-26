@@ -38,4 +38,5 @@ set wildignore+=*.DS_Store
 set wildignore+=*.pyc,__pycache__,*.egg-info
 
 " Completion mode
-set completeopt=menuone,preview,noinsert
+set completeopt=menuone,noinsert,noselect
+set pumheight=5
