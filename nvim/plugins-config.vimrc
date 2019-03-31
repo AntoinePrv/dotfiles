@@ -58,7 +58,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['yml'] = ''
 
 " ale
 let g:ale_sign_error = 'ﱥ'
-let g:ale_sign_warning = ''
+let g:ale_sign_warning = ''
 let g:ale_completion_enabled = 1
 let g:ale_linters = {'python': ['pyls', 'pydocstyle']}
 let g:ale_fixers = {
@@ -69,16 +69,43 @@ let g:ale_fix_on_save = 1
 
 
 " Tmuxline
+function! TmuxvarResolve_var(name)
+	let command = a:name.'=$(tmux showenv __TMUX#{pane_id}_'.a:name.') && '
+	let command = command . a:name.'=\\${'.a:name.'#__TMUX#{pane_id}_'.a:name.'=}'
+	let command = command . ' && '
+	return command
+endfunction
+
+function! TmuxvarPwd()
+	let command = ' #('.TmuxvarResolve_var('PWD')
+	let command = command . 'cd \\$PWD && pwd | xargs basename)'
+	return command
+endfunction
+
+function! TmuxvarGit_branch()
+	let command = '#('.TmuxvarResolve_var('PWD').'cd \\$PWD && '
+	let command = command . '(git rev-parse --abbrev-ref HEAD && echo "") '
+	let command = command . '| sed ''1!G;h;$!d''  | paste -sd " " -)'
+	return command
+endfunction
+
+function! TmuxvarVirtualenv()
+	let command = '#('.TmuxvarResolve_var('VIRTUAL_ENV')
+	let command = command . 'echo " $(basename \\$VIRTUAL_ENV)")'
+	return command
+endfunction
+
 let g:tmuxline_preset = {
-	\'a'    : ['#h', ' #S'],
+	\'a'    : '%a %R',
+	\'b'    : '#h',
+	\'c'    : ' #S',
 	\'cwin' : '#I:#W#F',
 	\'win'  : '#I:#W',
-	\'x'    : '#(cd #{pane_current_path}; (git rev-parse --abbrev-ref HEAD && echo "") | sed ''1!G;h;$!d''  | paste -sd " " -)',
-	\'y'    : ' #(cd #{pane_current_path}; pwd | xargs basename)',
-	\'z'    : '%R %a',
+	\'x'    : TmuxvarGit_branch(),
+	\'y'    : TmuxvarPwd(),
+	\'z'    : TmuxvarVirtualenv(),
 	\'options' : {'status-justify': 'left'}
 \}
-
 
 " Promptline
 " Small prompt for inside tmux
