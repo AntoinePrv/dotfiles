@@ -11,10 +11,10 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Prompt
+export PROMPT_COMMAND=''
 if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
 	source "${DIR}/tmux-prompt.sh"
-	# Force update the status line
-	export PROMPT_COMMAND="${PROMPT_COMMAND} tmux refresh-client -S;"
+	source "${DIR}/tmux-update.sh"
 else
 	source "${DIR}/default-prompt.sh"
 fi
