@@ -1,6 +1,7 @@
 alias ls='ls -Gh'
 alias ll='ls -l'
 alias vim='nvim'
+alias python='python3'
 
 # Defining folder directories
 shopt -s cdable_vars

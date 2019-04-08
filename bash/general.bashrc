@@ -34,5 +34,5 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # Pipenv completion
-eval "$(pipenv --completion)"
-eval "$(pip completion --bash)"
+[ -x "$(command -v pipenv)" ] && eval "$(pipenv --completion)"
+[ -x "$(command -v pip)" ] && eval "$(pip completion --bash)"
