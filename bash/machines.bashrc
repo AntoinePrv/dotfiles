@@ -16,11 +16,16 @@ elif [ "$(hostname -d)" = "gerad.lan" ]; then
 
 	# Local disk space
 	if [ -d "/local_workspace" ]; then
-		LOCAL_WORKSPACE="/local_workspace/proant"
+		LOCAL_WORKSPACE="/local_workspace/${USER}"
 	elif [ -d "/local1" ]; then
-		LOCAL_WORKSPACE="/local1/proant"
+		LOCAL_WORKSPACE="/local1/${USER}"
 	fi
 
 	# Virt env locations
 	export WORKON_HOME="${LOCAL_WORKSPACE}/venvs"
+
+# Mila cluster configuration
+elif [ "$(hostname -d)" = "server.mila.quebec" ]; then
+	# Network space
+	LOCAL_WORKSPACE="/network/tmp1/${USER}"
 fi
