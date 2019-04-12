@@ -84,7 +84,7 @@ endfunction
 
 function! TmuxvarGit_branch()
 	let command = '#('.TmuxvarResolve_var('PWD').'cd \\$PWD && '
-	let command = command . '(git rev-parse --abbrev-ref HEAD && echo "") '
+	let command = command . '(git rev-parse --abbrev-ref HEAD && echo "") '
 	let command = command . '| sed ''1!G;h;$!d''  | paste -sd " " -)'
 	return command
 endfunction

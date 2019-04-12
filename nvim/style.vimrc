@@ -1,6 +1,6 @@
 " Color theme
 syntax enable
-colorscheme gruvbox
+colorscheme base16-tomorrow-night
 
 " Line numbers
 set number

@@ -8,7 +8,7 @@ export EDITOR=nvim
 
 # Terminal colors
 export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+export GREP_OPTIONS='--color=auto'
 
 # Prompt
 export PROMPT_COMMAND=''

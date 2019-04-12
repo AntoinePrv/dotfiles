@@ -11,12 +11,13 @@ call plug#begin('~/.vim/plugged')
 	" General
 	Plug 'tpope/vim-sensible'
 	Plug 'scrooloose/nerdcommenter'
+	Plug 'tpope/vim-fugitive'
 
 	" Colors themes
 	Plug 'sickill/vim-monokai'
 	Plug 'junegunn/seoul256.vim'
 	Plug 'morhetz/gruvbox'
-	Plug 'tpope/vim-fugitive'
+	Plug 'chriskempson/base16-vim'
 
 	" Visual
 	Plug 'vim-airline/vim-airline'
