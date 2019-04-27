@@ -17,6 +17,13 @@ augroup buffer_view
 	au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 augroup end
 
+" Autoreload buffer when file has changed
+set autoread
+augroup auto_reload
+	autocmd!
+	autocmd FocusGained,BufEnter * :checktime
+augroup end
+
 " Set .bashrc as a bash extension
 augroup bashrc_files
 	autocmd!

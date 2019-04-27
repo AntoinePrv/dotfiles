@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-sensible'
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'tpope/vim-fugitive'
+	Plug 'tmux-plugins/vim-tmux-focus-events'
 
 	" Colors themes
 	Plug 'sickill/vim-monokai'

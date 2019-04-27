@@ -110,12 +110,14 @@ let g:tmuxline_preset = {
 
 " Promptline
 " Small prompt for inside tmux
+" Read the color from an airline extension. Also
+let g:promptline_theme = 'airline_insert'
 let g:promptline_preset = {
 	\'a'    : [ '\W' ],
 	\'x'    : [ promptline#slices#jobs() ],
 	\'warn' : [ promptline#slices#last_exit_code() ]
 \}
-" Full prompt putide tmux
+" Full prompt for inside tmux
 let g:promptline_preset = {
 	\'a'    : [ promptline#slices#host({ 'only_if_ssh': 1 }), '\W'],
 	\'b'    : [ promptline#slices#vcs_branch(), promptline#slices#git_status() ],
