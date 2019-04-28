@@ -1,11 +1,11 @@
 # Configuration specific to machines / networks
 
 # Local configuration
-if [ "${HOSTNAME}" = "kogitox.local" ]; then
+if [[ "${HOSTNAME}" == "kogitox"* ]]; then
 	:  # Does nothing
 
 # Gerad configuration
-elif [ "$(hostname -d)" = "gerad.lan" ]; then
+elif [[ "${HOSTNAME}" == *".gerad.lan" ]]; then
 	# Load some module
 	source /home/modules/Bashrc
 	module load tmux
@@ -25,7 +25,7 @@ elif [ "$(hostname -d)" = "gerad.lan" ]; then
 	export WORKON_HOME="${LOCAL_WORKSPACE}/venvs"
 
 # Mila cluster configuration
-elif [ "$(hostname -d)" = "server.mila.quebec" ]; then
+elif [[ "${HOSTNAME}" == *"server.mila.quebec" ]]; then
 	# Network space
 	export LOCAL_WORKSPACE="/network/tmp1/${USER}"
 fi
