@@ -141,7 +141,7 @@ let g:promptline_preset = {
 	\'x'    : [ promptline#slices#jobs() ],
 	\'warn' : [ promptline#slices#last_exit_code() ]
 \}
-" Full prompt for inside tmux
+" Regular prompt
 let g:promptline_preset = {
 	\'a'    : [ promptline#slices#host({ 'only_if_ssh': 1 }), '\W'],
 	\'b'    : [ promptline#slices#vcs_branch(), promptline#slices#git_status() ],
