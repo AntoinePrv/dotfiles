@@ -53,6 +53,7 @@ def prompt_install(
 def main(
     dry_run: bool = True,
 ) -> None:
+    # target -> source
     installs = {
         HOME_DIR/".config/bash": PROJECT_DIR/"bash",
         HOME_DIR/".bashrc": HOME_DIR/".config/bash/bashrc",
@@ -60,7 +61,8 @@ def main(
         HOME_DIR/".config/nvim": PROJECT_DIR/"nvim",
         HOME_DIR/".config/tmux": PROJECT_DIR/"tmux",
         HOME_DIR/".tmux.conf": HOME_DIR/".config/tmux/tmux.conf",
-        HOME_DIR/".config/git": PROJECT_DIR/"git"
+        HOME_DIR/".config/git": PROJECT_DIR/"git",
+        HOME_DIR/".local/share/base16": PROJECT_DIR/"base16",
     }
     for dest, source in installs.items():
         prompt_install(source=source, dest=dest, dry_run=dry_run)

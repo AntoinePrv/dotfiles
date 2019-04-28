@@ -26,6 +26,30 @@ augroup end
 let NERDTreeAutoDeleteBuffer = 1
 
 
+" Base16 colors
+colorscheme base16-default-dark
+" Use the 256 color space to avoid redifining bright colors
+let base16colorspace=256
+" Cutomize Base16 theme
+function! s:base16_customize() abort
+	" Colors: https://github.com/chriskempson/base16/blob/master/styling.md
+	" Arguments: group, guifg, guibg, ctermfg, ctermbg, attr, guisp
+	" Remove background highlight present by default in vi
+	call Base16hi("SpellBad",   "None", "None", "None", "None")
+	call Base16hi("SpellCap",   "None", "None", "None", "None")
+	call Base16hi("SpellLocal", "None", "None", "None", "None")
+	call Base16hi("SpellRare",  "None", "None", "None", "None")
+	" Set Ale signs
+	let l:signcol_bg = synIDattr(hlID('SignColumn'),'bg')
+	call Base16hi("ALEErrorSign", g:base16_gui08, l:signcol_bg, g:base16_cterm08, l:signcol_bg)
+	call Base16hi("ALEWarningSign", g:base16_gui0A, l:signcol_bg, g:base16_cterm0A, l:signcol_bg)
+endfunction
+augroup on_change_colorschema
+	autocmd!
+	autocmd ColorScheme * call s:base16_customize()
+augroup end
+
+
 " airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled=0

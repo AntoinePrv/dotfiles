@@ -6,9 +6,16 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 set -o vi
 export EDITOR=nvim
 
-# Terminal colors
+# Shell colors
 export CLICOLOR=1
 export GREP_OPTIONS='--color=auto'
+
+# Terminal Base16 color theme
+THEME="pop"
+THEME_SCRIPT="${HOME}/.local/share/base16/scripts/base16-${THEME}.sh"
+if [[ -n "$PS1" && -s "$THEME_SCRIPT" ]]; then
+	source "$THEME_SCRIPT"
+fi
 
 # Prompt
 export PROMPT_COMMAND=''
