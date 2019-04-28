@@ -35,10 +35,10 @@ function! s:base16_customize() abort
 	" Colors: https://github.com/chriskempson/base16/blob/master/styling.md
 	" Arguments: group, guifg, guibg, ctermfg, ctermbg, attr, guisp
 	" Remove background highlight present by default in vi
-	call Base16hi("SpellBad",   "None", "None", "None", "None")
-	call Base16hi("SpellCap",   "None", "None", "None", "None")
-	call Base16hi("SpellLocal", "None", "None", "None", "None")
-	call Base16hi("SpellRare",  "None", "None", "None", "None")
+	call Base16hi("SpellBad",   "None", "None", "None", "None", "underline,italic")
+	call Base16hi("SpellCap",   "None", "None", "None", "None", "underline,italic")
+	call Base16hi("SpellLocal", "None", "None", "None", "None", "underline,italic")
+	call Base16hi("SpellRare",  "None", "None", "None", "None", "underline,italic")
 	" Set Ale signs
 	let l:signcol_bg = synIDattr(hlID('SignColumn'),'bg')
 	call Base16hi("ALEErrorSign", g:base16_gui08, l:signcol_bg, g:base16_cterm08, l:signcol_bg)
