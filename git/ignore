@@ -3,3 +3,9 @@
 
 # Python et al.
 .ipynb_checkpoints
+
+# Mergetools backup files
+*.orig
+
+# Network file storage
+.nfs*
