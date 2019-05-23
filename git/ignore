@@ -8,4 +8,4 @@
 *.orig
 
 # Network file storage
-.nfs*
+**/.nfs*
