@@ -8,7 +8,6 @@ export EDITOR=nvim
 
 # Shell colors
 export CLICOLOR=1
-export GREP_OPTIONS='--color=auto'
 
 # Terminal Base16 color theme
 THEME="pop"
