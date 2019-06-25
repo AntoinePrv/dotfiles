@@ -11,7 +11,7 @@ elif [[ "${HOSTNAME}" == *".gerad.lan" ]]; then
 	module load gcc/7.2.0
 	module load git
 	module load htop
-	module load singularity
+	module load singularity/3.1.1
 
 	# Local disk space
 	if [ -d "/local_workspace" ]; then
