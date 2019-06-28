@@ -26,9 +26,9 @@ elif [[ "${HOSTNAME}" == *".gerad.lan" ]]; then
 # Mila cluster configuration
 elif [[ "${HOSTNAME}" == *"server.mila.quebec" ]]; then
 	module load singularity/3
-
-	# Network space
 	export SCRATCH="/network/tmp1/${USER}"
+	export WORKON_HOME="${SLURM_TMPDIR-$SCRATCH}/venvs"
+	mkdir -p $WORKON_HOME
 
 # Compute Canda configuration
 elif [[ "${HOSTNAME}" == *"calculquebec.ca" ]]; then
