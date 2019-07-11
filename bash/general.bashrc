@@ -1,9 +1,6 @@
 # Useful variables
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-
-# Set vim editing style and editor
-set -o vi
 export EDITOR=nvim
 
 # Shell colors

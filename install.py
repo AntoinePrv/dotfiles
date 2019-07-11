@@ -63,6 +63,8 @@ def main(
         HOME_DIR/".tmux.conf": HOME_DIR/".config/tmux/tmux.conf",
         HOME_DIR/".config/git": PROJECT_DIR/"git",
         HOME_DIR/".local/share/base16": PROJECT_DIR/"base16",
+        HOME_DIR/".config/misc": PROJECT_DIR/"misc",
+        HOME_DIR/".inputrc": HOME_DIR/".config/misc/inputrc",
     }
     for dest, source in installs.items():
         prompt_install(source=source, dest=dest, dry_run=dry_run)
