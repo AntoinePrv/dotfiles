@@ -1,2 +1,2 @@
 # dotfiles
-Nix environement configuration, from .bashrc to vim
+Nix environment configuration files, from .bashrc to vim
