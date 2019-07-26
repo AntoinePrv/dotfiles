@@ -4,6 +4,8 @@ nmap <space> <Leader>
 
 " General mappings
 inoremap jk <Esc>
+nnoremap <silent> <C-W>_ :split<CR>
+nnoremap <silent> <C-W><Bar> :vsplit<CR>
 
 " Numbers
 nnoremap <F3> :NumbersToggle<CR>
