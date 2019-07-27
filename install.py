@@ -21,7 +21,7 @@ def prompt_install(
     source: pathlib.Path,
     dest: pathlib.Path,
     dry_run: bool = True,
-    symlinks: bool = True
+    symlinks: bool = True,
 ) -> None:
     # Deal with previous file
     if dest.exists():
@@ -50,21 +50,19 @@ def prompt_install(
     logger.info(f"Installed {dest}.")
 
 
-def main(
-    dry_run: bool = True,
-) -> None:
+def main(dry_run: bool = True,) -> None:
     # target -> source
     installs = {
-        HOME_DIR/".config/bash": PROJECT_DIR/"bash",
-        HOME_DIR/".bashrc": HOME_DIR/".config/bash/bashrc",
-        HOME_DIR/".bash_profile": HOME_DIR/".config/bash/bashrc",
-        HOME_DIR/".config/nvim": PROJECT_DIR/"nvim",
-        HOME_DIR/".config/tmux": PROJECT_DIR/"tmux",
-        HOME_DIR/".tmux.conf": HOME_DIR/".config/tmux/tmux.conf",
-        HOME_DIR/".config/git": PROJECT_DIR/"git",
-        HOME_DIR/".local/share/base16": PROJECT_DIR/"base16",
-        HOME_DIR/".config/misc": PROJECT_DIR/"misc",
-        HOME_DIR/".inputrc": HOME_DIR/".config/misc/inputrc",
+        HOME_DIR / ".config/bash": PROJECT_DIR / "bash",
+        HOME_DIR / ".bashrc": HOME_DIR / ".config/bash/bashrc",
+        HOME_DIR / ".bash_profile": HOME_DIR / ".config/bash/bashrc",
+        HOME_DIR / ".config/nvim": PROJECT_DIR / "nvim",
+        HOME_DIR / ".config/tmux": PROJECT_DIR / "tmux",
+        HOME_DIR / ".tmux.conf": HOME_DIR / ".config/tmux/tmux.conf",
+        HOME_DIR / ".config/git": PROJECT_DIR / "git",
+        HOME_DIR / ".local/share/base16": PROJECT_DIR / "base16",
+        HOME_DIR / ".config/misc": PROJECT_DIR / "misc",
+        HOME_DIR / ".inputrc": HOME_DIR / ".config/misc/inputrc",
     }
     for dest, source in installs.items():
         prompt_install(source=source, dest=dest, dry_run=dry_run)
@@ -73,17 +71,19 @@ def main(
 if __name__ == "__main__":
     # Parse program options
     parser = argparse.ArgumentParser(
-        description="Install all the config files for the user.")
+        description="Install all the config files for the user."
+    )
     parser.add_argument(
-        "--dry-run", "-n",
+        "--dry-run",
+        "-n",
         help="Show steps without executing.",
         default=False,
-        action="store_true")
+        action="store_true",
+    )
     args = parser.parse_args()
 
     # Define logging as printing
-    logging.basicConfig(
-        level=logging.INFO, stream=sys.stdout, format="%(message)s")
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout, format="%(message)s")
 
     # Run the install
     main(**vars(args))
