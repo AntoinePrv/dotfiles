@@ -67,6 +67,11 @@ def nvim_generate_files() -> None:
         run_nvim_cmd(f"source {vim_script}", f"PromptlineSnapshot {sh_script}")
         logger.info(f"Generated file {sh_script}.")
 
+    vim_script = PROJECT_DIR / "tmux/tmuxline.vim"
+    tmux_conf = PROJECT_DIR / "tmux/tmuxline.tmux"
+    run_nvim_cmd(f"source {vim_script}", "Tmuxline", f"TmuxlineSnapshot {tmux_conf}")
+    logger.info(f"Generated file {tmux_conf}.")
+
 
 def main(dry_run: bool = True) -> None:
     # target -> source
