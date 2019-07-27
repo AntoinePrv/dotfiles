@@ -17,7 +17,7 @@ HOME_DIR = pathlib.Path(os.environ["HOME"]).resolve()
 PROJECT_DIR = pathlib.Path(__file__).parent.resolve()
 
 
-def prompt_install(
+def prompt_install_files(
     source: pathlib.Path,
     dest: pathlib.Path,
     dry_run: bool = True,
@@ -50,7 +50,25 @@ def prompt_install(
     logger.info(f"Installed {dest}.")
 
 
-def main(dry_run: bool = True,) -> None:
+def run_nvim_cmd(*cmds: str) -> None:
+    cmd_str = " ".join(f"+'{cmd}'" for cmd in cmds)
+    os.system(f"nvim -n {cmd_str} +'qa!' &> /dev/null")
+
+
+def nvim_generate_files() -> None:
+    # Make sur all nvim deps are installed
+    run_nvim_cmd("PlugUpgrade", "PlugInstall --sync", "PlugUpdate --sync")
+    logger.info("Installed nvim packages.")
+
+    # TODO make a prompt for existing file, factor the prompt from different commands
+    for name in ("default-prompt", "tmux-prompt"):
+        vim_script = PROJECT_DIR / f"bash/{name}.vim"
+        sh_script = PROJECT_DIR / f"bash/{name}.sh"
+        run_nvim_cmd(f"source {vim_script}", f"PromptlineSnapshot {sh_script}")
+        logger.info(f"Generated file {sh_script}.")
+
+
+def main(dry_run: bool = True) -> None:
     # target -> source
     installs = {
         HOME_DIR / ".config/bash": PROJECT_DIR / "bash",
@@ -65,7 +83,9 @@ def main(dry_run: bool = True,) -> None:
         HOME_DIR / ".inputrc": HOME_DIR / ".config/misc/inputrc",
     }
     for dest, source in installs.items():
-        prompt_install(source=source, dest=dest, dry_run=dry_run)
+        prompt_install_files(source=source, dest=dest, dry_run=dry_run)
+
+    nvim_generate_files()
 
 
 if __name__ == "__main__":

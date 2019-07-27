@@ -131,21 +131,3 @@ let g:tmuxline_preset = {
 	\'z'    : TmuxvarVirtualenv(),
 	\'options' : {'status-justify': 'left'}
 \}
-
-" Promptline
-" Small prompt for inside tmux
-" Read the color from an airline extension. Also
-let g:promptline_theme = 'airline_insert'
-let g:promptline_preset = {
-	\'a'    : [ '\W' ],
-	\'x'    : [ promptline#slices#jobs() ],
-	\'warn' : [ promptline#slices#last_exit_code() ]
-\}
-" Regular prompt
-let g:promptline_preset = {
-	\'a'    : [ promptline#slices#host({ 'only_if_ssh': 1 }), '\W'],
-	\'b'    : [ promptline#slices#vcs_branch(), promptline#slices#git_status() ],
-	\'c'    : [ promptline#slices#python_virtualenv() ],
-	\'x'    : [ promptline#slices#jobs() ],
-	\'warn' : [ promptline#slices#last_exit_code() ]
-\}
