@@ -211,8 +211,17 @@ if __name__ == "__main__":
         default=False,
         action="store_true",
     )
+    parser.add_argument(
+        "--yes",
+        "-y",
+        help="Always replace existing installation targets",
+        dest="replace_all",
+        action="store_const",
+        const=True,
+    )
     args = parser.parse_args()
     Action.dry_run = args.dry_run
+    Action.replace_all = args.replace_all
 
     # Define logging as printing
     logging.basicConfig(level=logging.INFO, stream=sys.stdout, format="%(message)s")
