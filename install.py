@@ -112,8 +112,8 @@ class FilesInstall(Action):
 
 def run_nvim_cmd(*cmds: str) -> None:
     """Run commands in nvim."""
-    cmd_str = " ".join(f"+'{cmd}'" for cmd in cmds)
-    os.system(f"nvim -n {cmd_str} +'qa!' &> /dev/null")
+    cmd_str = " ".join(f"+'silent {cmd}'" for cmd in cmds)
+    os.system(f"nvim -n --headless {cmd_str} +'qa!'")
 
 
 class UpdateNvimPackages(Action):
