@@ -31,13 +31,14 @@ augroup bashrc_files
 augroup end
 
 " Colorcolumn relative to textwidth
-set textwidth=80
+set textwidth=90
 set colorcolumn=+0
 
 " Some Python specifics
 augroup python_files
 	autocmd!
-	autocmd FileType python setlocal textwidth=80
+	" Black default
+	autocmd FileType python setlocal textwidth=88
 augroup end
 
 " Files to ignore
