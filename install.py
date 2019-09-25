@@ -92,7 +92,7 @@ class FilesInstall(Action):
     def __init__(self, source: pathlib.Path, dest: pathlib.Path) -> None:
         super().__init__(
             replace_prompt=f"Location {dest} already exists.",
-            report_message=f"Instaled {dest}.",
+            report_message=f"Installed {dest}.",
         )
         self.source = source
         self.dest = dest
@@ -132,7 +132,7 @@ class UpdateNvimPackages(Action):
         run_nvim_cmd("PlugUpgrade", "PlugInstall --sync", "PlugUpdate --sync")
 
 
-class NvimGenerateLine(Action, abc.ABC):
+class NvimGenerateFile(Action, abc.ABC):
     def __init__(self, script: pathlib.Path, dest: pathlib.Path) -> None:
         super().__init__(
             replace_prompt=f"Location {dest} already exists.",
@@ -151,17 +151,42 @@ class NvimGenerateLine(Action, abc.ABC):
         ...
 
 
-class NvimGeneratePromptline(NvimGenerateLine):
-    def install(self) -> bool:
+class NvimGeneratePromptline(NvimGenerateFile):
+    def install(self) -> None:
         """Generate promptline bash prompt."""
         run_nvim_cmd(f"source {self.script}", f"PromptlineSnapshot! {self.dest}")
 
 
-class NvimGenerateTmuxline(NvimGenerateLine):
-    def install(self) -> bool:
+class NvimGenerateTmuxline(NvimGenerateFile):
+    def install(self) -> None:
         """Generate tmuxline tmux conf."""
         run_nvim_cmd(
             f"source {self.script}", "Tmuxline", f"TmuxlineSnapshot! {self.dest}"
+        )
+
+
+class PipGenerateCompletion(Action):
+    def __init__(self, dest: pathlib.Path) -> None:
+        super().__init__(
+            replace_prompt=f"Location {dest} already exists.",
+            report_message=f"Generated file {dest}.",
+        )
+        self.dest = dest
+
+    def exists(self) -> bool:
+        """Return wether the installation target already exists."""
+        return self.dest.exists() or self.dest.is_symlink()
+
+    def install(self) -> None:
+        """Generate completion files for pip and pipenv."""
+        retcode = os.system(
+            "type -P pip &> /dev/null && "
+            f"(pip completion --`basename $SHELL` > {self.dest})"
+        )
+        redirect = ">>" if (retcode == 0) else ">"
+        os.system(
+            "type -P pipenv &> /dev/null && "
+            f"(PIPENV_SHELL=$SHELL pipenv --completion {redirect} {self.dest})"
         )
 
 
@@ -191,6 +216,7 @@ def main() -> None:
             script=PROJECT_DIR/"tmux/tmuxline.vim",
             dest=CONFIG_DIR/"tmux/tmuxline.tmux"
         ),
+        PipGenerateCompletion(dest=CONFIG_DIR/"bash/completion/pip.bashrc"),
     ]
     # fmt: on
 
