@@ -14,8 +14,10 @@ nnoremap <F4> :NumbersOnOff<CR>
 " Netwr
 nnoremap <leader>e :Explore<CR>
 
-" ALE
-" Navigate between errors
+" ALE Go to definition
+nnoremap <Leader>g :ALEGoToDefinition<CR>
+
+" ALE Navigate between errors
 nmap <silent> ]e :call AleNextError()<CR>
 function! AleNextError() range
 	for l:i in range(v:count1)
