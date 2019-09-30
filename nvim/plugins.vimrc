@@ -23,7 +23,6 @@ call plug#begin('~/.vim/plugged')
 	" Visual
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
-	Plug 'scrooloose/nerdtree'
 	Plug 'myusuf3/numbers.vim'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'ryanoasis/vim-devicons'

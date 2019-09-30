@@ -15,17 +15,6 @@ let g:NERDToggleCheckAllLines = 1
 let NERDTreeRespectWildIgnore=1
 
 
-" NERDTree
-augroup nerd_tree
-	autocmd!
-	" Auto open NERDTree
-	autocmd StdinReadPre * let s:std_in=1
-	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-augroup end
-" Auto delete buffer of deleted file
-let NERDTreeAutoDeleteBuffer = 1
-
-
 " Base16 colors
 colorscheme base16-default-dark
 " Use the 256 color space to avoid redifining bright colors
