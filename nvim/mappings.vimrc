@@ -1,3 +1,7 @@
+" Use space as leader but allow it to display properly wiht \
+let mapleader = "\\"
+nmap <space> <Leader>
+
 " General mappings
 inoremap jk <Esc>
 
