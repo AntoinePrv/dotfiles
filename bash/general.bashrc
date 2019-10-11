@@ -23,8 +23,8 @@ else
 fi
 
 # Add path for executable
-export PATH="$HOME"'/.local/bin':"$PATH"
-export PATH=$PATH:/usr/local/bin
+export PATH="/usr/local/bin:/usr/local/sbin:${PATH}"
+export PATH="${HOME}/.local/bin:${PATH}"
 
 # Python tools
 export PYTHONBREAKPOINT="ipdb.set_trace"
