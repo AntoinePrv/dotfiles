@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'tpope/vim-fugitive'
 	Plug 'tmux-plugins/vim-tmux-focus-events'
+	Plug 'junegunn/fzf', { 'do': './install --bin' }
 
 	" Colors themes
 	Plug 'sickill/vim-monokai'

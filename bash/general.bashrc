@@ -13,6 +13,9 @@ if [[ -n "$PS1" && -s "$THEME_SCRIPT" ]]; then
 	source "$THEME_SCRIPT"
 fi
 
+# Fzf color
+export FZF_DEFAULT_OPTS='--color=16'
+
 # Prompt
 export PROMPT_COMMAND=''
 if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then

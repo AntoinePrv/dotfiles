@@ -14,6 +14,9 @@ nnoremap <F4> :NumbersOnOff<CR>
 " Netwr
 nnoremap <leader>e :Explore<CR>
 
+" Fzf
+nnoremap <Leader>p :FZF<CR>
+
 " ALE Go to definition
 nnoremap <Leader>g :ALEGoToDefinition<CR>
 
