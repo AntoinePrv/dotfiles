@@ -1,6 +1,7 @@
 " Use space as leader but allow it to display properly wiht \
 let mapleader = "\\"
-nmap <space> <Leader>
+nmap <space> <leader>
+vmap <space> <leader>
 
 " General mappings
 inoremap jk <Esc>
@@ -11,14 +12,19 @@ nnoremap <silent> <C-W><Bar> :vsplit<CR>
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NumbersOnOff<CR>
 
+" Nerd Commenter
+nnoremap <silent> <leader>/ :call NERDComment(0, "toggle")<CR>
+vnoremap <silent> <leader>/ :call NERDComment(0, "toggle")<CR>
+
 " Netwr
 nnoremap <leader>e :Explore<CR>
 
 " Fzf
-nnoremap <Leader>p :FZF<CR>
+nnoremap <leader>p :FZF<CR>
 
 " ALE Go to definition
-nnoremap <Leader>g :ALEGoToDefinition<CR>
+nnoremap <leader>g :ALEGoToDefinition<CR>
+nnoremap <leader>h :ALEHover<CR>
 
 " ALE Navigate between errors
 nmap <silent> ]e :call AleNextError()<CR>
