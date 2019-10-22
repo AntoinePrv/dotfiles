@@ -20,7 +20,7 @@ vnoremap <silent> <leader>/ :call NERDComment(0, "toggle")<CR>
 nnoremap <leader>e :Explore<CR>
 
 " Fzf
-nnoremap <leader>p :FZF<CR>
+nnoremap <leader>p :call FzfFindFile()<CR>
 
 " ALE Go to definition
 nnoremap <leader>g :ALEGoToDefinition<CR>

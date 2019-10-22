@@ -70,6 +70,20 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['json'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['yaml'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['yml'] = ''
 
+" Fzf
+function FzfFindFile()
+	" Change sources if in git
+	call system('git rev-parse --is-inside-work-tree')
+	if v:shell_error == 0
+		let fzf_config = {
+			\ 'source': 'git ls-files --exclude-standard  -oc -z',
+			\ 'options': '--read0'
+		\}
+	else
+		let fzf_config = {}
+	endif
+	call fzf#run(fzf#wrap(fzf_config))
+endfunction
 
 " ale
 let g:ale_sign_error = 'ﱥ'
