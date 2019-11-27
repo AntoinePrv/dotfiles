@@ -1,0 +1,11 @@
+name: cpp
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - make
+  - cmake
+  - ccache
+  - clang-dev

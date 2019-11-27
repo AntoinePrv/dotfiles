@@ -1,0 +1,19 @@
+name: base
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - git
+  - curl
+  - wget
+  - htop
+  - ncurses  # Seems missing dep for tmux
+  - tmux
+  - fzf
+  - bat
+  - ripgrep
+  - fd-find
+  - ctags
+  - fswatch
