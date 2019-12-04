@@ -1,7 +1,9 @@
 # Exit if non-interactive shell
 [[ $- != *i* ]] && return
 
-# This files just source all other files in bash folder ending in .bashrc
+# Need to be sourced first
+source ~/.config/bash/machines.bashrc
+# This just source all files in bash folder ending in .bashrc
 for file in $(find -L ~/.config/bash -type f -name '*.bashrc'); do
 	source "$file"
 done

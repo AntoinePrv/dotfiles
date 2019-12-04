@@ -2,7 +2,10 @@
 
 # Local configuration
 if [[ "${HOSTNAME}" == "kogitox"* ]]; then
-	:  # Does nothing
+	# Local disk space
+	export CACHE_DIR="${HOME}/.cache"
+	export WORKSPACE_DIR="${HOME}/workspace"
+	export SCRATCH_DIR="/tmp/scratch"
 
 # Gerad configuration
 elif [[ "${HOSTNAME}" == *".gerad.lan" ]]; then
@@ -13,27 +16,37 @@ elif [[ "${HOSTNAME}" == *".gerad.lan" ]]; then
 	module load git
 	module load htop
 	module load singularity
+	module load anaconda
 
 	# Local disk space
 	if [ -d "/local_workspace" ]; then
-		export SCRATCH="/local_workspace/${USER}"
+		LOCAL_DIR="/local_workspace/${USER}"
 	elif [ -d "/local1" ]; then
-		export SCRATCH="/local1/${USER}"
+		LOCAL_DIR="/local1/${USER}"
 	fi
-
-	# Virt env locations
-	export WORKON_HOME="${SCRATCH}/venvs"
+	export CACHE_DIR="${LOCAL_DIR}/cache"
+	export WORKSPACE_DIR="${LOCAL_DIR}/workspace"
+	export SCRATCH_DIR="/tmp/scratch"
 
 # Mila cluster configuration
 elif [[ "${HOSTNAME}" == *"server.mila.quebec" ]]; then
 	module load singularity/3.2.0
-	export SCRATCH="/network/tmp1/${USER}"
-	export WORKON_HOME="${SLURM_TMPDIR-$SCRATCH}/venvs"
-	mkdir -p $WORKON_HOME
+
+	# Local disk space
+	export CACHE_DIR="/network/tmp1/${USER}/cache"
+	export WORKSPACE_DIR="/network/tmp1/${USER}/workspace"
+	export SCRATCH_DIR="${SLURM_TMPDIR-/tmp}/scratch"
 
 # Compute Canda configuration
 elif [[ "${HOSTNAME}" == *"calculquebec.ca" ]]; then
 	module load python/3.7
 	module load singularity/3.2
 
+	# Local disk space
+	export CACHE_DIR="/network/tmp1/${USER}/cache"
+	export WORKSPACE_DIR="/network/tmp1/${USER}/workspace"
+	export SCRATCH_DIR="${SLURM_TMPDIR-/tmp}/scratch"
+
 fi
+
+mkdir -p "$CACHE_DIR" "$WORKSPACE_DIR" "$SCRATCH_DIR"

@@ -16,6 +16,12 @@ fi
 # Fzf color
 export FZF_DEFAULT_OPTS='--color=16'
 
+# Bat color
+export BAT_THEME='base16'
+
+# Use bat as man pager if available
+type -P bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # Prompt
 export PROMPT_COMMAND=''
 if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
@@ -25,16 +31,20 @@ else
 	source "${DIR}/default-prompt.sh"
 fi
 
-# Add path for executable
-export PATH="/usr/local/bin:/usr/local/sbin:${PATH}"
-export PATH="${HOME}/.local/bin:${PATH}"
+# Add path for executable if not aleard there
+for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
+	case ":$PATH:" in
+		*":$x:"*) : ;; # already there
+		*) PATH="$x:$PATH";;
+	esac
+done
+export PATH
 
 # Python tools
 export PYTHONBREAKPOINT="ipdb.set_trace"
+export PYTHONPYCACHEPREFIX="${CACHE_DIR}/cpython"
+export WORKON_HOME="${WORKSPACE_DIR}/venvs"
 
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-	eval "$(pyenv init -)"
-fi
+# Conda directories
+export CONDA_ENVS_PATH="${WORKSPACE_DIR}/conda/envs"
+export CONDA_PKGS_DIRS="${CACHE_DIR}/conda/pkgs"
