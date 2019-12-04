@@ -9,3 +9,6 @@
 
 # Network file storage
 **/.nfs*
+
+# MacOs
+.DS_Store
