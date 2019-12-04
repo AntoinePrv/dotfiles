@@ -1,5 +1,3 @@
-name: base
-
 channels:
   - defaults
   - conda-forge
@@ -9,8 +7,8 @@ dependencies:
   - curl
   - wget
   - htop
-  - ncurses  # Seems missing dep for tmux
-  - tmux
+    # - ncurses  # Seems missing dep for tmux
+    # - tmux
   - fzf
   - bat
   - ripgrep
