@@ -1,6 +1,10 @@
 # Useful variables
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Initialize conda
+__conda_setup="$(conda shell.bash hook 2> /dev/null)" && eval "$__conda_setup"
+unset __conda_setup
+
 export EDITOR=nvim
 
 # Shell colors
