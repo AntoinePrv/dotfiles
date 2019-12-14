@@ -180,8 +180,8 @@ class PipGenerateCompletion(Action):
     def install(self) -> None:
         """Generate completion files for pip and pipenv."""
         retcode = os.system(
-            "type -P pip &> /dev/null && "
-            f"(pip completion --`basename $SHELL` > {self.dest})"
+            "type -P pip3 &> /dev/null && "
+            f"(pip3 completion --`basename $SHELL` > {self.dest})"
         )
         redirect = ">>" if (retcode == 0) else ">"
         os.system(
