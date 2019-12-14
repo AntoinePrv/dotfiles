@@ -203,6 +203,7 @@ def main() -> None:
         FilesInstall(source=PROJECT_DIR/"base16", dest=DATA_DIR/"base16"),
         FilesInstall(source=PROJECT_DIR/"misc", dest=CONFIG_DIR/"misc"),
         FilesInstall(source=CONFIG_DIR/"misc/inputrc", dest=HOME_DIR/".inputrc"),
+        FilesInstall(source=CONFIG_DIR/"misc/editrc", dest=HOME_DIR/".editrc"),
         UpdateNvimPackages(),
         NvimGeneratePromptline(
             script=PROJECT_DIR/"bash/default-prompt.vim",

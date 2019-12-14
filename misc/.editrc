@@ -1,0 +1,5 @@
+bind -v
+# bind "jk" vi-command-mode
+
+lldb:bind ^I lldb_complete
+lldb:bind ^P ed-command
