@@ -27,8 +27,10 @@ function! TmuxvarGit_branch()
 endfunction
 
 function! TmuxvarVirtualenv()
-	let l:command = TmuxvarResolve_var('VIRTUAL_ENV') . ' && '
-	let l:command = l:command . 'echo " $(basename \\$VIRTUAL_ENV)"'
+	let l:command = '(' . TmuxvarResolve_var('CONDA_DEFAULT_ENV')
+	let l:command = l:command . ' && printf " \\${CONDA_DEFAULT_ENV?}") && space=" "; '
+	let l:command = l:command . '(' . TmuxvarResolve_var('VIRTUAL_ENV')
+	let l:command = l:command . ' && printf "\\${space} \\$(basename \\$VIRTUAL_ENV)")'
 	return '#(' . l:command . ')'
 endfunction
 

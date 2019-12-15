@@ -14,6 +14,7 @@ function __update_local_env () {
 # Function called by PROMPT_COMMAND
 function __update_tmux () {
 	__update_local_env 'VIRTUAL_ENV'
+	__update_local_env 'CONDA_DEFAULT_ENV'
 	__update_local_env 'PWD'
 	# Update the status line
 	tmux refresh-client -S
