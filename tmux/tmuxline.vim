@@ -15,10 +15,11 @@ function! TmuxvarPwd()
 	return command
 endfunction
 
+let s:current_dir = expand('<sfile>:p:h')  " Folder where this files exists
 function! TmuxvarGit_branch()
-	let command = '#('.TmuxvarResolve_var('PWD').'cd \\$PWD && '
-	let command = command . '(git rev-parse --abbrev-ref HEAD && echo "") '
-	let command = command . '| sed ''1!G;h;$!d''  | paste -sd " " -)'
+	let l:command = '#('.TmuxvarResolve_var('PWD').'cd \\$PWD && '
+	let l:command = command . 'bash ' . s:current_dir . '/tmuxline-git.sh'
+	let l:command = command . ')'
 	return command
 endfunction
 
