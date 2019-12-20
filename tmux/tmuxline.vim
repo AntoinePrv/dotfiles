@@ -2,6 +2,12 @@
 
 let g:tmuxline_theme = 'airline'
 
+function! TmuxlineCurrentWindow()
+	" Delete active window flag (*) replaced by () and change other flag characters
+	let l:command = 'printf "#F" | tr -d "*" | tr "Z" "ﬕ"'
+	return ' #W #(' . command . ')'
+endfunction
+
 function! TmuxlineResolveVar(name)
 	" Get current value from current tmux environment
 	let l:command = 'OUT=$(tmux showenv __TMUX#{pane_id}_'.a:name.') && '
@@ -36,10 +42,10 @@ endfunction
 
 let g:tmuxline_preset = {
 	\'a'    : '%a %R',
-	\'b'    : '#h',
+	\'b'    : ' #h',
 	\'c'    : ' #S',
-	\'cwin' : '#I:#W#F',
-	\'win'  : '#I:#W',
+	\'cwin' : TmuxlineCurrentWindow(),
+	\'win'  : '#I #W',
 	\'x'    : TmuxlineGitStatus(),
 	\'y'    : TmuxlinePwd(),
 	\'z'    : TmuxlineVirtualEnv(),
