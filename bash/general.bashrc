@@ -40,6 +40,10 @@ export PROMPT_COMMAND=''
 if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
 	source "${DIR}/tmux-prompt.sh"
 	source "${DIR}/tmux-update.sh"
+
+	# Fix Tmux Conda path conflict
+	conda deactivate &> /dev/null
+	conda activate base &> /dev/null
 else
 	source "${DIR}/default-prompt.sh"
 fi
