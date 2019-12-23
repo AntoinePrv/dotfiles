@@ -1,6 +1,15 @@
 # Useful variables
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Add path for executable if not aleard there
+for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
+	case ":$PATH:" in
+		*":$x:"*) : ;; # already there
+		*) PATH="$x:$PATH";;
+	esac
+done
+export PATH
+
 # Initialize conda
 __conda_setup="$(conda shell.bash hook 2> /dev/null)" && eval "$__conda_setup"
 unset __conda_setup
@@ -34,15 +43,6 @@ if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
 else
 	source "${DIR}/default-prompt.sh"
 fi
-
-# Add path for executable if not aleard there
-for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
-	case ":$PATH:" in
-		*":$x:"*) : ;; # already there
-		*) PATH="$x:$PATH";;
-	esac
-done
-export PATH
 
 # Python tools
 export PYTHONBREAKPOINT="ipdb.set_trace"
