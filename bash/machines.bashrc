@@ -7,6 +7,10 @@ if [[ "${HOSTNAME}" == "kogitox"* ]]; then
 	export WORKSPACE_DIR="${HOME}/workspace"
 	export SCRATCH_DIR="/tmp/scratch"
 
+# Gerad login node
+elif [[ "${HOSTNAME}" == "nexus2.gerad.lan" ]]; then
+	:  # Do nothing
+
 # Gerad configuration
 elif [[ "${HOSTNAME}" == *".gerad.lan" ]]; then
 	source /home/modules/Bashrc
