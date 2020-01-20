@@ -9,7 +9,7 @@ if [[ "${HOSTNAME}" == "kogitox"* ]]; then
 
 # Gerad login node
 elif [[ "${HOSTNAME}" == "nexus2.gerad.lan" ]]; then
-	:  # Do nothing
+	return  # Do nothing
 
 # Gerad configuration
 elif [[ "${HOSTNAME}" == *".gerad.lan" ]]; then
