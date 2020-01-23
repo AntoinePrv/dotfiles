@@ -40,3 +40,38 @@ function! AlePreviousError() range
 		:execute "normal \<Plug>(ale_previous_wrap)"
 	endfor
 endfunction
+
+" Return the character under the cursor
+" https://stackoverflow.com/questions/23323747/vim-vimscript-get-exact-character-under-the-cursor
+function! CursorChar()
+	return matchstr(getline('.'), '\%' . col('.') . 'c.')
+endfunction
+
+" Resize a box horizontally if the middle text has changed
+function! ReBox()
+	" Read character at begining of line (accounting for indent)
+	:execute "normal! ^"
+	let l:char = CursorChar()
+	" Replace line above with middle one
+	:execute "normal! yyk"
+	:execute "normal! V\"0p"
+	" Replace line with character (accounting for indent)
+	:execute "normal! ^v$r" . l:char
+	" Replace line below with middle one
+	:execute "normal! 2j"
+	:execute "normal! V\"0p"
+	" Replace line with character (accounting for indent)
+	:execute "normal! ^v$r" . l:char
+	:execute "normal! k"
+endfunction
+
+" Create A box around the text in the line with the given character
+function! Box(char)
+	" Add symbols at begining and end of line (accounting for indent)
+	:execute "normal! I" . a:char . "  "
+	:execute "normal! A  " . a:char
+	" Create line above and below
+	:execute "normal! yy2Pj"
+	" Restore Box
+	:call ReBox()
+endfunction
