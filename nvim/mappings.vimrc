@@ -91,3 +91,9 @@ function! CReBox()
 	:execute "normal! 2jA/"
 	:execute "normal! k"
 endfunction
+
+augroup box
+	autocmd!
+	autocmd FileType python nnoremap<buffer> <Leader>b :call Box('#')<CR>
+	autocmd FileType cpp nnoremap<buffer> <Leader>b :call CBox()<CR>
+augroup end
