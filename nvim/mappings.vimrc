@@ -75,3 +75,19 @@ function! Box(char)
 	" Restore Box
 	:call ReBox()
 endfunction
+
+" Create a box for C++ style comment, with star and a leading/terminating slash
+function! CBox()
+	:call Box('*')
+	:execute "normal! I "
+	:execute "normal! kI/"
+	:execute "normal! 2jI \<esc>A/"
+	:execute "normal! k"
+endfunction
+
+function! CReBox()
+	:call ReBox()
+	:execute "normal! k^hr/"
+	:execute "normal! 2jA/"
+	:execute "normal! k"
+endfunction
