@@ -7,6 +7,7 @@ dependencies:
   - curl
   - wget
   - htop
+  - sed  # GNU sed
     # - ncurses  # Seems missing dep for tmux
     # - tmux
   - fzf
