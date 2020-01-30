@@ -6,6 +6,8 @@ if [[ "${HOSTNAME}" == "kogitox"* ]]; then
 	export CACHE_DIR="${HOME}/.cache"
 	export WORKSPACE_DIR="${HOME}/workspace"
 	export SCRATCH_DIR="/tmp/scratch"
+	# For CMake to poperly find package
+	export SDKROOT=$(xcodebuild -version -sdk macosx Path)
 
 # Gerad login node
 elif [[ "${HOSTNAME}" == "nexus2.gerad.lan" ]]; then
