@@ -28,6 +28,9 @@ augroup auto_reload
 	autocmd FocusGained,BufEnter * :checktime
 augroup end
 
+" Authorize hidden buffer with modification
+set hidden
+
 " Set .bashrc as a bash extension
 augroup bashrc_files
 	autocmd!
