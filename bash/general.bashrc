@@ -56,6 +56,9 @@ if python -m pip show ipdb &> /dev/null ; then
 	export PYTEST_ADDOPTS="--pdbcls=ipdb:__main__.debugger_cls"
 fi
 
+# CCache directory
+export CCACHE_DIR="${CACHE_DIR}/ccache"
+
 # Conda directories
 export CONDA_ENVS_PATH="${WORKSPACE_DIR}/conda/envs"
 export CONDA_PKGS_DIRS="${CACHE_DIR}/conda/pkgs"
