@@ -52,6 +52,9 @@ fi
 export PYTHONBREAKPOINT="ipdb.set_trace"
 export PYTHONPYCACHEPREFIX="${CACHE_DIR}/cpython"
 export WORKON_HOME="${WORKSPACE_DIR}/venvs"
+if python -m pip show ipdb &> /dev/null ; then
+	export PYTEST_ADDOPTS="--pdbcls=ipdb:__main__.debugger_cls"
+fi
 
 # Conda directories
 export CONDA_ENVS_PATH="${WORKSPACE_DIR}/conda/envs"
