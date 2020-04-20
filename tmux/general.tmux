@@ -4,9 +4,16 @@ set -g mouse on
 # Change prefix
 set -g prefix C-a
 
-# Split screen
-bind _ split-window
-bind | split-window -h
+# Start numbering at 1
+set -g base-index 1
+
+# Redefine bindings for window splitting and define splits to start in current directory
+unbind '"'
+unbind %
+bind _ split-window -c "#{pane_current_path}"
+bind | split-window -h -c "#{pane_current_path}"
+# Create new window in current directory
+bind c new-window -c "#{pane_current_path}"
 
 # Vim mode
 setw -g mode-keys vi
