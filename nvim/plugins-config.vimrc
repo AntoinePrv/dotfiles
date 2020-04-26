@@ -77,13 +77,21 @@ function FzfFindFile()
 	if v:shell_error == 0
 		let fzf_config = {
 			\ 'source': 'git ls-files --exclude-standard  -oc -z',
-			\ 'options': '--read0'
+			\ 'options': '--read0 --reverse --info=hidden --prompt=" "'
 		\}
 	else
 		let fzf_config = {}
 	endif
 	call fzf#run(fzf#wrap(fzf_config))
 endfunction
+let g:fzf_layout = {
+	\ 'window': {
+		\ 'width': 0.5,
+		\ 'height': 0.3,
+		\ 'border': 'sharp',
+		\ 'style': 'minimal',
+	\}
+\}
 
 " ale
 let g:ale_sign_error = 'ﱥ'
