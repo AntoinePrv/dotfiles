@@ -66,4 +66,4 @@ cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
 
 " Completion mode
 set completeopt=menuone,noinsert,noselect
-set pumheight=5
+set pumheight=7

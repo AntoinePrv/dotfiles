@@ -33,6 +33,7 @@ call plug#begin('~/.vim/plugged')
 	" Completion and and syntax
 	Plug 'sheerun/vim-polyglot'
 	Plug 'dense-analysis/ale'
+	Plug 'ncm2/float-preview.nvim'
 
 	" Tmux panes navigation
 	Plug 'christoomey/vim-tmux-navigator'

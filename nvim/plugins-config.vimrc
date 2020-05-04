@@ -107,3 +107,6 @@ let g:ale_fixers = {
 	\'cpp': ['clangtidy', 'clang-format'],
 \}
 let g:ale_fix_on_save = 1
+
+" Float-preview (replacement for completopt+=preview using flaoting window)
+let g:float_preview#docked = 0
