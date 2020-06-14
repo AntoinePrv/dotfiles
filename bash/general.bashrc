@@ -49,10 +49,10 @@ else
 fi
 
 # Python tools
-export PYTHONBREAKPOINT="ipdb.set_trace"
 export PYTHONPYCACHEPREFIX="${CACHE_DIR}/cpython"
 export WORKON_HOME="${WORKSPACE_DIR}/venvs"
-if python -m pip show ipdb &> /dev/null ; then
+if python -c 'import importlib.util as u; exit(u.find_spec("IPython") is None)' ; then
+	export PYTHONBREAKPOINT="ipdb.set_trace"
 	export PYTEST_ADDOPTS="--pdbcls=ipdb:__main__.debugger_cls"
 fi
 
