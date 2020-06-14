@@ -6,7 +6,7 @@
 
 [alias]
 	graph = log --oneline --abbrev-commit --graph --decorate --color
-	amend = commit --amend --no-edit
+	fixup = commit --amend --no-edit
 	st = status
 
 [filter "lfs"]
