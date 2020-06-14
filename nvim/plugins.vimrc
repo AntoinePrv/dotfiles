@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'airblade/vim-gitgutter'
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+	Plug 'ap/vim-css-color'
 
 	" Completion and and syntax
 	Plug 'sheerun/vim-polyglot'
