@@ -62,3 +62,4 @@ export CCACHE_DIR="${CACHE_DIR}/ccache"
 # Conda directories
 export CONDA_ENVS_PATH="${WORKSPACE_DIR}/conda/envs"
 export CONDA_PKGS_DIRS="${CACHE_DIR}/conda/pkgs"
+export CONDA_BLD_PATH="${CACHE_DIR}/conda/channel"
