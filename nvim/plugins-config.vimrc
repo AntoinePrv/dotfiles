@@ -96,6 +96,34 @@ let g:fzf_layout = {
 " ale
 let g:ale_sign_error = 'ﱥ'
 let g:ale_sign_warning = ''
+let g:ale_completion_symbols = {
+	\ 'text': '',
+	\ 'method': '',
+	\ 'function': 'λ',
+	\ 'constructor': '',
+	\ 'field': '',
+	\ 'variable': 'x',
+	\ 'class': '',
+	\ 'interface': '',
+	\ 'module': '',
+	\ 'property': '',
+	\ 'unit': '',
+	\ 'value': 'val',
+	\ 'enum': '',
+	\ 'keyword': '',
+	\ 'snippet': '',
+	\ 'color': '',
+	\ 'file': '',
+	\ 'reference': '&',
+	\ 'folder': '',
+	\ 'enum member': '',
+	\ 'constant': '',
+	\ 'struct': '',
+	\ 'event': '',
+	\ 'operator': '+',
+	\ 'type_parameter': 'type param',
+	\ '<default>': '?'
+	\ }
 let g:ale_completion_enabled = 1
 let g:ale_linters = {
 	\'python': ['pyls', 'pydocstyle'],
