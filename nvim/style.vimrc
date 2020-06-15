@@ -14,7 +14,11 @@ set smarttab
 
 " Hidden characters
 set list
-set listchars=eol:¬,tab:─→,trail:·,nbsp:⌴
+set listchars=eol:¬,tab:──→,trail:·,nbsp:⌴,extends:…,precedes:…
+
+" Soft wrap lines with indent
+set breakindent
+set showbreak=↳
 
 " Improved highlighting
 let python_highlight_all=1
