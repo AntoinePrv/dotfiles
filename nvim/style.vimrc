@@ -7,11 +7,6 @@ set number
 " Mouse
 set mouse=a
 
-" Defaults
-set tabstop=2
-set shiftwidth=2
-set smarttab
-
 " Hidden characters
 set list
 set listchars=eol:¬,tab:──→,trail:·,nbsp:⌴,extends:…,precedes:…

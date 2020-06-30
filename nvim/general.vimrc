@@ -21,6 +21,19 @@ augroup buffer_view
 	au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 augroup end
 
+" Tabs and spaces
+set tabstop=2  " Width of tab character
+set shiftwidth=2
+set smarttab
+
+" Some Python specifics
+augroup space_indented
+	autocmd!
+	autocmd FileType markdown setlocal expandtab shiftwidth=2 softtabstop=2
+	autocmd FileType rst setlocal expandtab shiftwidth=3 softtabstop=2
+augroup end
+
+
 " Autoreload buffer when file has changed
 set autoread
 augroup auto_reload
@@ -40,13 +53,6 @@ augroup end
 " Colorcolumn relative to textwidth
 set textwidth=100
 set colorcolumn=+0
-
-" Some Python specifics
-augroup python_files
-	autocmd!
-	" Black default
-	autocmd FileType python setlocal textwidth=100
-augroup end
 
 " Files to ignore
 set wildignore+=*.DS_Store
