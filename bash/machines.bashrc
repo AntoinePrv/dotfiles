@@ -1,10 +1,14 @@
 # Configuration specific to machines / networks
 
+# Default values
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_DATA_HOME="${HOME}/.local/share"
+
+
 # Local configuration
 if [[ "${HOSTNAME}" == "kogitox"* ]]; then
 	# Local disk space
-	export CACHE_DIR="${HOME}/.cache"
-	export WORKSPACE_DIR="${HOME}/workspace"
 	export SCRATCH_DIR="/tmp/scratch"
 	# For CMake to poperly find package
 	export SDKROOT=$(xcodebuild -version -sdk macosx Path)
@@ -30,8 +34,8 @@ elif [[ "${HOSTNAME}" == *".gerad.lan" ]]; then
 	elif [ -d "/local1" ]; then
 		LOCAL_DIR="/local1/${USER}"
 	fi
-	export CACHE_DIR="${LOCAL_DIR}/cache"
-	export WORKSPACE_DIR="${LOCAL_DIR}/workspace"
+	export XDG_CACHE_HOME="${LOCAL_DIR}/cache"
+	export XDG_DATA_HOME="${LOCAL_DIR}/local/share"
 	export SCRATCH_DIR="/tmp/scratch"
 
 # Mila cluster configuration
@@ -39,8 +43,8 @@ elif [[ "${HOSTNAME}" == *"server.mila.quebec" ]]; then
 	module load singularity/3.2.0
 
 	# Local disk space
-	export CACHE_DIR="/network/tmp1/${USER}/cache"
-	export WORKSPACE_DIR="/network/tmp1/${USER}/workspace"
+	export XDG_CACHE_HOME="/network/tmp1/${USER}/cache"
+	export XDG_DATA_HOME="/network/tmp1/${USER}/local/share"
 	export SCRATCH_DIR="${SLURM_TMPDIR-/tmp}/scratch"
 
 # Compute Canda configuration
@@ -49,10 +53,10 @@ elif [[ "${HOSTNAME}" == *"calculquebec.ca" ]]; then
 	module load singularity/3.2
 
 	# Local disk space
-	export CACHE_DIR="/network/tmp1/${USER}/cache"
-	export WORKSPACE_DIR="/network/tmp1/${USER}/workspace"
+	export XDG_CACHE_HOME="/network/tmp1/${USER}/cache"
+	export XDG_DATA_HOME="/network/tmp1/${USER}/local/share"
 	export SCRATCH_DIR="${SLURM_TMPDIR-/tmp}/scratch"
 
 fi
 
-mkdir -p "$CACHE_DIR" "$WORKSPACE_DIR" "$SCRATCH_DIR"
+mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$SCRATCH_DIR"

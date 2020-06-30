@@ -49,17 +49,17 @@ else
 fi
 
 # Python tools
-export PYTHONPYCACHEPREFIX="${CACHE_DIR}/cpython"
-export WORKON_HOME="${WORKSPACE_DIR}/venvs"
+export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/cpython"
+export WORKON_HOME="${XDG_DATA_HOME}/pipenv/venvs"
 if python -c 'import importlib.util as u; exit(u.find_spec("IPython") is None)' ; then
 	export PYTHONBREAKPOINT="ipdb.set_trace"
 	export PYTEST_ADDOPTS="--pdbcls=ipdb:__main__.debugger_cls"
 fi
 
 # CCache directory
-export CCACHE_DIR="${CACHE_DIR}/ccache"
+export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
 
 # Conda directories
-export CONDA_ENVS_PATH="${WORKSPACE_DIR}/conda/envs"
-export CONDA_PKGS_DIRS="${CACHE_DIR}/conda/pkgs"
-export CONDA_BLD_PATH="${CACHE_DIR}/conda/channel"
+export CONDA_ENVS_PATH="${XDG_DATA_HOME}/conda/envs"
+export CONDA_PKGS_DIRS="${XDG_CACHE_HOME}/conda/pkgs"
+export CONDA_BLD_PATH="${XDG_CACHE_HOME}/conda/channel"
