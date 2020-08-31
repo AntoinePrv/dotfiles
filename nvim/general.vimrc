@@ -26,14 +26,6 @@ set tabstop=2  " Width of tab character
 set shiftwidth=2
 set smarttab
 
-" Some Python specifics
-augroup space_indented
-	autocmd!
-	autocmd FileType markdown setlocal expandtab shiftwidth=2 softtabstop=2
-	autocmd FileType rst setlocal expandtab shiftwidth=3 softtabstop=2
-augroup end
-
-
 " Autoreload buffer when file has changed
 set autoread
 augroup auto_reload
