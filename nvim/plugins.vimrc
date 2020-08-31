@@ -1,13 +1,15 @@
 " Automatic install
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-	silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let s:vim_plug_url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+let s:vim_plug_file = stdpath("data") . "/site/autoload/plug.vim"
+
+if empty(glob(s:vim_plug_file))
+	silent execute "!curl -fLo " . s:vim_plug_load_file " --create-dirs " . s:vim_plug_url
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 
 " Plugins will be downloaded under the specified directory.
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath("data") . "/plugged")
 	" General
 	Plug 'tpope/vim-sensible'
 	Plug 'scrooloose/nerdcommenter'
