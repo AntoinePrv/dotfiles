@@ -15,6 +15,9 @@ let g:NERDToggleCheckAllLines = 1
 let NERDTreeRespectWildIgnore=1
 
 
+" Procession
+let g:prosession_dir = stdpath("data") . "/prosession"
+
 " Base16 colors
 colorscheme base16-default-dark
 " Use the 256 color space to avoid redifining bright colors
