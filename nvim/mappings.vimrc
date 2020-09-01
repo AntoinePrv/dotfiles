@@ -1,4 +1,4 @@
-" Use space as leader but allow it to display properly wiht \
+" Use space as leader but allow it to display properly with \
 let mapleader = "\\"
 nmap <space> <leader>
 vmap <space> <leader>
@@ -40,9 +40,3 @@ function! AlePreviousError() range
 		:execute "normal \<Plug>(ale_previous_wrap)"
 	endfor
 endfunction
-
-augroup box
-	autocmd!
-	autocmd FileType python nnoremap<buffer> <Leader>b :call Box('#')<CR>
-	autocmd FileType cpp nnoremap<buffer> <Leader>b :call CBox()<CR>
-augroup end
