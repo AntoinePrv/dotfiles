@@ -58,6 +58,8 @@ fi
 
 # CCache directory
 export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
+# Conan cache directory
+export CONAN_USER_HOME="${XDG_CACHE_HOME}/conan"
 
 # Conda directories
 export CONDA_ENVS_PATH="${XDG_DATA_HOME}/conda/envs"
