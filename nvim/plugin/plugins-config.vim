@@ -44,6 +44,7 @@ augroup end
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled=0
 let g:airline#extensions#tmuxline#enabled = 0
+let g:airline#extensions#ale#enabled = 1
 let g:airline_section_z = '%l/%L'
 let g:airline_theme='base16_tomorrow'
 
@@ -94,7 +95,7 @@ let g:fzf_layout = {
 	\}
 \}
 
-" ale
+" ALE
 let g:ale_sign_error = 'ﱥ'
 let g:ale_sign_warning = ''
 let g:ale_completion_symbols = {
@@ -125,17 +126,11 @@ let g:ale_completion_symbols = {
 	\ 'type_parameter': 'type param',
 	\ '<default>': '?'
 	\ }
-let g:ale_completion_enabled = 1
-let g:ale_linters = {
-	\'python': ['pyls', 'pydocstyle'],
-	\'cpp': ['clangd', 'clangtidy'],
-\}
-let g:ale_fixers = {
-	\'*': ['remove_trailing_lines', 'trim_whitespace'],
-	\'python': ['black'],
-	\'cpp': ['clangtidy', 'clang-format'],
-\}
-let g:ale_fix_on_save = 1
+" Activate per project
+let g:ale_completion_enabled = 0
+let g:ale_disable_lsp = 1
+let g:ale_linters = {}
+let g:ale_fixers = {}
 
 " Float-preview (replacement for completopt+=preview using flaoting window)
 let g:float_preview#docked = 0
