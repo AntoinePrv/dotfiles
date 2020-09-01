@@ -35,7 +35,7 @@ call plug#begin(stdpath("data") . "/plugged")
 
 	" Completion and and syntax
 	Plug 'sheerun/vim-polyglot'
-	Plug 'dense-analysis/ale'
+	Plug 'dense-analysis/ale', { 'tag': 'v2.7.0' }
 	Plug 'ncm2/float-preview.nvim'
 
 	" Tmux panes navigation

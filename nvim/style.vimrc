@@ -15,8 +15,5 @@ set listchars=eol:¬,tab:──→,trail:·,nbsp:⌴,extends:…,precedes:…
 set breakindent
 set showbreak=↳
 
-" Improved highlighting
-let python_highlight_all=1
-
 " Show command at the bottom right
 set showcmd
