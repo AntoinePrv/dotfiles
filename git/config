@@ -15,6 +15,12 @@
 	process = git-lfs filter-process
 	required = true
 
+[commit]
+	gpgsign = true
+
+[pull]
+	rebase = true
+
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
