@@ -13,9 +13,6 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 
-" Procession
-let g:prosession_dir = stdpath("data") . "/prosession"
-
 " Base16 colors
 colorscheme base16-default-dark
 " Use the 256 color space to avoid redifining bright colors
@@ -126,11 +123,6 @@ let g:ale_completion_symbols = {
 	\ 'type_parameter': 'type param',
 	\ '<default>': '?'
 	\ }
-" Activate per project
-let g:ale_completion_enabled = 0
-let g:ale_disable_lsp = 1
-let g:ale_linters = {}
-let g:ale_fixers = {}
 
 " Float-preview (replacement for completopt+=preview using flaoting window)
 let g:float_preview#docked = 0

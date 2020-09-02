@@ -14,8 +14,6 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'tpope/vim-sensible'
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'tpope/vim-fugitive'
-	Plug 'tpope/vim-obsession'
-	Plug 'dhruvasagar/vim-prosession'
 	Plug 'tmux-plugins/vim-tmux-focus-events'
 	Plug 'junegunn/fzf', { 'do': './install --bin' }
 
