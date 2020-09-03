@@ -25,6 +25,9 @@
 	tool = vimdiff
 	conflictstyle = diff3
 
+[rebase]
+	autoStash = true
+
 [rerere]
 	enabled = true
 
