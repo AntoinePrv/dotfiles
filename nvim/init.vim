@@ -11,9 +11,10 @@ endif
 " Plugins will be downloaded under the specified directory.
 call plug#begin(stdpath("data") . "/plugged")
 	" General
-	Plug 'tpope/vim-sensible'
 	Plug 'scrooloose/nerdcommenter'
+	Plug 'tpope/vim-sensible'
 	Plug 'tpope/vim-fugitive'
+	Plug 'tpope/vim-obsession'
 	Plug 'tmux-plugins/vim-tmux-focus-events'
 	Plug 'junegunn/fzf', { 'do': './install --bin' }
 
