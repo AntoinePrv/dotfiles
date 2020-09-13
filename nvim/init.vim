@@ -18,9 +18,6 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'junegunn/fzf', { 'do': './install --bin' }
 
 	" Colors themes
-	Plug 'sickill/vim-monokai'
-	Plug 'junegunn/seoul256.vim'
-	Plug 'morhetz/gruvbox'
 	Plug 'chriskempson/base16-vim'
 
 	" Visual
@@ -28,12 +25,11 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'ryanoasis/vim-devicons'
-	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plug 'ap/vim-css-color'
 
 	" Completion and and syntax
 	Plug 'sheerun/vim-polyglot'
-	Plug 'dense-analysis/ale', { 'tag': 'v2.7.0' }
+	Plug 'dense-analysis/ale', { 'tag': 'v3.0.0' }
 	Plug 'ncm2/float-preview.nvim'
 
 	" Tmux panes navigation
