@@ -8,9 +8,31 @@ inoremap jk <Esc>
 nnoremap <silent> <C-W>_ :split<CR>
 nnoremap <silent> <C-W><Bar> :vsplit<CR>
 
-" Numbers
-nnoremap <F3> :NumbersToggle<CR>
-nnoremap <F4> :NumbersOnOff<CR>
+" Tab complete or indent
+function! InsertTabWrapper()
+	if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+		" return tab if empry line
+		return "\<tab>"
+	endif
+	if pumvisible()
+		" Next completion if completion menue is open
+		return "\<down>"
+	endif
+	" Open omni completion
+	return "\<C-X>\<C-O>"
+endfunction
+inoremap <expr> <tab> InsertTabWrapper()
+inoremap <s-tab> <c-n>
+
+" Change mapping in wildmenu to move with Up and Down.
+" Cannot remap in wildmenu, but only command line, so we dynamically check.
+" Also bind Right to open wildmenue on next folder when using paths.
+" https://vi.stackexchange.com/a/22628
+set wildcharm=<C-Z>  " Represent the completion character in macros
+cnoremap <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
+cnoremap <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
+cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
+cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
 
 " Nerd Commenter
 nnoremap <silent> <leader>/ :call NERDComment(0, "toggle")<CR>

@@ -46,15 +46,6 @@ set wildignore+=*.pyc,__pycache__,*.egg-info
 
 " Command line completes common prefix on tab and open wildmenu. Tab again to cycle.
 set wildmode=longest:full,full
-" Change mapping in wildmenu to move with Up and Down.
-" Cannot remap in wildmenu, but only command line, so we dynamically check.
-" Also bind Right to open wildmenue on next folder when using paths.
-" https://vi.stackexchange.com/a/22628
-set wildcharm=<C-Z>  " Represent the completion character in macros
-cnoremap <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
-cnoremap <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
-cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
-cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
 
 " Completion mode
 set completeopt=menuone,noinsert,noselect
