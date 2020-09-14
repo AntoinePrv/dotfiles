@@ -25,6 +25,7 @@ nnoremap <leader>p :call FzfFindFile()<CR>
 " ALE Go to definition
 nnoremap <leader>g :ALEGoToDefinition<CR>
 nnoremap <leader>h :ALEHover<CR>
+nnoremap <leader>r :ALERename<CR>
 
 " ALE Navigate between errors
 nmap <silent> ]e :call AleNextError()<CR>

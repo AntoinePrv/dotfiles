@@ -30,6 +30,8 @@ function! s:base16_customize() abort
 	let l:signcol_bg = synIDattr(hlID('SignColumn'),'bg')
 	call Base16hi("ALEErrorSign", g:base16_gui08, l:signcol_bg, g:base16_cterm08, l:signcol_bg)
 	call Base16hi("ALEWarningSign", g:base16_gui0A, l:signcol_bg, g:base16_cterm0A, l:signcol_bg)
+	call Base16hi("ALEVirtualTextError", g:base16_gui08, "", g:base16_cterm08, "")
+	call Base16hi("ALEVirtualTextWarning", g:base16_gui0A, "", g:base16_cterm0A, "")
 endfunction
 augroup on_change_colorschema
 	autocmd!
@@ -95,6 +97,7 @@ let g:fzf_layout = {
 " ALE
 let g:ale_sign_error = 'ﱥ'
 let g:ale_sign_warning = ''
+let g:ale_virtualtext_cursor = 1
 let g:ale_completion_symbols = {
 	\ 'text': '',
 	\ 'method': '',
