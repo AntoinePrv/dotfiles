@@ -52,6 +52,7 @@ fi
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/cpython"
 export WORKON_HOME="${XDG_DATA_HOME}/pipenv/venvs"
 export PIP_CACHE_DIR="${XDG_CACHE_HOME}/pip"
+export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
 if python -c 'import importlib.util as u; exit(u.find_spec("IPython") is None)' ; then
 	export PYTHONBREAKPOINT="ipdb.set_trace"
 	export PYTEST_ADDOPTS="--pdbcls=ipdb:__main__.debugger_cls"
