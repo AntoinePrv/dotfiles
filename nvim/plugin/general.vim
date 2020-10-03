@@ -48,5 +48,5 @@ set wildignore+=*.pyc,__pycache__,*.egg-info
 set wildmode=longest:full,full
 
 " Completion mode
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noinsert,noselect  " Use longest ?
 set pumheight=7

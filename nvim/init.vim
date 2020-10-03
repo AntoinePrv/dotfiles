@@ -27,6 +27,8 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'airblade/vim-gitgutter'
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'ap/vim-css-color'
+	" Move to this one
+	" Plug 'norcalli/nvim-colorizer.lua'
 
 	" Completion and and syntax
 	Plug 'sheerun/vim-polyglot'
