@@ -13,6 +13,10 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 
+" Use vim-cpp-enhanced-hihglight
+let g:polyglot_disabled = ["cpp"]
+
+
 " Base16 colors
 colorscheme base16-default-dark
 " Use the 256 color space to avoid redifining bright colors

@@ -33,6 +33,7 @@ call plug#begin(stdpath("data") . "/plugged")
 	" Completion and and syntax
 	Plug 'sheerun/vim-polyglot'
 	Plug 'rbberger/vim-singularity-syntax'
+	Plug 'octol/vim-cpp-enhanced-highlight'
 	Plug 'dense-analysis/ale', { 'tag': 'v3.0.0' }
 	Plug 'ncm2/float-preview.nvim'
 
