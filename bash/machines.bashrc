@@ -8,8 +8,6 @@ export XDG_DATA_HOME="${HOME}/.local/share"
 
 # Local configuration
 if [[ "${HOSTNAME}" == "kogitox"* ]]; then
-	# Local disk space
-	export SCRATCH_DIR="/tmp/scratch"
 	# For CMake to poperly find package
 	export SDKROOT=$(xcodebuild -version -sdk macosx Path)
 
@@ -59,4 +57,5 @@ elif [[ "${HOSTNAME}" == *"calculquebec.ca" ]]; then
 
 fi
 
-mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$SCRATCH_DIR"
+mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME"
+[ ! -z ${SCRATCH_DIR+x} ] &&  mkdir -p "$SCRATCH_DIR"
