@@ -14,11 +14,37 @@ filetype plugin on
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
-" Remember window view for each buffer
+" Functions for saving and restoring the buffer views.
+"
+" The logic takes care of some edge cases. See the origina article
+" https://web.archive.org/web/20201025005002/https://vim.fandom.com/wiki/Avoid_scrolling_when_switch_buffers
+
+" Save current view settings on a per-window, per-buffer basis.
+function! AutoSaveWinView()
+	if !exists("w:SavedBufView")
+		let w:SavedBufView = {}
+	endif
+	let w:SavedBufView[bufnr("%")] = winsaveview()
+endfunction
+
+" Restore current view settings.
+function! AutoRestoreWinView()
+	let buf = bufnr("%")
+	if exists("w:SavedBufView") && has_key(w:SavedBufView, buf)
+		let v = winsaveview()
+		let atStartOfFile = v.lnum == 1 && v.col == 0
+		if atStartOfFile && !&diff
+			call winrestview(w:SavedBufView[buf])
+		endif
+		unlet w:SavedBufView[buf]
+	endif
+endfunction
+
+" When switching buffers, preserve window view.
 augroup buffer_view
 	autocmd!
-	au BufLeave * let b:winview = winsaveview()
-	au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+	autocmd BufLeave * call AutoSaveWinView()
+	autocmd BufEnter * call AutoRestoreWinView()
 augroup end
 
 " Tabs and spaces
