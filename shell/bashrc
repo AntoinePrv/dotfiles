@@ -1,0 +1,12 @@
+# Exit if non-interactive shell
+[[ $- != *i* ]] && return
+
+source ~/.config/shell/machines.sh  # Need to be sourced first
+source ~/.config/shell/general.sh
+source ~/.config/shell/secrets.sh
+source ~/.config/shell/aliases.sh  # Need to be sourced last
+
+# This just source all files in completion folder ending in .sh
+for file in $(find -L ~/.config/shell/completion -type f -name '*.sh'); do
+	source "$file"
+done

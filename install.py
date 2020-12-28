@@ -153,7 +153,7 @@ class NvimGenerateFile(Action, abc.ABC):
 
 class NvimGeneratePromptline(NvimGenerateFile):
     def install(self) -> None:
-        """Generate promptline bash prompt."""
+        """Generate promptline prompt."""
         run_nvim_cmd(f"source {self.script}", f"PromptlineSnapshot! {self.dest}")
 
 
@@ -193,9 +193,8 @@ class PipGenerateCompletion(Action):
 def main() -> None:
     # fmt: off
     installs = [
-        FilesInstall(source=PROJECT_DIR/"bash", dest=CONFIG_DIR/"bash"),
-        FilesInstall(source=CONFIG_DIR/"bash/bashrc", dest=HOME_DIR/".bashrc"),
-        FilesInstall(source=CONFIG_DIR/"bash/bashrc", dest=HOME_DIR/".bash_profile"),
+        FilesInstall(source=PROJECT_DIR/"shell", dest=CONFIG_DIR/"shell"),
+        FilesInstall(source=CONFIG_DIR/"shell/bashrc", dest=HOME_DIR/".bashrc"),
         FilesInstall(source=PROJECT_DIR/"nvim", dest=CONFIG_DIR/"nvim"),
         FilesInstall(source=PROJECT_DIR/"tmux", dest=CONFIG_DIR/"tmux"),
         FilesInstall(source=CONFIG_DIR/"tmux/tmux.conf", dest=HOME_DIR/".tmux.conf"),
@@ -207,18 +206,18 @@ def main() -> None:
         FilesInstall(source=CONFIG_DIR/"misc/editrc", dest=HOME_DIR/".editrc"),
         UpdateNvimPackages(),
         NvimGeneratePromptline(
-            script=PROJECT_DIR/"bash/default-prompt.vim",
-            dest=CONFIG_DIR/"bash/default-prompt.sh"
+            script=PROJECT_DIR/"shell/default-prompt.vim",
+            dest=CONFIG_DIR/"shell/default-prompt.sh"
         ),
         NvimGeneratePromptline(
-            script=PROJECT_DIR/"bash/tmux-prompt.vim",
-            dest=CONFIG_DIR/"bash/tmux-prompt.sh"
+            script=PROJECT_DIR/"shell/tmux-prompt.vim",
+            dest=CONFIG_DIR/"shell/tmux-prompt.sh"
         ),
         NvimGenerateTmuxline(
             script=PROJECT_DIR/"tmux/tmuxline.vim",
             dest=CONFIG_DIR/"tmux/tmuxline.tmux"
         ),
-        PipGenerateCompletion(dest=CONFIG_DIR/"bash/completion/pip.bashrc"),
+        PipGenerateCompletion(dest=CONFIG_DIR/"shell/completion/pip.sh"),
     ]
     # fmt: on
 
