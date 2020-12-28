@@ -194,6 +194,7 @@ def main() -> None:
     # fmt: off
     installs = [
         FilesInstall(source=PROJECT_DIR/"shell", dest=CONFIG_DIR/"shell"),
+        FilesInstall(source=CONFIG_DIR/"shell/profile", dest=HOME_DIR/".profile"),
         FilesInstall(source=CONFIG_DIR/"shell/bashrc", dest=HOME_DIR/".bashrc"),
         FilesInstall(source=PROJECT_DIR/"nvim", dest=CONFIG_DIR/"nvim"),
         FilesInstall(source=PROJECT_DIR/"tmux", dest=CONFIG_DIR/"tmux"),
