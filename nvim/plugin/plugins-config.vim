@@ -97,6 +97,9 @@ let g:fzf_layout = {
 		\ 'style': 'minimal',
 	\}
 \}
+let g:fzf_colors = {
+	\ 'border':  ['fg', 'VertSplit'],
+\}
 
 " ALE
 let g:ale_sign_error = 'ﱥ'

@@ -16,7 +16,7 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-obsession'
 	Plug 'tmux-plugins/vim-tmux-focus-events'
-	Plug 'junegunn/fzf', { 'do': './install --bin' }
+	Plug 'junegunn/fzf', { 'tag': '0.24.4', 'do': { -> fzf#install() } }
 
 	" Colors themes
 	Plug 'chriskempson/base16-vim'
