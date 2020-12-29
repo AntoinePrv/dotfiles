@@ -6,6 +6,6 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	alias ll='ls -lh --color=auto'
 fi
 alias grep='grep --color=auto'
-type -P bat &> /dev/null && alias cat='bat'
-type -P nvim &> /dev/null && alias vim='nvim'
-type -P python3 &> /dev/null && alias python='python3'
+type bat &> /dev/null && alias cat='bat'
+type nvim &> /dev/null && alias vim='nvim'
+type python3 &> /dev/null && alias python='python3'

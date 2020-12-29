@@ -22,7 +22,11 @@ function __update_tmux () {
 	tmux refresh-client -S
 }
 
-# Update PROMPT_COMMAND
-if [[ ! "$PROMPT_COMMAND" == *__update_tmux* ]]; then
-	export PROMPT_COMMAND+='__update_tmux;'
+if [ -n "$BASH_VERSION" ]; then
+	if [[ ! "$PROMPT_COMMAND" == *__update_tmux* ]]; then
+		export PROMPT_COMMAND+='__update_tmux;'
+	fi
+elif [ -n "$ZSH_VERSION" ]; then
+	precmd_functions+=(__update_tmux)
+	typeset -U precmd_functions  # Remove duplicate in array
 fi

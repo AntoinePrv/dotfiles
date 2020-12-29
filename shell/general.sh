@@ -1,5 +1,9 @@
 # Useful variables
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -n "$BASH_VERSION" ]; then
+	DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+elif [ -n "$ZSH_VERSION" ]; then
+	DIR="$(cd "${0%/*}" && pwd)"
+fi
 
 # Add path for executable if not aleard there
 for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
@@ -36,7 +40,6 @@ export BAT_THEME='base16'
 type -P bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Prompt
-export PROMPT_COMMAND=''
 if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
 	source "${DIR}/tmux-prompt.sh"
 	source "${DIR}/tmux-update.sh"
