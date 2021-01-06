@@ -15,7 +15,7 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'tpope/vim-sensible'
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-obsession'
-	Plug 'tmux-plugins/vim-tmux-focus-events'
+	Plug 'stefandtw/quickfix-reflector.vim'
 	Plug 'junegunn/fzf', { 'tag': '0.24.4', 'do': { -> fzf#install() } }
 
 	" Colors themes
@@ -37,8 +37,9 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'dense-analysis/ale', { 'tag': 'v3.0.0' }
 	Plug 'ncm2/float-preview.nvim'
 
-	" Tmux panes navigation
+	" Tmux integration
 	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'tmux-plugins/vim-tmux-focus-events'
 
 	" Plugins for outside of vim
 	Plug 'edkolev/tmuxline.vim'
