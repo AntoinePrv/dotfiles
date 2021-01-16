@@ -104,6 +104,7 @@ let g:fzf_colors = {
 let g:ale_sign_error = "ﱥ"
 let g:ale_sign_warning = ""
 let g:ale_virtualtext_cursor = 1
+let g:ale_floating_preview = 1
 let g:ale_completion_symbols = {
 	\ "text": "",
 	\ "method": "",

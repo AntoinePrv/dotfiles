@@ -34,7 +34,7 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'sheerun/vim-polyglot'
 	Plug 'rbberger/vim-singularity-syntax'
 	Plug 'octol/vim-cpp-enhanced-highlight'
-	Plug 'dense-analysis/ale', { 'tag': 'v3.0.0' }
+	Plug 'dense-analysis/ale', { 'tag': '9387ccfbc57f34f9fdc6af85cd0dbddf5ee8c5ae' }
 	Plug 'ncm2/float-preview.nvim'
 
 	" Tmux integration
