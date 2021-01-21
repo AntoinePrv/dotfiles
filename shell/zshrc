@@ -16,6 +16,7 @@ source "$(get_dir)/machines.sh"  # Need to be sourced first
 source "$(get_dir)/general.sh"
 source "$(get_dir)/secrets.sh"
 source "$(get_dir)/aliases.sh"  # Need to be sourced after general
+source "$(get_dir)/editor.zsh"
 
 # Prompt
 if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
