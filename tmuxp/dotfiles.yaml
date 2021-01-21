@@ -1,0 +1,10 @@
+session_name: 'dotfiles'
+start_directory: '${WORKSPACE_DIR}/github.com/AntoinePrv/dotfiles'
+windows:
+  - window_name: 'editor'
+    layout: 'even-horizontal'
+    panes:
+      - shell_command: >-
+          nvim --cmd "let g:project='dotfiles'"
+        focus: true
+      - null

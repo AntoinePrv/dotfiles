@@ -14,7 +14,7 @@ export CLICOLOR=1
 
 # Terminal Base16 color theme
 THEME="pop"
-THEME_SCRIPT="${HOME}/.local/share/base16/scripts/base16-${THEME}.sh"
+THEME_SCRIPT="${XDG_DATA_HOME}/base16/scripts/base16-${THEME}.sh"
 if [[ -n "$PS1" && -s "$THEME_SCRIPT" ]]; then
 	source "$THEME_SCRIPT"
 fi
@@ -43,6 +43,8 @@ if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
 	conda activate base &> /dev/null
 fi
 
+# Tmuxp configuration directory
+export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"
 
 # Python tools
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/cpython"
@@ -56,5 +58,6 @@ fi
 
 # CCache directory
 export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
+
 # Conan cache directory
 export CONAN_USER_HOME="${XDG_CACHE_HOME}/conan"

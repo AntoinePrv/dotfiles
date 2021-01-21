@@ -1,0 +1,22 @@
+session_name: 'website'
+start_directory: '${WORKSPACE_DIR}/github.com/AntoinePrv/personal-page'
+windows:
+  - window_name: 'server'
+    layout: 'even-horizontal'
+    panes:
+      - shell_command: hugo serve
+      - shell_command: null
+  - window_name: 'content'
+    layout: 'even-horizontal'
+    panes:
+      - shell_command: >-
+          nvim --cmd "let g:project='website'"
+        focus: true
+      - null
+  - window_name: 'theme'
+    layout: 'even-horizontal'
+    panes:
+      - shell_command:
+        - cd themes/ezhil
+        - nvim
+      - shell_command: cd themes/ezhil
