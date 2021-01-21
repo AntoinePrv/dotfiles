@@ -1,7 +1,26 @@
 # Exit if non-interactive shell
 [[ $- != *i* ]] && return
 
-source ~/.config/shell/machines.sh  # Need to be sourced first
-source ~/.config/shell/general.sh
-source ~/.config/shell/secrets.sh
-source ~/.config/shell/aliases.sh  # Need to be sourced last
+# Find this script directory requires non POSIX shell dependant function in the case the script is
+# sourced.
+function get_dir {
+	if [ -n "$BASH_VERSION" ]; then
+		local file="${BASH_SOURCE[0]}"
+	elif [ -n "$ZSH_VERSION" ]; then
+		local file="${(%):-%x}"
+	fi
+	echo -n "$(cd "$(dirname "$(readlink "${file}")" )" && pwd)"
+}
+
+source "$(get_dir)/machines.sh"  # Need to be sourced first
+source "$(get_dir)/general.sh"
+source "$(get_dir)/secrets.sh"
+source "$(get_dir)/aliases.sh"  # Need to be sourced after general
+
+# Prompt
+if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
+	source "$(get_dir)/tmux-prompt.sh"
+	source "$(get_dir)/tmux-update.sh"
+else
+	source "$(get_dir)/default-prompt.sh"
+fi
