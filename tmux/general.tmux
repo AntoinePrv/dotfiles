@@ -1,3 +1,6 @@
+# Set default shell
+set -g default-shell "${SHELL}"
+
 # Mouse control
 set -g mouse on
 
