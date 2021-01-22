@@ -4,7 +4,7 @@
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_DATA_HOME="${HOME}/.local/share"
-export WORKPLACE_DIR="${HOME}/workplace"
+export WORKSPACE_DIR="${HOME}/workslace"
 
 
 # Local configuration
@@ -58,5 +58,5 @@ elif [[ "${HOSTNAME}" == *"calculquebec.ca" ]]; then
 
 fi
 
-mkdir -p "${XDG_CONFIG_HOME}" "${XDG_CACHE_HOME}" "${XDG_DATA_HOME}" "${WORKPLACE_DIR}"
+mkdir -p "${XDG_CONFIG_HOME}" "${XDG_CACHE_HOME}" "${XDG_DATA_HOME}" "${WORKSPACE_DIR}"
 [ ! -z ${SCRATCH_DIR+x} ] &&  mkdir -p "$SCRATCH_DIR"
