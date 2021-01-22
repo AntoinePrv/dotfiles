@@ -1,24 +1,24 @@
-session_name: 'ecole'
-start_directory: '${WORKSPACE_DIR}/github.com/ds4dm/ecole'
+session_name: "ecole"
+start_directory: "~/workspace/github.com/ds4dm/ecole"  # ${WORKSPACE_DIR}
 shell_command_before:
   - 'source "${TMUXP_CONFIGDIR}/ecole/activate.sh"'
-  - 'clear'
+  - "clear"
 windows:
-  - window_name: 'build'
+  - window_name: "build"
     panes:
       - shell_command: 'bash "${TMUXP_CONFIGDIR}/ecole/watch.sh" build'
       - shell_command: 'bash "${TMUXP_CONFIGDIR}/ecole/watch.sh" tests'
       - shell_command: 'bash "${TMUXP_CONFIGDIR}/ecole/watch.sh" pytest'
-    layout: 'even-horizontal'
-  - window_name: 'nvim'
+    layout: "even-horizontal"
+  - window_name: "nvim"
     panes:
       - shell_command: >-
           nvim --cmd "let g:project='ecole'"
         focus: true
-  - window_name: 'dev'
+  - window_name: "dev"
     panes:
       - shell_command: null
         focus: true
       - shell_command: null
       - shell_command: null
-    layout: 'main-vertical'
+    layout: "main-vertical"
