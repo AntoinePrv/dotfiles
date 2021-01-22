@@ -15,14 +15,15 @@ set -g @plugin 'christoomey/vim-tmux-navigator'
 run '\
 TPM_PATH="${XDG_DATA_HOME-${HOME}/.local/share}/tmux/" && \
 TPM_VERSION=3.0.0 && \
-[ ! -d  "${TPM_PATH}/tpm" ] && \
-mkdir -p "${TPM_PATH}" && \
-cd "${TPM_PATH}" && \
-wget --output-document tpm.tar.gz "https://github.com/tmux-plugins/tpm/archive/v${TPM_VERSION}.tar.gz" && \
-tar -xzf tpm.tar.gz && \
-mv "tpm-${TPM_VERSION}" tpm && \
-rm tpm.tar.gz && \
-./tpm/bin/install_plugins'
+if [ ! -d  "${TPM_PATH}/tpm" ] ; then \
+	mkdir -p "${TPM_PATH}" && \
+	cd "${TPM_PATH}" && \
+	wget --output-document tpm.tar.gz "https://github.com/tmux-plugins/tpm/archive/v${TPM_VERSION}.tar.gz" && \
+	tar -xzf tpm.tar.gz && \
+	mv "tpm-${TPM_VERSION}" tpm && \
+	rm tpm.tar.gz && \
+	./tpm/bin/install_plugins \
+; fi'
 
 # Initialize tmux plugin manager
 # Press prefix + I to fetch the plugin.
