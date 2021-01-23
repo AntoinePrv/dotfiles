@@ -29,4 +29,4 @@ if [ ! -d  "${TPM_PATH}/tpm" ] ; then \
 # Press prefix + I to fetch the plugin.
 # Press prefix + alt + u to remove the plugin.
 # Press prefix + U to updates plugin.
-run -b '${XDG_DATA_HOME-${HOME}/.local/share}/tmux/plugins/tmp/tmp'
+run -b '${XDG_DATA_HOME-${HOME}/.local/share}/tmux/plugins/tpm/tpm'
