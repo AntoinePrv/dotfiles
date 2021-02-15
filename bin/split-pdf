@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+function print_help() {
+    cat << EOF
+Usage:
+  $0 -f|--from [int] -t|--to int [-o|--out <out-file>] <in-file>
+  $0 -h|--help
+
+Arguments:
+  -h|--help            Print help and exit.
+  -f|--from <page>     Page to start extracting from.
+  -t|--to <page>       Last page to extract.
+  -o|--out <file>      Name of the extracted pdf.
+EOF
+}
+
+function error_parameters() {
+    print_help
+    exit 1
+}
+
+function main {
+    local positional_args=()
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+        -h|--help)
+            print_help "$0"
+            exit 0
+            ;;
+        -f|--from)
+            local -r from="$2"
+            shift 2 # past argument and value
+            ;;
+        -t|--to)
+            local -r to="$2"
+            shift 2 # past argument and value
+            ;;
+        -o|--out)
+            local -r out_file="$2"
+            shift 2 # past argument and value
+            ;;
+        *) # unknown option
+            positional_args+=("$1") # save it in an array for later
+            shift # past argument
+            ;;
+        esac
+    done
+
+    # In file is positional parameter
+    if [[ ${#positional_args[@]} == 1 ]]; then
+        local -r in_file="${positional_args[0]}"
+    fi
+
+    # restore positional parameters
+    set -- "${positional_args[@]}" 
+
+    if [ -z "${in_file+x}" ] || [ -z "${from+x}" ] || [ -z "${to+x}" ]; then
+        error_parameters "$0"
+    fi
+
+    local -r command=(
+        gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH
+        -dFirstPage="${from}" -dLastPage="${to}"
+        -sOutputFile="${out_file:-out.pdf}" "${in_file}"
+    )
+
+    "${command[@]}"
+}
+
+main "$@"
