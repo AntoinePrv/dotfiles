@@ -10,7 +10,7 @@ export WORKSPACE_DIR="${HOME}/workspace"
 # Local configuration
 if [[ "${HOSTNAME}" == "kogitox"* ]]; then
 	# For CMake to poperly find package
-	export SDKROOT=$(xcodebuild -version -sdk macosx Path)
+	export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 
 # Gerad login node
 elif [[ "${HOSTNAME}" == "nexus2.gerad.lan" ]]; then
