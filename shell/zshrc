@@ -1,27 +1,19 @@
 # Exit if non-interactive shell
 [[ $- != *i* ]] && return
 
-# Find this script directory requires non POSIX shell dependant function in the case the script is
-# sourced.
-function get_dir {
-	if [ -n "$BASH_VERSION" ]; then
-		local file="${BASH_SOURCE[0]}"
-	elif [ -n "$ZSH_VERSION" ]; then
-		local file="${(%):-%x}"
-	fi
-	echo -n "$(cd "$(dirname "$(readlink "${file}")" )" && pwd)"
-}
+# Script directory requires non POSIX shell dependant function in the case the script is sourced (use Bashe).
+DIR="$(cd "$(dirname "$(readlink "${(%):-%x}")" )" && pwd)"
 
-source "$(get_dir)/machines.sh"  # Need to be sourced first
-source "$(get_dir)/general.sh"
-source "$(get_dir)/secrets.sh"
-source "$(get_dir)/aliases.sh"  # Need to be sourced after general
-source "$(get_dir)/editor.zsh"
+source "${DIR}/machines.sh"  # Need to be sourced first
+source "${DIR}/general.sh"
+source "${DIR}/secrets.sh"
+source "${DIR}/aliases.sh"  # Need to be sourced after general
+source "${DIR}/editor.zsh"
 
 # Prompt
 if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
-	source "$(get_dir)/tmux-prompt.sh"
-	source "$(get_dir)/tmux-update.sh"
+	source "${DIR}/tmux-prompt.sh"
+	source "${DIR}/tmux-update.sh"
 else
-	source "$(get_dir)/default-prompt.sh"
+	source "${DIR}/default-prompt.sh"
 fi
