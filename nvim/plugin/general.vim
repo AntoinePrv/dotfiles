@@ -62,9 +62,8 @@ augroup end
 " Authorize hidden buffer with modification
 set hidden
 
-" Colorcolumn relative to textwidth
-set textwidth=100
-set colorcolumn=+0
+" Never physically break lines
+set textwidth=0 wrapmargin=0
 
 " Files to ignore
 set wildignore+=*.DS_Store
