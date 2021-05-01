@@ -16,7 +16,7 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-obsession'
 	Plug 'stefandtw/quickfix-reflector.vim'
-	Plug 'junegunn/fzf', { 'tag': '0.24.4', 'do': { -> fzf#install() } }
+	Plug 'junegunn/fzf', { 'tag': '0.27.0', 'do': { -> fzf#install() } }
 
 	" Colors themes
 	Plug 'chriskempson/base16-vim'
@@ -34,7 +34,7 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'sheerun/vim-polyglot'
 	Plug 'rbberger/vim-singularity-syntax'
 	Plug 'octol/vim-cpp-enhanced-highlight'
-	Plug 'dense-analysis/ale', { 'tag': '9387ccfbc57f34f9fdc6af85cd0dbddf5ee8c5ae' }
+	Plug 'dense-analysis/ale', { 'tag': 'v3.1.0' }
 	Plug 'ncm2/float-preview.nvim'
 
 	" Tmux integration
