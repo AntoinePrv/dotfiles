@@ -12,11 +12,42 @@ export EDITOR=nvim
 # Shell colors
 export CLICOLOR=1
 
+function use_dark_mode () {
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		local -r script='tell app "System Events" to tell appearance preferences to get dark mode'
+		if local -r mode="$(osascript -e "${script}")"; then
+			if [[ "${mode}" = "false" ]]; then
+				return 1
+			fi
+		fi
+	fi
+	return 0
+}
+
+function set_theme () {
+	if use_dark_mode; then
+		local -r theme="onedark"
+	else
+		local -r theme="one-light"
+	fi
+	local -r theme_script="${XDG_DATA_HOME}/base16/scripts/base16-${theme}.sh"
+	if [[ -n "${PS1}" && -s "${theme_script}" ]]; then
+		source "${theme_script}"
+	fi
+}
+
+function is_in_ssh () {
+	[[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] && return 0 || return 1
+}
+
+function is_in_tmux () {
+	[[ "${TERM}" = "screen"* &&  -n "${TMUX}" ]] && return 0 || return 1
+}
+
 # Terminal Base16 color theme
-THEME="pop"
-THEME_SCRIPT="${XDG_DATA_HOME}/base16/scripts/base16-${THEME}.sh"
-if [[ -n "$PS1" && -s "$THEME_SCRIPT" ]]; then
-	source "$THEME_SCRIPT"
+
+if ! {is_in_tmux || is_in_ssh}; then
+	set_theme
 fi
 
 # Fzf color
