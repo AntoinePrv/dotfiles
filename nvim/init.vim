@@ -16,6 +16,7 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-obsession'
 	Plug 'stefandtw/quickfix-reflector.vim'
+	Plug 'drzel/vim-scrolloff-fraction', { 'commit': 'c4e543a9d9da6382f00c9f3c170d5c5def1f77f0' }
 	Plug 'junegunn/fzf', { 'tag': '0.27.0', 'do': { -> fzf#install() } }
 
 	" Colors themes
