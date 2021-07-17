@@ -10,6 +10,9 @@ endif
 
 " Plugins will be downloaded under the specified directory.
 call plug#begin(stdpath("data") . "/plugged")
+	" Local files loaded with plugin manager
+	Plug expand('<sfile>:p:h') . '/dotfiles'
+
 	" General
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'tpope/vim-sensible'
