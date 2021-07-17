@@ -20,7 +20,7 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug 'junegunn/fzf', { 'tag': '0.27.0', 'do': { -> fzf#install() } }
 
 	" Colors themes
-	Plug 'chriskempson/base16-vim'
+	Plug 'fnune/base16-vim'  " Updated fork of chriskempson/base16-vim
 
 	" Visual
 	Plug 'vim-airline/vim-airline'
@@ -32,9 +32,8 @@ call plug#begin(stdpath("data") . "/plugged")
 	" Plug 'norcalli/nvim-colorizer.lua'
 
 	" Completion and and syntax
-	Plug 'sheerun/vim-polyglot'
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 	Plug 'rbberger/vim-singularity-syntax'
-	Plug 'octol/vim-cpp-enhanced-highlight'
 	Plug 'dense-analysis/ale', { 'tag': 'v3.1.0' }
 	Plug 'ncm2/float-preview.nvim'
 
