@@ -624,3 +624,81 @@ c.TerminalInteractiveShell.prompt_includes_vi_mode = False
 ## If True, any %store-d variables will be automatically restored when IPython
 #  starts.
 #c.StoreMagics.autorestore = False
+
+
+# base16-prompt-toolkit (https://github.com/memeplex/base16-prompt-toolkit)
+# Base16 Prompt Toolkit template by Carlos Pita (carlosjosepita@gmail.com
+# Default Dark scheme by Chris Kempson (http://chriskempson.com)
+
+import enum
+
+import prompt_toolkit.output.vt100
+import pygments.style
+import pygments.token
+
+
+# See http://pygments.org/docs/tokens/ for a description of the different
+# pygments tokens.
+
+class Base16Style(pygments.style.Style):
+
+    class Colors:
+        base00 = "#181818"
+        base01 = "#282828"
+        base02 = "#383838"
+        base03 = "#585858"
+        base04 = "#b8b8b8"
+        base05 = "#d8d8d8"
+        base06 = "#e8e8e8"
+        base07 = "#f8f8f8"
+        base08 = "#ab4642"
+        base09 = "#dc9656"
+        base0A = "#f7ca88"
+        base0B = "#a1b56c"
+        base0C = "#86c1b9"
+        base0D = "#7cafc2"
+        base0E = "#ba8baf"
+        base0F = "#a16946"
+
+    background_color = Colors.base00
+    highlight_color = Colors.base02
+    default_style = Colors.base05
+
+    styles = {
+        pygments.token.Text: Colors.base05,
+        pygments.token.Error: f"{Colors.base08} bold",
+        pygments.token.Comment: Colors.base03,
+        pygments.token.Keyword: Colors.base0E,
+        pygments.token.Keyword.Constant: Colors.base09,
+        pygments.token.Keyword.Namespace: Colors.base0D,
+        pygments.token.Name.Builtin: Colors.base0D,
+        pygments.token.Name.Function: Colors.base0D,
+        pygments.token.Name.Class: Colors.base0D,
+        pygments.token.Name.Decorator: Colors.base0E,
+        pygments.token.Name.Exception: Colors.base08,
+        pygments.token.Number: Colors.base09,
+        pygments.token.Operator: Colors.base0E,
+        pygments.token.Literal: Colors.base0B,
+        pygments.token.String: Colors.base0B,
+    }
+
+# See https://github.com/jonathanslenders/python-prompt-toolkit/issues/355
+for i, color in enumerate(getattr(Base16Style.Colors, f"base0{d}") for d in "08BADEC5379F1246"):
+    r, g, b = int(color[1:3], 16), int(color[3:5], 16), int(color[5:], 16)
+    prompt_toolkit.output.vt100._256_colors[r, g, b] = i + 6 if i > 8 else i
+
+c.TerminalInteractiveShell.highlighting_style = Base16Style
+
+
+# See https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/prompt_toolkit/styles/defaults.py
+# for a description of prompt_toolkit related pseudo-tokens.
+c.TerminalInteractiveShell.highlighting_style_overrides = {
+    pygments.token.Token.Prompt: Base16Style.Colors.base0B,
+    pygments.token.Token.PromptNum: f"{Base16Style.Colors.base0B} bold",
+    pygments.token.Token.OutPrompt: Base16Style.Colors.base08,
+    pygments.token.Token.OutPromptNum: f"{Base16Style.Colors.base08} bold",
+    pygments.token.Token.Menu.Completions.Completion: f"bg:{Base16Style.Colors.base01} {Base16Style.Colors.base04}",
+    pygments.token.Token.Menu.Completions.Completion.Current: f"bg:{Base16Style.Colors.base04} {Base16Style.Colors.base01}",
+    pygments.token.Token.MatchingBracket.Other: f"bg:{Base16Style.Colors.base03} {Base16Style.Colors.base00}",
+}
+
