@@ -19,3 +19,6 @@ set colorcolumn=100
 
 " Show command at the bottom right
 set showcmd
+
+" Default folding level when opening new buffer
+set foldlevelstart=4
