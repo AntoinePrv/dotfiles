@@ -24,8 +24,10 @@ zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
 
+# Keybindings
 bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode
+bindkey '^R' history-incremental-search-backward
 
 # From Arch wiki https://wiki.archlinux.org/index.php/Zsh
 
