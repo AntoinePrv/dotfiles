@@ -35,8 +35,8 @@ cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
 cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
 
 " Nerd Commenter
-nnoremap <silent> <leader>/ :call NERDComment(0, "toggle")<CR>
-vnoremap <silent> <leader>/ :call NERDComment(0, "toggle")<CR>
+nnoremap <silent> <leader>/ :call nerdcommenter#Comment(0, "toggle")<CR>
+vnoremap <silent> <leader>/ :call nerdcommenter#Comment(0, "toggle")<CR>
 
 " Netwr
 nnoremap <leader>e :Explore<CR>

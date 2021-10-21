@@ -14,7 +14,7 @@ call plug#begin(stdpath("data") . "/plugged")
 	Plug expand('<sfile>:p:h') . '/dotfiles'
 
 	" General
-	Plug 'scrooloose/nerdcommenter'
+	Plug 'preservim/nerdcommenter'
 	Plug 'tpope/vim-sensible'
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-obsession'
