@@ -19,6 +19,11 @@ initialize_zinit "3.7" "${ZINIT[BIN_DIR]}"
 zinit ice compile
 zinit light @zinit-zsh/z-a-bin-gem-node
 
+if [[ "$(uname)" == Darwin* ]]; then
+	zinit ice lucid from='gh' atclone='swiftc -o dark-mode dark-mode.swift' atpull="%atclone" sbin='dark-mode'
+	zinit light @AntoinePrv/dark-mode
+fi
+
 zinit ice lucid from='gh-r' mv='rip* ripgrep' sbin='**/rg(.exe|) -> rg'
 zinit light @BurntSushi/ripgrep
 

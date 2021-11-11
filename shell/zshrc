@@ -5,10 +5,10 @@
 DIR="$(cd "$(dirname "$(readlink "${(%):-%x}")" )" && pwd)"
 
 source "${DIR}/machines.sh"  # Need to be sourced first
+source "${DIR}/zinit.zsh"
 source "${DIR}/general.sh"
 source "${DIR}/secrets.sh"
 source "${DIR}/aliases.sh"  # Need to be sourced after general
-source "${DIR}/zinit.zsh"
 source "${DIR}/editor.zsh"
 
 # Prompt
