@@ -38,11 +38,11 @@ function is_macos () {
 
 
 function set_theme () {
-	# FIXME job does not get kill when shell terminates
 	if is_macos && (! is_in_tmux) && (! is_in_ssh); then
-		(dark-mode base16 \
-			--root "${XDG_DATA_HOME}/base16" \
-			--light "one-light" --dark "onedark" &)
+		(
+			dark-mode base16 --root "${XDG_DATA_HOME}/base16" --light "one-light" --dark "onedark" &
+			bash -c "while ps -p $$ 2>&1 1>/dev/null; do sleep 600; done; pkill -P $!" &
+		)
 	fi
 }
 
