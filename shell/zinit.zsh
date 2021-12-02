@@ -1,6 +1,6 @@
 # Auto-install zinit plugin manager if not present and source it.
 function initialize_zinit {
-	local -r url="https://github.com/zdharma/zinit/archive/refs/tags/v${1}.tar.gz"
+	local -r url="https://github.com/zdharma-continuum/zinit/archive/refs/tags/v${1}.tar.gz"
 	local -r dest="$2"
 	if [[ ! -f "${dest}/zinit.zsh" ]]; then
 		mkdir -p "${dest}"
@@ -17,7 +17,7 @@ initialize_zinit "3.7" "${ZINIT[BIN_DIR]}"
 
 # Provides sbin etc. ice for managing programs as shims
 zinit ice compile
-zinit light @zinit-zsh/z-a-bin-gem-node
+zinit light @zdharma-continuum/z-a-bin-gem-node
 
 if [[ "$(uname)" == Darwin* ]]; then
 	zinit ice lucid from='gh' atclone='swiftc -o dark-mode dark-mode.swift' atpull="%atclone" sbin='dark-mode'
@@ -38,4 +38,4 @@ zinit light @zsh-users/zsh-completions
 
 # Should be loaded last and call again compinit after all (turbo) completion are loaded
 zinit ice wait compile lucid atinit='ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay'
-zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
