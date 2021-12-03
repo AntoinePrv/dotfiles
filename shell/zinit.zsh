@@ -24,10 +24,9 @@ zinit ice cloneonly
 zinit light "chriskempson/base16-shell"
 export BASE16_DIR="$(zinit cd "chriskempson/base16-shell" &> /dev/null && pwd)"
 
-if [[ "$(uname)" == Darwin* ]]; then
-	zinit ice lucid from='gh' atclone='swiftc -o dark-mode dark-mode.swift' atpull="%atclone" sbin='dark-mode'
-	zinit light @AntoinePrv/dark-mode
-fi
+zinit ice lucid from='gh' if='[[ "$(uname)" == Darwin* ]]' \
+	atclone='swiftc -o dark-mode dark-mode.swift' atpull="%atclone" sbin='dark-mode'
+zinit light @AntoinePrv/dark-mode
 
 zinit ice lucid from='gh-r' mv='rip* ripgrep' sbin='**/rg(.exe|) -> rg'
 zinit light @BurntSushi/ripgrep
