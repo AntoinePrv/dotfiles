@@ -19,6 +19,11 @@ initialize_zinit "3.7" "${ZINIT[BIN_DIR]}"
 zinit ice compile
 zinit light @zdharma-continuum/z-a-bin-gem-node
 
+# Install base16-shell but don't source code to avoid polluting the completion
+zinit ice cloneonly
+zinit light "chriskempson/base16-shell"
+export BASE16_DIR="$(zinit cd "chriskempson/base16-shell" &> /dev/null && pwd)"
+
 if [[ "$(uname)" == Darwin* ]]; then
 	zinit ice lucid from='gh' atclone='swiftc -o dark-mode dark-mode.swift' atpull="%atclone" sbin='dark-mode'
 	zinit light @AntoinePrv/dark-mode
