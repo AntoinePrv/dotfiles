@@ -37,6 +37,9 @@ zinit light @sharkdp/fd
 zinit ice lucid from='gh-r' mv='bat* bat' sbin='**/bat(.exe|) -> bat'
 zinit light @sharkdp/bat
 
+zinit ice lucid from='gh-r' sbi='**/fzf(.exe|) -> fzf'
+zinit light @junegunn/fzf
+
 zinit ice wait compile lucid blockf
 zinit light @zsh-users/zsh-completions
 
