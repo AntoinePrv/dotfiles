@@ -28,16 +28,21 @@ zinit ice lucid from='gh' if='[[ "$(uname)" == Darwin* ]]' \
 	atclone='swiftc -o dark-mode dark-mode.swift' atpull="%atclone" sbin='dark-mode'
 zinit light @AntoinePrv/dark-mode
 
-zinit ice lucid from='gh-r' mv='rip* ripgrep' sbin='**/rg(.exe|) -> rg'
+zinit ice lucid from='gh-r' sbin='**/rg(.exe|) -> rg'
 zinit light @BurntSushi/ripgrep
 
-zinit ice lucid from='gh-r' mv='fd* fd' sbin='**/fd(.exe|) -> fd'
+zinit ice lucid from='gh-r' sbin='**/fd(.exe|) -> fd'
 zinit light @sharkdp/fd
 
-zinit ice lucid from='gh-r' mv='bat* bat' sbin='**/bat(.exe|) -> bat'
+# Add cp='autocomplete/bat.zsh -> _bat'
+zinit ice lucid from='gh-r' sbin='**/bat(.exe|) -> bat'
 zinit light @sharkdp/bat
 
-zinit ice lucid from='gh-r' sbi='**/fzf(.exe|) -> fzf'
+zinit ice lucid id-as='junegunn/fzf:bin' from='gh-r' sbi='**/fzf(.exe|) -> fzf'
+zinit light @junegunn/fzf
+
+# This is for using fzf with completions
+zini ice lucid id-as='junegunn/fzf:fuzzy-completions' cp='shell/completion.zsh -> _fzf_fuzzy_completions'
 zinit light @junegunn/fzf
 
 zinit ice wait compile lucid blockf
