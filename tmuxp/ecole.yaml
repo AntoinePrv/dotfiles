@@ -6,7 +6,6 @@ shell_command_before:
 windows:
   - window_name: "build"
     panes:
-      - shell_command: 'bash "${TMUXP_CONFIGDIR}/ecole/watch.sh" build'
       - shell_command: 'bash "${TMUXP_CONFIGDIR}/ecole/watch.sh" tests'
       - shell_command: 'bash "${TMUXP_CONFIGDIR}/ecole/watch.sh" pytest'
     layout: "even-horizontal"

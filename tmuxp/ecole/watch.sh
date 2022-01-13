@@ -53,16 +53,8 @@ function __fswatch () {
 	fswatch --latency=1 --monitor=poll_monitor --one-per-batch --recursive "$@"
 }
 
-function __build () {
-	clear && __title Build && cmake --build build/ --parallel "$@" -- -s
-}
-
-function __watch_build () {
-	__fswatch CMakeLists.txt libecole/ python/ cmake/ | cancel_and_run __build "$@"
-}
-
 function __doc () {
-	clear && __title Generate Doc && cmake --build build/ --target ecole-sphinx "$@" -- -s
+	clear && __title Generate Doc && ./dev/run.sh test-doc "$@"
 }
 
 function __watch_doc () {
@@ -70,23 +62,19 @@ function __watch_doc () {
 }
 
 function __tests () {
-	clear && __title Tests && ./build/libecole/tests/test-libecole "$@"
+	clear && __title Build && ./dev/run.sh test-lib
 }
 
 function __watch_tests () {
-	__fswatch build/libecole/tests/test-libecole | cancel_and_run __tests "$@"
+	__fswatch CMakeLists.txt libecole/ python/ cmake/ | cancel_and_run __tests "$@"
 }
 
 function __pytest () {
-	(
-		clear && __title PyTest && \
-		./build/venv/bin/python -u -m pytest --no-slow -o cache_dir="${XDG_CACHE_HOME}/pytest/ecole" "$@" python/
-	)
+	clear && __title Build && ./dev/run.sh test-py
 }
 
 function __watch_pytest () {
-	WATCH_PATHS="build/venv python/tests python/**/*.py"
-	__fswatch --exclude '.*\.pyc' ${WATCH_PATHS} | cancel_and_run __pytest "$@"
+	__fswatch --exclude '.*\.pyc' python/ | cancel_and_run __pytest "$@"
 }
 
 function __main() {
