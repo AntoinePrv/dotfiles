@@ -34,8 +34,14 @@ call plug#begin(stdpath("data") . "/plugged")
 	" Completion and and syntax
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 	Plug 'rbberger/vim-singularity-syntax'
-	Plug 'dense-analysis/ale', { 'tag': 'v3.1.0' }
-	Plug 'ncm2/float-preview.nvim'
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'hrsh7th/cmp-nvim-lsp'
+	Plug 'hrsh7th/cmp-buffer'
+	Plug 'hrsh7th/cmp-path'
+	Plug 'hrsh7th/cmp-cmdline'
+	Plug 'hrsh7th/vim-vsnip'
+	Plug 'hrsh7th/cmp-vsnip'
+	Plug 'hrsh7th/nvim-cmp'
 
 	" Tmux integration
 	Plug 'christoomey/vim-tmux-navigator'
