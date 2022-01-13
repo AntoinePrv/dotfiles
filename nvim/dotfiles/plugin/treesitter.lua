@@ -1,4 +1,3 @@
-lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	ensure_installed = "maintained",
 
@@ -19,7 +18,6 @@ require'nvim-treesitter.configs'.setup {
 
 	indent = { enable = true }
 }
-EOF
 
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
