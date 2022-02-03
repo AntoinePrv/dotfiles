@@ -36,13 +36,25 @@ function is_macos () {
 	[[ "$OSTYPE" == "darwin"* ]] && return 0 || return 1
 }
 
+function is_linux () {
+	[[ "$OSTYPE" == "linux"* ]] && return 0 || return 1
+}
+
+function is_wsl () {
+	grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null && return 0 || return 1
+}
+
 
 function set_theme () {
+	local -r light="one-light"
+	local -r dark="onedark"
 	if is_macos && (! is_in_tmux) && (! is_in_ssh); then
 		(
-			dark-mode base16 --root "${BASE16_DIR}" --light "one-light" --dark "onedark" &
+			dark-mode base16 --root "${BASE16_DIR}" --light "${light}" --dark "${dark}" &
 			bash -c "while ps -p $$ 2>&1 1>/dev/null; do sleep 600; done; pkill -P $!" &
 		)
+	else
+		bash "${BASE16_DIR}/scripts/base16-${dark}.sh"
 	fi
 }
 
@@ -71,7 +83,7 @@ __conda_setup="$(conda shell.bash hook 2> /dev/null)" && eval "$__conda_setup"
 unset __conda_setup
 
 # Fix Tmux Conda path conflict
-if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
+if is_in_tmux ; then
 	conda deactivate &> /dev/null
 	conda activate base &> /dev/null
 fi
@@ -84,7 +96,7 @@ export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/cpython"
 export WORKON_HOME="${XDG_DATA_HOME}/pipenv/venvs"
 export PIP_CACHE_DIR="${XDG_CACHE_HOME}/pip"
 export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
-if python -c 'import importlib.util as u; exit(u.find_spec("IPython") is None)' ; then
+if python3 -c 'import importlib.util as u; exit(u.find_spec("IPython") is None)' &> /dev/null ; then
 	export PYTHONBREAKPOINT="ipdb.set_trace"
 	export PYTEST_ADDOPTS="--pdbcls=ipdb:__main__.debugger_cls"
 fi

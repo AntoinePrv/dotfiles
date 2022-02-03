@@ -30,8 +30,8 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X end-selection
 
 # Setup 'v' to begin selection as in Vim
 bind-key -T copy-mode-vi v send-keys -X begin-selection
-# Setup 'y' to yank (copy) selection and fix MacOs namespace
-bind-key -T copy-mode-vi y send-keys -X copy-pipe "reattach-to-user-namespace pbcopy"
+# Setup 'y' to yank (copy) selection
+bind-key -T copy-mode-vi y send-keys -X copy-selection
 
 # Remove default bindings, leaving only one way to do things
 unbind -T copy-mode-vi Enter
