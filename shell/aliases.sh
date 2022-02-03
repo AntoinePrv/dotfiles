@@ -15,3 +15,19 @@ function docker-shell () {
 		--interactive --tty --rm \
 		--workdir "/workspace" --mount "type=bind,source=${PWD},target=/workspace/$(basename ${PWD})" "$@"
 }
+
+# Aliases for pasteboard to mimic MacOS'
+if is_linux ; then
+	if is_wsl ; then
+		alias pbcopy="clip.exe"
+		alias pbpaste="powershell.exe -c Get-Clipboard"
+	else
+		if type xsel &> /dev/null ; then
+			alias pbcopy="xsel --clipboard"
+			alias pbpaste="xsel --clipboard"
+		elif type xclip &> /dev/null ; then
+			alias pbcopy="xclip -selection clipboard"
+			alias pbpaste="xclip -o -selection clipboard"
+		fi
+	fi
+fi
