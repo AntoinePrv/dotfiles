@@ -12,18 +12,6 @@ export EDITOR=nvim
 # Shell colors
 export CLICOLOR=1
 
-function use_dark_mode () {
-	if [[ "$OSTYPE" == "darwin"* ]]; then
-		local -r script='tell app "System Events" to tell appearance preferences to get dark mode'
-		if local -r mode="$(osascript -e "${script}")"; then
-			if [[ "${mode}" = "false" ]]; then
-				return 1
-			fi
-		fi
-	fi
-	return 0
-}
-
 function is_in_ssh () {
 	[[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] && return 0 || return 1
 }
@@ -44,13 +32,25 @@ function is_wsl () {
 	grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null && return 0 || return 1
 }
 
+export BASE16_LIGHT_THEME="one-light"
+export BASE16_DARK_THEME="onedark"
+
+function base16 (){
+	if [ "$1" = "light" ]; then
+		local -r theme="${BASE16_LIGHT_THEME}"
+	elif [ "${1}" = "dark" ]; then
+		local -r theme="${BASE16_DARK_THEME}"
+	else
+		local -r theme="${1}"
+	fi
+	bash "${BASE16_DIR}/scripts/base16-${theme}.sh"
+}
 
 function set_theme () {
-	local -r light="one-light"
-	local -r dark="onedark"
 	if is_macos && (! is_in_tmux) && (! is_in_ssh); then
 		(
-			dark-mode base16 --root "${BASE16_DIR}" --light "${light}" --dark "${dark}" &
+			dark-mode base16 --root "${BASE16_DIR}" \
+				--light "${BASE16_LIGHT_THEME}" --dark "${BASE16_DARK_THEME}" &
 			bash -c "while ps -p $$ 2>&1 1>/dev/null; do sleep 600; done; pkill -P $!" &
 		)
 	else
