@@ -12,25 +12,6 @@ export EDITOR=nvim
 # Shell colors
 export CLICOLOR=1
 
-function is_in_ssh () {
-	[[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] && return 0 || return 1
-}
-
-function is_in_tmux () {
-	[[ "${TERM}" = "screen"* &&  -n "${TMUX}" ]] && return 0 || return 1
-}
-
-function is_macos () {
-	[[ "$OSTYPE" == "darwin"* ]] && return 0 || return 1
-}
-
-function is_linux () {
-	[[ "$OSTYPE" == "linux"* ]] && return 0 || return 1
-}
-
-function is_wsl () {
-	grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null && return 0 || return 1
-}
 
 export BASE16_LIGHT_THEME="one-light"
 export BASE16_DARK_THEME="onedark"
@@ -47,7 +28,7 @@ function base16 (){
 }
 
 function set_theme () {
-	if is_macos && (! is_in_tmux) && (! is_in_ssh); then
+	if is-this macos && (! is-this tmux) && (! is-this ssh); then
 		(
 			dark-mode base16 --root "${BASE16_DIR}" \
 				--light "${BASE16_LIGHT_THEME}" --dark "${BASE16_DARK_THEME}" &
@@ -58,10 +39,17 @@ function set_theme () {
 	fi
 }
 
-# Terminal Base16 color theme
-
-if ! {is_in_tmux || is_in_ssh}; then
+if ! {is-this tmux || is-this ssh}; then
+	# Terminal Base16 color theme
 	set_theme
+	# Start the ssh-agent if it is not started and track the socket.
+	# ssh-add is handled by the .ssh/config
+	eval "$(ssh-agent -s)" &> /dev/null
+fi
+
+if is-this wsl; then
+	# Fix for tmux on openSuse with WSL2. https://github.com/microsoft/WSL/issues/2530
+	export TMUX_TMPDIR="/tmp"
 fi
 
 # Fzf color
@@ -83,7 +71,7 @@ __conda_setup="$(conda shell.bash hook 2> /dev/null)" && eval "$__conda_setup"
 unset __conda_setup
 
 # Fix Tmux Conda path conflict
-if is_in_tmux ; then
+if is-this tmux ; then
 	conda deactivate &> /dev/null
 	conda activate base &> /dev/null
 fi

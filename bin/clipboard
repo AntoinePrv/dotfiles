@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# Script to have a similar clipbard interface in all systems.
+
+if is-this linux ; then
+	if is-this wsl ; then
+		function copy () {
+			/mnt/c/Windows/System32/clip.exe "$@"
+		}
+		function paste () {
+			/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c Get-Clipboard "$@"
+		}
+	else
+		if type xsel &> /dev/null ; then
+			function copy () {
+				xsel --clipboard "$@"
+			}
+			function paste () {
+				xsel --clipboard "$@"
+			}
+		elif type xclip &> /dev/null ; then
+			function copy () {
+				xclip -selection clipboard "$@"
+			}
+			function paste () {
+				xclip -o -selection clipboard "$@"
+			}
+		fi
+	fi
+elif is-this macos ; then
+	function copy () {
+		pbcopy "$@"
+	}
+	function paste () {
+		pbpaste "$@"
+	}
+fi
+
+function main () {
+	case "${1}" in
+		"copy") copy "${@:2}";;
+		"paste") paste "${@:2}";;
+		*) echo "Unknown command $@" 1>&2 && exit 1;;
+	esac
+}
+
+main "$@"

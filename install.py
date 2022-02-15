@@ -20,6 +20,7 @@ CONFIG_DIR = pathlib.Path(
 DATA_DIR = pathlib.Path(
     os.environ.get("XDG_DATA_HOME", HOME_DIR / ".local/share")
 ).resolve()
+BIN_DIR = HOME_DIR / ".local/bin"
 PROJECT_DIR = pathlib.Path(__file__).parent.resolve()
 
 
@@ -193,6 +194,7 @@ class PipGenerateCompletion(Action):
 def main() -> None:
     # fmt: off
     installs = [
+        FilesInstall(source=PROJECT_DIR/"bin", dest=BIN_DIR),
         FilesInstall(source=PROJECT_DIR/"shell", dest=CONFIG_DIR/"shell"),
         FilesInstall(source=CONFIG_DIR/"shell/profile", dest=HOME_DIR/".profile"),
         FilesInstall(source=CONFIG_DIR/"shell/bashrc", dest=HOME_DIR/".bashrc"),

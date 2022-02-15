@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+
+function __is_this_ssh () {
+	[[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] && return 0 || return 1
+}
+
+function __is_this_tmux () {
+	[[ "${TERM}" = "screen"* &&  -n "${TMUX}" ]] && return 0 || return 1
+}
+
+function __is_this_macos () {
+	[[ "$OSTYPE" == "darwin"* ]] && return 0 || return 1
+}
+
+function __is_this_linux () {
+	[[ "$OSTYPE" == "linux"* ]] && return 0 || return 1
+}
+
+function __is_this_wsl () {
+	grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null && return 0 || return 1
+}
+
+"__is_this_${1}"
