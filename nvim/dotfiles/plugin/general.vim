@@ -14,6 +14,19 @@ filetype plugin on
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
+let g:clipboard = {
+	\ "name": "clipboard",
+	\ "copy": {
+		\ "+": ["clipboard", "copy"],
+		\ "*": ["clipboard", "copy"],
+	\ },
+	\ "paste": {
+		\ "+": ["clipboard", "paste"],
+		\ "*": ["clipboard", "paste"],
+	\ },
+	\ "cache_enabled": 1,
+\ }
+
 " Functions for saving and restoring the buffer views.
 "
 " The logic takes care of some edge cases. See the origina article
