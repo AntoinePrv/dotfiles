@@ -66,10 +66,10 @@ export CONDA_ENVS_PATH="${XDG_DATA_HOME}/conda/envs"
 export CONDA_PKGS_DIRS="${XDG_CACHE_HOME}/conda/pkgs"
 export CONDA_BLD_PATH="${XDG_CACHE_HOME}/conda/channel"
 
-# Initialize conda
-__conda_setup="$(conda shell.bash hook 2> /dev/null)" && eval "$__conda_setup"
-unset __conda_setup
-
+# Initialize conda if found
+conda_exe="${CONDA_EXE:-conda}"
+type "${conda_exe}" &> /dev/null && eval "$("${conda_exe}" "shell.$(basename "${SHELL}")" hook)"
+unset conda_exe
 # Fix Tmux Conda path conflict
 if is-this tmux ; then
 	conda deactivate &> /dev/null

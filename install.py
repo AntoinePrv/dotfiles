@@ -209,6 +209,7 @@ def main() -> None:
         FilesInstall(source=PROJECT_DIR/"misc/ipython", dest=CONFIG_DIR/"ipython"),
         FilesInstall(source=CONFIG_DIR/"misc/inputrc", dest=HOME_DIR/".inputrc"),
         FilesInstall(source=CONFIG_DIR/"misc/editrc", dest=HOME_DIR/".editrc"),
+        FilesInstall(source=CONFIG_DIR/"misc/condarc", dest=HOME_DIR/".condarc"),
         UpdateNvimPackages(),
         NvimGeneratePromptline(
             script=PROJECT_DIR/"shell/default-prompt.vim",
