@@ -16,16 +16,42 @@ export CLICOLOR=1
 export BASE16_LIGHT_THEME="one-light"
 export BASE16_DARK_THEME="onedark"
 
+
 function base16 (){
 	if [ "$1" = "light" ]; then
-		local -r theme="${BASE16_LIGHT_THEME}"
+		bash "${BASE16_DIR}/scripts/base16-${BASE16_LIGHT_THEME}.sh"
 	elif [ "${1}" = "dark" ]; then
-		local -r theme="${BASE16_DARK_THEME}"
+		bash "${BASE16_DIR}/scripts/base16-${BASE16_DARK_THEME}.sh"
 	else
-		local -r theme="${1}"
+		bash "${BASE16_DIR}/scripts/base16-${1}.sh"
 	fi
-	bash "${BASE16_DIR}/scripts/base16-${theme}.sh"
 }
+
+# TODO: Make this into a proper package
+if is-this wsl; then
+	function powershell () {
+			/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe "$@"
+	}
+
+	function dark-mode () {
+		if [ "$1" = "light" ]; then
+			base16 light
+			powershell Set-ItemProperty \
+				-Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize' \
+				-Name AppsUseLightTheme \
+				-Value 1
+		elif [ "${1}" = "dark" ]; then
+			base16 dark
+			powershell Set-ItemProperty \
+				-Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize' \
+				-Name AppsUseLightTheme \
+				-Value 0
+		else
+			echo "Invalid value ${1}" 1>&2
+			return 1
+		fi
+	}
+fi
 
 function set_theme () {
 	if is-this macos && (! is-this tmux) && (! is-this ssh); then
@@ -35,9 +61,10 @@ function set_theme () {
 			bash -c "while ps -p $$ 2>&1 1>/dev/null; do sleep 600; done; pkill -P $!" &
 		)
 	else
-		bash "${BASE16_DIR}/scripts/base16-${dark}.sh"
+		base16 dark
 	fi
 }
+
 
 if ! {is-this tmux || is-this ssh}; then
 	# Terminal Base16 color theme
