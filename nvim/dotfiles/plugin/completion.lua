@@ -101,9 +101,11 @@ cmp.setup({
 			return vim_item
 		end
 	},
+	-- Only show buffer sourec when the first set is not available.
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = "vsnip" }
+		{ name = "vsnip" },
+		{ name = "path", option = { get_cwd = function(params) return vim.fn.getcwd() end } },
 	}, {
 		{ name = "buffer" },
 	}),
