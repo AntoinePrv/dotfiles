@@ -76,7 +76,8 @@ fi
 
 if is-this wsl; then
 	# Fix for tmux on openSuse with WSL2. https://github.com/microsoft/WSL/issues/2530
-	export TMUX_TMPDIR="/tmp"
+	export TMUX_TMPDIR="/tmp/${USER}/tmux"
+	mkdir -p "${TMUX_TMPDIR}"
 fi
 
 # Fzf color
