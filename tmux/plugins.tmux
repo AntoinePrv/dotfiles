@@ -18,7 +18,7 @@ TPM_VERSION=3.0.0 && \
 if [ ! -d  "${TPM_PATH}/tpm" ] ; then \
 	mkdir -p "${TPM_PATH}" && \
 	cd "${TPM_PATH}" && \
-	wget --output-document tpm.tar.gz "https://github.com/tmux-plugins/tpm/archive/v${TPM_VERSION}.tar.gz" && \
+	curl --silent --location --output tpm.tar.gz "https://github.com/tmux-plugins/tpm/archive/v${TPM_VERSION}.tar.gz" && \
 	tar -xzf tpm.tar.gz && \
 	mv "tpm-${TPM_VERSION}" tpm && \
 	rm tpm.tar.gz && \
