@@ -19,11 +19,11 @@ export BASE16_DARK_THEME="onedark"
 
 function base16 (){
 	if [ "$1" = "light" ]; then
-		bash "${BASE16_DIR}/scripts/base16-${BASE16_LIGHT_THEME}.sh"
+		bash "${BASE16_DIR:?}/scripts/base16-${BASE16_LIGHT_THEME}.sh"
 	elif [ "${1}" = "dark" ]; then
-		bash "${BASE16_DIR}/scripts/base16-${BASE16_DARK_THEME}.sh"
+		bash "${BASE16_DIR:?}/scripts/base16-${BASE16_DARK_THEME}.sh"
 	else
-		bash "${BASE16_DIR}/scripts/base16-${1}.sh"
+		bash "${BASE16_DIR:?}/scripts/base16-${1}.sh"
 	fi
 }
 
@@ -56,7 +56,7 @@ fi
 function set_theme () {
 	if is-this macos && (! is-this tmux) && (! is-this ssh); then
 		(
-			dark-mode base16 --root "${BASE16_DIR}" \
+			dark-mode base16 --root "${BASE16_DIR:?}" \
 				--light "${BASE16_LIGHT_THEME}" --dark "${BASE16_DARK_THEME}" &
 			bash -c "while ps -p $$ 2>&1 1>/dev/null; do sleep 600; done; pkill -P $!" &
 		)

@@ -21,8 +21,8 @@ zinit light @zdharma-continuum/z-a-bin-gem-node
 
 # Install base16-shell but don't source code to avoid polluting the completion
 zinit ice cloneonly
-zinit light "chriskempson/base16-shell"
-export BASE16_DIR="$(zinit cd "chriskempson/base16-shell" &> /dev/null && pwd)"
+zinit light "base16-project/base16-shell"
+export BASE16_DIR="$(zinit cd "base16-project/base16-shell" &> /dev/null && pwd)"
 
 zinit ice lucid from='gh' if='[[ "$(uname)" == Darwin* ]]' \
 	atclone='swiftc -o dark-mode dark-mode.swift' atpull="%atclone" sbin='dark-mode'
