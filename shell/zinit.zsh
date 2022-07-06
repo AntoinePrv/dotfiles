@@ -38,12 +38,15 @@ zinit light @sharkdp/fd
 zinit ice lucid from='gh-r' sbin='**/bat(.exe|) -> bat'
 zinit light @sharkdp/bat
 
-zinit ice lucid id-as='junegunn/fzf:bin' from='gh-r' sbi='**/fzf(.exe|) -> fzf'
+zinit ice lucid id-as='junegunn/fzf:bin' from='gh-r' sbin='**/fzf(.exe|) -> fzf'
 zinit light @junegunn/fzf
 
 # This is for using fzf with completions
 zini ice lucid id-as='junegunn/fzf:fuzzy-completions' cp='shell/completion.zsh -> _fzf_fuzzy_completions'
 zinit light @junegunn/fzf
+
+zinit ice lucid from='gh-r' sbin='**/gh(.exe|) -> gh'
+zinit light @cli/cli
 
 zinit ice wait compile lucid blockf
 zinit light @zsh-users/zsh-completions
