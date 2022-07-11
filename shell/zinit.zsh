@@ -17,7 +17,7 @@ initialize_zinit "3.7" "${ZINIT[BIN_DIR]}"
 
 # Provides sbin etc. ice for managing programs as shims
 zinit ice compile
-zinit light @zdharma-continuum/z-a-bin-gem-node
+zinit light @zdharma-continuum/zinit-annex-bin-gem-node
 
 # Install base16-shell but don't source code to avoid polluting the completion
 zinit ice cloneonly
@@ -47,6 +47,9 @@ zinit light @junegunn/fzf
 
 zinit ice lucid from='gh-r' sbin='**/gh(.exe|) -> gh'
 zinit light @cli/cli
+
+zinit ice lucide from='gh-r' sbin='**/task(.exe|) -> task'
+zinit light @go-task/task
 
 zinit ice wait compile lucid blockf
 zinit light @zsh-users/zsh-completions
