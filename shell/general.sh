@@ -125,3 +125,9 @@ export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
 
 # Conan cache directory
 export CONAN_USER_HOME="${XDG_CACHE_HOME}/conan"
+
+# GPG
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+
+# Task
+export TASK_TEMP_DIR="${XDG_CACHE_HOME}/taskfile"
