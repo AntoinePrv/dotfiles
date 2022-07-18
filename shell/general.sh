@@ -104,6 +104,9 @@ if is-this tmux ; then
 	conda activate base &> /dev/null
 fi
 
+# Mamba package and environments prefix
+export MAMBA_ROOT_PREFIX="${XDG_DATA_HOME}/mamba"
+
 # Tmuxp configuration directory
 export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"
 

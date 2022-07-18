@@ -24,7 +24,7 @@ zinit ice cloneonly
 zinit light "base16-project/base16-shell"
 export BASE16_DIR="$(zinit cd "base16-project/base16-shell" &> /dev/null && pwd)"
 
-zinit ice lucid from='gh' if='[[ "$(uname)" == Darwin* ]]' \
+zinit ice lucid from='gh' if='[[ "$(uname -s)" == Darwin* ]]' \
 	atclone='swiftc -o dark-mode dark-mode.swift' atpull="%atclone" sbin='dark-mode'
 zinit light @AntoinePrv/dark-mode
 
@@ -50,6 +50,24 @@ zinit light @cli/cli
 
 zinit ice lucide from='gh-r' sbin='**/task(.exe|) -> task'
 zinit light @go-task/task
+
+# For downloading arbitrary assets from URLs
+zinit light @zdharma-continuum/zinit-annex-readurl
+
+case "$(uname -s)" in
+	Darwin*)
+		conda_os="osx" ;;
+	Linux*)
+		conda_os="linux" ;;
+esac
+case "$(uname -m)" in
+	x86_64)
+		conda_arch="64" ;;
+esac
+zinit ice lucid id-as='conda-forge/micromamba' as='readurl|null' extract \
+	fbin='bin/micromamba -> micromamba' atload='eval "$(micromamba shell hook -s posix)"'\
+	dlink="/conda-forge/micromamba/%VERSION%/download/${conda_os}-${conda_arch}/micromamba-%VERSION%-*.tar.bz2"
+zinit snippet https://anaconda.org/conda-forge/micromamba/files
 
 zinit ice wait compile lucid blockf
 zinit light @zsh-users/zsh-completions
