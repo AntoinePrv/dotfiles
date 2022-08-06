@@ -64,8 +64,11 @@ case "$(uname -m)" in
 	x86_64)
 		conda_arch="64" ;;
 esac
+# micromamba is bound as both function and script because function is necessary for activation
+# but not visible in programs (maybe easier to simply add in PATH using cmd).
 zinit ice lucid id-as='conda-forge/micromamba' as='readurl|null' extract \
-	fbin='bin/micromamba -> micromamba' atload='eval "$(micromamba shell hook -s posix)"'\
+	fbin='bin/micromamba -> micromamba' sbin='bin/micromamba -> micromamba' \
+	atload='eval "$(micromamba shell hook -s posix)"'\
 	dlink="/conda-forge/micromamba/%VERSION%/download/${conda_os}-${conda_arch}/micromamba-%VERSION%-*.tar.bz2"
 zinit snippet https://anaconda.org/conda-forge/micromamba/files
 
