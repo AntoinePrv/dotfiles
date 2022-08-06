@@ -130,7 +130,7 @@ class UpdateNvimPackages(Action):
 
     def install(self) -> None:
         """Update nvim package manager and packages."""
-        run_nvim_cmd("PlugUpgrade", "PlugInstall --sync", "PlugUpdate --sync")
+        run_nvim_cmd("autocmd User PackerComplete quitall", "PackerSync")
 
 
 class NvimGenerateFile(Action, abc.ABC):
