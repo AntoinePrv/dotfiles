@@ -117,7 +117,7 @@ export PIP_CACHE_DIR="${XDG_CACHE_HOME}/pip"
 export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
 if python3 -c 'import importlib.util as u; exit(u.find_spec("IPython") is None)' &> /dev/null ; then
 	export PYTHONBREAKPOINT="ipdb.set_trace"
-	export PYTEST_ADDOPTS="--pdbcls=ipdb:__main__.debugger_cls"
+	export PYTEST_ADDOPTS="--pdbcls=IPython.core.debugger:Pdb"
 fi
 
 # CCache directory
