@@ -7,6 +7,9 @@ vmap <space> <leader>
 inoremap jk <Esc>
 nnoremap <silent> <C-W>_ :split<CR>
 nnoremap <silent> <C-W><Bar> :vsplit<CR>
+" More intuitive default from `:help cw`
+noremap cw dwi
+noremap cW dWi
 
 " Nerd Commenter
 nnoremap <silent> <leader>/ :call nerdcommenter#Comment(0, "toggle")<CR>
