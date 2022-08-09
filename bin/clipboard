@@ -12,8 +12,12 @@ if is-this linux ; then
 		}
 	else
 		if type wl-copy &> /dev/null ; then
-			copy=wl-copy
-			paste=wl-paste
+			function copy () {
+				wl-copy "$@"
+			}
+			function paste () {
+				wl-paste "$@"
+			}
 		elif type xsel &> /dev/null ; then
 			function copy () {
 				xsel --clipboard "$@"
