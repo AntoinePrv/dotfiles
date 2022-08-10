@@ -28,11 +28,9 @@ require('packer').startup(function(use)
 	use 'vim-airline/vim-airline'
 	use 'vim-airline/vim-airline-themes'
 	use 'ryanoasis/vim-devicons'
-	use {
-		'lewis6991/gitsigns.nvim',
-		requires={'nvim-lua/plenary.nvim'},
-		config=function() require('gitsigns').setup() end
-	}
+
+	-- Git support
+	use {'lewis6991/gitsigns.nvim', requires={'nvim-lua/plenary.nvim'}}
 
 	-- Completion and and syntax
 	use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
