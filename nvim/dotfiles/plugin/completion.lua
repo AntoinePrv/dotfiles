@@ -138,29 +138,28 @@ local cmp_nvim_lsp_capabilities = require("cmp_nvim_lsp").update_capabilities(vi
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
 	-- Mappings.
-	local opts = { noremap=true, silent=true }
+	local opts = {noremap=true, silent=true, buffer=bufnr}
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	buf_set_keymap("n", "<leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	buf_set_keymap("n", "<laeder>s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-	buf_set_keymap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-	buf_set_keymap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-	buf_set_keymap("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	buf_set_keymap("n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-	buf_set_keymap("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	buf_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	buf_set_keymap("n", "[e", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-	buf_set_keymap("n", "]e", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-	buf_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-	buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+	vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, opts)
+	vim.keymap.set("n", "<laeder>s", vim.lsp.buf.signature_help, opts)
+	vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+	vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+	vim.keymap.set("n", "<leader>wl", print, opts)
+	vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
+	vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
+	vim.keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
+	vim.keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
+	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
+	vim.keymap.set("n", "<leader>f", vim.lsp.buf.formatting, opts)
 end
 
 local nvim_lsp = require("lspconfig")
