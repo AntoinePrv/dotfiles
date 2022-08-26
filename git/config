@@ -10,6 +10,7 @@
 	fixup = commit --amend --no-edit
 	forward = merge --ff-only
 	st = status
+	hub = !gh
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -17,8 +18,14 @@
 	process = git-lfs filter-process
 	required = true
 
+[init]
+	defaultBranch = main
+
 [pull]
 	rebase = true
+
+[push]
+	autoSetupRemote = true
 
 [merge]
 	tool = vimdiff
@@ -36,5 +43,3 @@
 
 [include]
 	path = secrets
-[init]
-	defaultBranch = main
