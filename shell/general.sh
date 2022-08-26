@@ -18,8 +18,8 @@ mkdir -p "$(dirname "${HISTFILE}")"
 export CLICOLOR=1
 
 
-export BASE16_LIGHT_THEME="one-light"
-export BASE16_DARK_THEME="onedark"
+export BASE16_LIGHT_THEME="humanoid-light"
+export BASE16_DARK_THEME="humanoid-dark"
 
 
 function base16 (){
@@ -32,39 +32,17 @@ function base16 (){
 	fi
 }
 
-# TODO: Make this into a proper package
-if is-this wsl; then
-	function powershell () {
-			/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe "$@"
-	}
-
-	function dark-mode () {
-		if [ "$1" = "light" ]; then
-			base16 light
-			powershell Set-ItemProperty \
-				-Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize' \
-				-Name AppsUseLightTheme \
-				-Value 1
-		elif [ "${1}" = "dark" ]; then
-			base16 dark
-			powershell Set-ItemProperty \
-				-Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize' \
-				-Name AppsUseLightTheme \
-				-Value 0
-		else
-			echo "Invalid value ${1}" 1>&2
-			return 1
-		fi
-	}
-fi
-
 function set_theme () {
-	if is-this macos && (! is-this tmux) && (! is-this ssh); then
+	if is-this macos; then
 		(
 			dark-mode base16 --root "${BASE16_DIR:?}" \
 				--light "${BASE16_LIGHT_THEME}" --dark "${BASE16_DARK_THEME}" &
+			# TODO should be handled by the project itself
 			bash -c "while ps -p $$ 2>&1 1>/dev/null; do sleep 600; done; pkill -P $!" &
 		)
+	elif is-this linux; then
+			dark-mode base16 --root "${BASE16_DIR:?}" \
+				--light "${BASE16_LIGHT_THEME}" --dark "${BASE16_DARK_THEME}" &
 	else
 		base16 dark
 	fi

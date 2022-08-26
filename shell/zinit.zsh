@@ -25,7 +25,10 @@ zinit light "base16-project/base16-shell"
 export BASE16_DIR="$(zinit cd "base16-project/base16-shell" &> /dev/null && pwd)"
 
 zinit ice lucid from='gh' if='[[ "$(uname -s)" == Darwin* ]]' \
-	atclone='swiftc -o dark-mode dark-mode.swift' atpull="%atclone" sbin='dark-mode'
+	atclone='swiftc -o dark-mode macos/dark-mode.swift' atpull="%atclone" sbin='dark-mode'
+zinit light @AntoinePrv/dark-mode
+zinit ice lucid from='gh' if='[[ "$(uname -s)" == Linux* ]]' \
+	sbin='linux/gnome/dark-mode.sh -> dark-mode'
 zinit light @AntoinePrv/dark-mode
 
 zinit ice lucid from='gh-r' sbin='**/rg(.exe|) -> rg'
