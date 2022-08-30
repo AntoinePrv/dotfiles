@@ -33,16 +33,19 @@ function base16 (){
 }
 
 function set_theme () {
+	# TODO find a better way to run in the background? Or make is an executable?
 	if is-this macos; then
 		(
 			dark-mode base16 --root "${BASE16_DIR:?}" \
 				--light "${BASE16_LIGHT_THEME}" --dark "${BASE16_DARK_THEME}" &
-			# TODO should be handled by the project itself
 			bash -c "while ps -p $$ 2>&1 1>/dev/null; do sleep 600; done; pkill -P $!" &
 		)
 	elif is-this linux; then
+		(
 			dark-mode base16 --root "${BASE16_DIR:?}" \
 				--light "${BASE16_LIGHT_THEME}" --dark "${BASE16_DARK_THEME}" &
+			bash -c "while ps -p $$ 2>&1 1>/dev/null; do sleep 600; done; pkill -P $!" &
+		)
 	else
 		base16 dark
 	fi
