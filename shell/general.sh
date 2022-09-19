@@ -9,10 +9,13 @@ export PATH
 
 export EDITOR=nvim
 
+# Number of commands saved in memory
+export HISTSIZE=100000
 # Shell history
 export HISTFILE="${XDG_DATA_HOME}/$(basename "${SHELL}")/history"
-export SAVEHIST=10000
 mkdir -p "$(dirname "${HISTFILE}")"
+# Number of commands saved in in HISTFILE
+export SAVEHIST=${HISTSIZE}
 
 # Shell colors
 export CLICOLOR=1
