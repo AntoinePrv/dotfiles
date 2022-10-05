@@ -25,7 +25,7 @@ zinit light "base16-project/base16-shell"
 export BASE16_DIR="$(zinit cd "base16-project/base16-shell" &> /dev/null && pwd)"
 
 zinit ice lucid from='gh' if='[[ "$(uname -s)" == Darwin* ]]' \
-	atclone='swiftc -o dark-mode macos/dark-mode.swift' atpull="%atclone" sbin='dark-mode'
+	atclone='swiftc -o dark-mode macos/dark-mode.swift' atpull='%atclone' sbin='dark-mode'
 zinit light @AntoinePrv/dark-mode
 zinit ice lucid from='gh' if='[[ "$(uname -s)" == Linux* ]]' \
 	sbin='linux/gnome/dark-mode.sh -> dark-mode'
@@ -48,7 +48,7 @@ zinit light @junegunn/fzf
 zini ice lucid id-as='junegunn/fzf:fuzzy-completions' cp='shell/completion.zsh -> _fzf_fuzzy_completions'
 zinit light @junegunn/fzf
 
-zinit ice lucid from='gh-r' sbin='**/gh(.exe|) -> gh'
+zinit ice lucid from='gh-r' sbin='**/gh(.exe|) -> gh' atclone='gh completion -s zsh > _gh' atpull='%atclone'
 zinit light @cli/cli
 
 zinit ice lucide from='gh-r' sbin='**/task(.exe|) -> task'
@@ -69,11 +69,12 @@ case "$(uname -m)" in
 esac
 # micromamba is bound as both function and script because function is necessary for activation
 # but not visible in programs (maybe easier to simply add in PATH using cmd).
-zinit ice lucid id-as='conda-forge/micromamba' as='readurl|null' extract \
-	fbin='bin/micromamba -> micromamba' sbin='bin/micromamba -> micromamba' \
-	atload='eval "$(micromamba shell hook -s posix)"'\
-	dlink="/conda-forge/micromamba/%VERSION%/download/${conda_os}-${conda_arch}/micromamba-%VERSION%-*.tar.bz2"
-zinit snippet https://anaconda.org/conda-forge/micromamba/files
+zinit ice lucid id-as='conda-forge/micromamba' as='readurl|command' extract \
+	dlink="/conda-forge/micromamba/%VERSION%/download/${conda_os}-${conda_arch}/micromamba-%VERSION%-*.tar.bz2" \
+	pick="bin/micromamba" \
+	atload='eval "$(micromamba shell hook --shell zsh)"'
+zinit snippet 'https://anaconda.org/conda-forge/micromamba/files'
+export MAMBA_EXE="$(zinit cd "conda-forge/micromamba" &> /dev/null && pwd)/bin/micromamba"
 
 zinit ice wait compile lucid blockf
 zinit light @zsh-users/zsh-completions
@@ -81,3 +82,6 @@ zinit light @zsh-users/zsh-completions
 # Should be loaded last and call again compinit after all (turbo) completion are loaded
 zinit ice wait compile lucid atinit='ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay'
 zinit light zdharma-continuum/fast-syntax-highlighting
+
+autoload -Uz compinit && compinit
+zi cdreplay
