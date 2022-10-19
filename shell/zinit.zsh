@@ -21,7 +21,7 @@ zinit light @zdharma-continuum/zinit-annex-bin-gem-node
 
 # Install base16-shell but don't source code to avoid polluting the completion
 zinit ice cloneonly
-zinit light "base16-project/base16-shell"
+zinit light "tinted-theming/base16-shell"
 export BASE16_DIR="$(zinit cd "base16-project/base16-shell" &> /dev/null && pwd)"
 
 zinit ice lucid from='gh' if='[[ "$(uname -s)" == Darwin* ]]' \

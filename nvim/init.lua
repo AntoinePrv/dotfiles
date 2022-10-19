@@ -24,7 +24,7 @@ require("packer").startup({
 		use {"junegunn/fzf", tag="0.27.0", run="fzf#install()"}
 
 		-- Colors themes
-		use "fnune/base16-vim"
+		use "tinted-theming/base16-vim"
 
 		-- Visual
 		use "vim-airline/vim-airline"
