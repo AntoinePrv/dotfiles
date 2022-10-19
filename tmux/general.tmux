@@ -32,12 +32,11 @@ bind BSpace select-window -t '{last}'
 # Navigates sessions
 unbind (
 unbind )
-# Need to compute index of previous/last session otherwise the order is by last accessed
-# Using ``|| true`` to do nothing on edge cases.
-bind j run-shell "tmux switch-client -t '$'$(($(tmux display-message -p '#{session_id}' | tr -d '$') + 1)) || true"
-bind J run-shell "tmux switch-client -t '$'$(($(tmux list-sessions | wc -l) - 1))"
-bind k run-shell "tmux switch-client -t '$'$(($(tmux display-message -p '#{session_id}' | tr -d '$') - 1)) || true"
-bind K switch-client -t $0
+bind k run-shell "${HOME}/.config/tmux/tmux-utils.sh previous-session"
+bind K run-shell "${HOME}/.config/tmux/tmux-utils.sh start-session"
+bind j run-shell "${HOME}/.config/tmux/tmux-utils.sh next-session"
+bind J run-shell "${HOME}/.config/tmux/tmux-utils.sh end-session"
+
 # Maximize
 unbind z
 bind m resize-pane -Z
