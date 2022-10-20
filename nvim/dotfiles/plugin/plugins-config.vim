@@ -58,6 +58,7 @@ let g:fzf_colors = {
 \}
 
 lua << EOF
+
 require('specs').setup{
 	show_jumps  = true,
 	min_jump = 10,
@@ -74,4 +75,13 @@ require('specs').setup{
 		resizer = require('specs').shrink_resizer,
 	},
 }
+vim.keymap.set(
+	"n", "n", "n:lua require('specs').show_specs()<CR>",
+	{silent=true, desc="Go to next search result"}
+)
+vim.keymap.set(
+	"n", "N", "N:lua require('specs').show_specs()<CR>",
+	{silent=true, desc="Go to previous search result"}
+)
+
 EOF
