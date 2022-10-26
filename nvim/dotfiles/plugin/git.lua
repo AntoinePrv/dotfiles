@@ -10,7 +10,7 @@ require("gitsigns").setup({
 
 		-- Navigation
 		map(
-			"n", "]c",
+			"n", "]h",
 			function()
 				if vim.wo.diff then return "]c" end
 				vim.schedule(function() gs.next_hunk() end)
@@ -19,7 +19,7 @@ require("gitsigns").setup({
 			{expr=true}
 		)
 		map(
-			"n", "[c",
+			"n", "[h",
 			function()
 				if vim.wo.diff then return "[c" end
 				vim.schedule(function() gs.prev_hunk() end)
@@ -29,8 +29,8 @@ require("gitsigns").setup({
 		)
 
 		-- Actions
-		map({"n", "v"}, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-		map({"n", "v"}, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+		map({"n", "v"}, "<leader>hs", gs.stage_hunk)
+		map({"n", "v"}, "<leader>hr", gs.reset_hunk)
 		map("n", "<leader>hS", gs.stage_buffer)
 		map("n", "<leader>hu", gs.undo_stage_hunk)
 		map("n", "<leader>hR", gs.reset_buffer)

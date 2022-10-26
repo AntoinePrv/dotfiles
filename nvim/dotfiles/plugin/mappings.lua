@@ -5,15 +5,28 @@
 vim.g.mapleader = "\\"
 vim.keymap.set({"n", "v"}, "<space>", "<leader>", {remap=true})
 
--- General mappings
-vim.keymap.set("i", "jk", "<Esc>")
-vim.keymap.set("n", "<C-W>_", ":split<CR>", {silent=true})
-vim.keymap.set("n", "<C-W><Bar>", ":vsplit<CR>", {silent=true})
+-- General
+vim.keymap.set("i", "jk", "<Esc>", {desc="Exit inster mode"})
+vim.keymap.set("n", "<C-S>", ":wa<CR>", {silent=true, desc="Save all buffers"})
+
+-- Navigation
+vim.keymap.set({"n", "v", "o"}, "K", "gg", {desc="Go to top of buffer"})
+vim.keymap.set({"n", "v", "o"}, "J", "G", {desc="Go to bottom of buffer"})
+vim.keymap.set({"n", "v", "o"}, "H", "^", {desc="Go to begining of line"})
+vim.keymap.set({"n", "v", "o"}, "L", "$", {desc="Go to end of line"})
+
+-- Remaps
+vim.keymap.set({"n", "v"}, "<leader>j", "J", {desc="Join lines"})
+vim.keymap.set({"n", "v"}, "<leader>u", "gu", {desc="Change text to lowercase"})
+vim.keymap.set({"n", "v"}, "<leader>U", "gU", {desc="Change text to uppercase"})
+
+-- Windows
+vim.keymap.set("n", "<C-W>-", ":split<CR>", {silent=true})
+vim.keymap.set("n", "<C-W><Bslash>", ":vsplit<CR>", {silent=true})
 
 -- More intuitive default from `:help cw`
 vim.keymap.set("n", "cw", "dwi")
 vim.keymap.set("n", "cW", "dWi")
-
 
 -- Call a function n times
 local function call_n(n, func, ...)
@@ -51,18 +64,7 @@ vim.keymap.set("n", "]l", repeatable(vim.cmd, ":lnext"))
 vim.keymap.set("n", "[L", repeatable(vim.cmd, ":lfirst"))
 vim.keymap.set("n", "]L", repeatable(vim.cmd, ":llast"))
 
--- Centered search
-vim.keymap.set("n", "*", "*zzzv", {desc = "Search and center screen"})
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
 -- Move selected lines up/down in visual mode
-vim.keymap.set("x", "K", ":move '<-2<CR>gv=gv")
-vim.keymap.set("x", "J", ":move '>+1<CR>gv=gv")
-
--- keep visual selection when (de)indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
 
 -- Nerd Commenter
 vim.keymap.set({"n", "v"}, "<leader>/", ":call nerdcommenter#Comment(0, 'toggle')<CR>")
