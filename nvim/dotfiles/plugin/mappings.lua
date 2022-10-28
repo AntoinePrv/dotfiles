@@ -71,7 +71,3 @@ vim.keymap.set({"n", "v"}, "<leader>/", ":call nerdcommenter#Comment(0, 'toggle'
 
 -- Netwr
 vim.keymap.set("n", "<leader>e", ":Explore<CR>")
-
--- Fzf
-vim.keymap.set("n", "<leader>p", vim.fn.FzfFindFile)
-

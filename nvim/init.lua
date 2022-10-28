@@ -21,7 +21,6 @@ require("packer").startup({
 		use "tpope/vim-obsession"
 		use "stefandtw/quickfix-reflector.vim"
 		use {"drzel/vim-scrolloff-fraction", commit="c4e543a9d9da6382f00c9f3c170d5c5def1f77f0"}
-		use {"junegunn/fzf", tag="0.27.0", run="fzf#install()"}
 
 		-- Colors themes
 		use "tinted-theming/base16-vim"
@@ -46,6 +45,12 @@ require("packer").startup({
 		use "hrsh7th/vim-vsnip"
 		use "hrsh7th/cmp-vsnip"
 		use "hrsh7th/nvim-cmp"
+
+		-- Telescope
+		use {
+		 	"nvim-telescope/telescope.nvim", tag = "0.1.0",
+			requires = {{"nvim-lua/plenary.nvim"}, {"nvim-tree/nvim-web-devicons"}}
+		}
 
 		-- Tmux integration
 		use "christoomey/vim-tmux-navigator"

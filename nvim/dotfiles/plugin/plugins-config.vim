@@ -32,30 +32,6 @@ set updatetime=100
 " reporting focus events. Either try installing Terminus or set:
 let g:gitgutter_terminal_reports_focus=0
 
-" Fzf
-function FzfFindFile()
-	" Change sources if in git
-	call system("git rev-parse --is-inside-work-tree")
-	if v:shell_error == 0
-		let fzf_config = {
-			\ "source": "git ls-files --exclude-standard  -oc -z",
-			\ "options": "--read0 --reverse --info=hidden --prompt=' '"
-		\}
-	else
-		let fzf_config = {}
-	endif
-	call fzf#run(fzf#wrap(fzf_config))
-endfunction
-let g:fzf_layout = {
-	\ "window": {
-		\ "width": 0.5,
-		\ "height": 0.3,
-		\ "border": "sharp",
-	\}
-\}
-let g:fzf_colors = {
-	\ "border":  ["fg", "VertSplit"],
-\}
 
 lua << EOF
 
