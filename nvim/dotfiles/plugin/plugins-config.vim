@@ -26,13 +26,6 @@ let g:airline_section_z = "%l/%L"
 let g:airline_theme="base16_tomorrow"
 
 
-" git-gutter
-set updatetime=100
-" When signs don't update after focusing Vim. Your terminal probably isn't
-" reporting focus events. Either try installing Terminus or set:
-let g:gitgutter_terminal_reports_focus=0
-
-
 lua << EOF
 
 require('specs').setup{
