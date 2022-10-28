@@ -9,6 +9,9 @@ vim.keymap.set({"n", "v"}, "<space>", "<leader>", {remap=true})
 vim.keymap.set("i", "jk", "<Esc>", {desc="Exit inster mode"})
 vim.keymap.set("n", "<C-S>", ":wa<CR>", {silent=true, desc="Save all buffers"})
 
+-- Deactivated
+vim.keymap.set({"n", "v"}, "q:", "<nop>", {desc="Does not open command history buffer"})
+
 -- Navigation
 vim.keymap.set({"n", "v", "o"}, "K", "gg", {desc="Go to top of buffer"})
 vim.keymap.set({"n", "v", "o"}, "J", "G", {desc="Go to bottom of buffer"})
@@ -54,17 +57,15 @@ vim.keymap.set("n", "]b", repeatable(vim.cmd, ":bnext"), {silent=true})
 vim.keymap.set("n", "[B", repeatable(vim.cmd, ":bfirst"), {silent=true})
 vim.keymap.set("n", "]B", repeatable(vim.cmd, ":blast"), {silent=true})
 -- Quickfix list mappings
-vim.keymap.set("n", "[q", repeatable(vim.cmd, ":cprevious"))
-vim.keymap.set("n", "]q", repeatable(vim.cmd, ":cnext"))
-vim.keymap.set("n", "[Q", repeatable(vim.cmd, ":cfirst"))
-vim.keymap.set("n", "]Q", repeatable(vim.cmd, ":clast"))
+vim.keymap.set("n", "[c", repeatable(vim.cmd, ":cprevious"))
+vim.keymap.set("n", "]c", repeatable(vim.cmd, ":cnext"))
+vim.keymap.set("n", "[C", repeatable(vim.cmd, ":cfirst"))
+vim.keymap.set("n", "]C", repeatable(vim.cmd, ":clast"))
 -- Location list mappings
 vim.keymap.set("n", "[l", repeatable(vim.cmd, ":lprevious"))
 vim.keymap.set("n", "]l", repeatable(vim.cmd, ":lnext"))
 vim.keymap.set("n", "[L", repeatable(vim.cmd, ":lfirst"))
 vim.keymap.set("n", "]L", repeatable(vim.cmd, ":llast"))
-
--- Move selected lines up/down in visual mode
 
 -- Nerd Commenter
 vim.keymap.set({"n", "v"}, "<leader>/", ":call nerdcommenter#Comment(0, 'toggle')<CR>")
