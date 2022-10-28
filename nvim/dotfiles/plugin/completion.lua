@@ -151,7 +151,9 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>s", vim.lsp.buf.signature_help, opts)
 	vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
 	vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-	vim.keymap.set("n", "<leader>wl", print, opts)
+	vim.keymap.set('n', '<space>wl', function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, bufopts)
 	vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
@@ -194,11 +196,29 @@ end
 vim.diagnostic.config({
 	virtual_text = false,
 	underline = true,
+	severity_sort = true
 })
 
 -- Show line diagnostics automatically in hover window
 vim.o.updatetime = 500
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.api.nvim_create_autocmd(
+	"CursorHold",
+	{
+		buffer = bufnr,
+		callback = function()
+			vim.diagnostic.open_float(
+				nil,
+				{
+					focusable = false,
+					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+					source = 'always',
+					prefix = ' ',
+					scope = 'cursor',
+				}
+			)
+		end
+	}
+)
 
 -- Weirdly complicated for setting the highlight for diagnostic.
 vim.cmd([[
