@@ -108,7 +108,16 @@ class FilesInstall(Action):
             self.dest.unlink()
         elif self.dest.is_dir():
             shutil.rmtree(self.dest)
-        self.dest.symlink_to(self.source)
+        if self.source.is_dir():
+            self.dest.mkdir(parents=True)
+            for source_p in self.source.glob("**/*"):
+                dest_p = self.dest / source_p.relative_to(self.source)
+                if source_p.is_dir():
+                    dest_p.mkdir(parents=True)
+                else:
+                    dest_p.symlink_to(source_p)
+        else:
+            self.dest.symlink_to(self.source)
 
 
 def run_nvim_cmd(*cmds: str) -> None:
