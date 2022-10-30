@@ -189,6 +189,7 @@ def main() -> None:
         FilesInstall(source=PROJECT_DIR/"tmuxp", dest=CONFIG_DIR/"tmuxp"),
         FilesInstall(source=PROJECT_DIR/"git", dest=CONFIG_DIR/"git"),
         FilesInstall(source=PROJECT_DIR/"misc", dest=CONFIG_DIR/"misc"),
+        FilesInstall(source=PROJECT_DIR/"misc/alacritty.yml", dest=CONFIG_DIR/"alacritty/alacritty.yml"),
         FilesInstall(source=PROJECT_DIR/"misc/ipython", dest=CONFIG_DIR/"ipython"),
         FilesInstall(source=CONFIG_DIR/"misc/inputrc", dest=HOME_DIR/".inputrc"),
         FilesInstall(source=CONFIG_DIR/"misc/editrc", dest=HOME_DIR/".editrc"),
