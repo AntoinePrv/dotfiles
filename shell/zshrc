@@ -14,7 +14,7 @@ source "${DIR}/aliases.sh"  # Need to be sourced after general
 source "${DIR}/editor.zsh"
 
 # Prompt
-if [[ "$TERM" == screen* ]] && [ -n "$TMUX" ]; then
+if is-this tmux; then
 	source "${DIR}/tmux-prompt.sh"
 	source "${DIR}/tmux-update.sh"
 else

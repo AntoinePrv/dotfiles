@@ -6,15 +6,15 @@ function __is_this_ssh () {
 }
 
 function __is_this_tmux () {
-	[[ "${TERM}" = "screen"* &&  -n "${TMUX}" ]] && return 0 || return 1
+	[[ -n "${TMUX}" ]] && return 0 || return 1
 }
 
 function __is_this_macos () {
-	[[ "$OSTYPE" == "darwin"* ]] && return 0 || return 1
+	[[ "${OSTYPE}" == "darwin"* ]] && return 0 || return 1
 }
 
 function __is_this_linux () {
-	[[ "$OSTYPE" == "linux"* ]] && return 0 || return 1
+	[[ "${OSTYPE}" == "linux"* ]] && return 0 || return 1
 }
 
 function __is_this_wsl () {
