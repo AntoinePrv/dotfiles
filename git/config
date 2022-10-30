@@ -41,5 +41,9 @@
 	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 	prompt = false
 
+[user]
+	name = AntoinePrv
+	email = AntoinePrv@users.noreply.github.com
+
 [include]
 	path = secrets
