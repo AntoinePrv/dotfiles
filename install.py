@@ -175,31 +175,6 @@ class NvimGenerateTmuxline(NvimGenerateFile):
         )
 
 
-class PipGenerateCompletion(Action):
-    def __init__(self, dest: pathlib.Path) -> None:
-        super().__init__(
-            replace_prompt=f"Location {dest} already exists.",
-            report_message=f"Generated file {dest}.",
-        )
-        self.dest = dest
-
-    def exists(self) -> bool:
-        """Return wether the installation target already exists."""
-        return self.dest.exists() or self.dest.is_symlink()
-
-    def install(self) -> None:
-        """Generate completion files for pip and pipenv."""
-        retcode = os.system(
-            "type -P pip3 &> /dev/null && "
-            f"(pip3 completion --`basename $SHELL` > {self.dest})"
-        )
-        redirect = ">>" if (retcode == 0) else ">"
-        os.system(
-            "type -P pipenv &> /dev/null && "
-            f"(PIPENV_SHELL=$SHELL pipenv --completion {redirect} {self.dest})"
-        )
-
-
 def main() -> None:
     # fmt: off
     installs = [
@@ -213,7 +188,6 @@ def main() -> None:
         FilesInstall(source=CONFIG_DIR/"tmux/tmux.conf", dest=HOME_DIR/".tmux.conf"),
         FilesInstall(source=PROJECT_DIR/"tmuxp", dest=CONFIG_DIR/"tmuxp"),
         FilesInstall(source=PROJECT_DIR/"git", dest=CONFIG_DIR/"git"),
-        FilesInstall(source=PROJECT_DIR/"base16", dest=DATA_DIR/"base16"),
         FilesInstall(source=PROJECT_DIR/"misc", dest=CONFIG_DIR/"misc"),
         FilesInstall(source=PROJECT_DIR/"misc/ipython", dest=CONFIG_DIR/"ipython"),
         FilesInstall(source=CONFIG_DIR/"misc/inputrc", dest=HOME_DIR/".inputrc"),
@@ -232,7 +206,6 @@ def main() -> None:
             script=PROJECT_DIR/"tmux/tmuxline.vim",
             dest=CONFIG_DIR/"tmux/tmuxline.tmux"
         ),
-        PipGenerateCompletion(dest=CONFIG_DIR/"shell/completion/pip.sh"),
     ]
     # fmt: on
 

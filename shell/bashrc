@@ -8,8 +8,3 @@ source "${DIR}/machines.sh"  # Need to be sourced first
 source "${DIR}/general.sh"
 source "${DIR}/secrets.sh"
 source "${DIR}/aliases.sh"  # Need to be sourced last
-
-# This just source all files in completion folder ending in .sh
-for file in $(find -L "${DIR}/completion" -type f -name '*.sh'); do
-	source "$file"
-done
