@@ -28,7 +28,9 @@ let g:airline_theme="base16_tomorrow"
 
 lua << EOF
 
-require('specs').setup{
+require("nvim-autopairs").setup()
+
+require("specs").setup{
 	show_jumps  = true,
 	min_jump = 10,
 	popup = {
