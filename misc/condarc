@@ -4,3 +4,4 @@ channels:
 channel_priority: disabled
 auto_activate_base: false
 local_repodata_ttl: 86400  # One day
+show_banner: false
