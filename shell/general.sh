@@ -111,6 +111,7 @@ fi
 
 # CCache directory
 export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
+export SCCACHE_DIR="${XDG_CACHE_HOME}/sccache"
 
 # Conan cache directory
 export CONAN_USER_HOME="${XDG_CACHE_HOME}/conan"
