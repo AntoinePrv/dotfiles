@@ -51,9 +51,9 @@ local function repeatable(func, ...)
 	end
 end
 
--- Navigate buffers
-vim.keymap.set("n", "[b", repeatable(vim.cmd, ":bprevious"), {silent=true})
-vim.keymap.set("n", "]b", repeatable(vim.cmd, ":bnext"), {silent=true})
+-- Navigate buffers using Bufsurf to use viewing (not opening) history
+vim.keymap.set("n", "[b", repeatable(vim.cmd, ":BufSurfBack"), {silent=true})
+vim.keymap.set("n", "]b", repeatable(vim.cmd, ":BufSurfForward"), {silent=true})
 vim.keymap.set("n", "[B", repeatable(vim.cmd, ":bfirst"), {silent=true})
 vim.keymap.set("n", "]B", repeatable(vim.cmd, ":blast"), {silent=true})
 -- Quickfix list mappings

@@ -20,7 +20,8 @@ require("packer").startup({
 		use "tpope/vim-sensible"
 		use "tpope/vim-obsession"
 		use "stefandtw/quickfix-reflector.vim"
-		use {"drzel/vim-scrolloff-fraction", commit="c4e543a9d9da6382f00c9f3c170d5c5def1f77f0"}
+		use "ton/vim-bufsurf"
+		use "drzel/vim-scrolloff-fraction"
 		use "windwp/nvim-autopairs"
 
 		-- Colors themes
