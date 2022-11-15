@@ -1,6 +1,7 @@
-if ! type zi &> /dev/null; then
-	source <(curl -sL git.io/zi-loader); zzinit
+if [ ! -f ~/.zi/bin/zi.zsh ]; then 
+	# source <(curl -sL git.io/zi-loader); zzinit
 fi
+source ~/.zi/bin/zi.zsh
 
 # Provides sbin etc. ice for managing programs as shims
 zi ice compile
