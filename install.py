@@ -186,7 +186,6 @@ def main() -> None:
         FilesInstall(source=PROJECT_DIR/"nvim", dest=CONFIG_DIR/"nvim"),
         FilesInstall(source=PROJECT_DIR/"tmux", dest=CONFIG_DIR/"tmux"),
         FilesInstall(source=CONFIG_DIR/"tmux/tmux.conf", dest=HOME_DIR/".tmux.conf"),
-        FilesInstall(source=PROJECT_DIR/"tmuxp", dest=CONFIG_DIR/"tmuxp"),
         FilesInstall(source=PROJECT_DIR/"git", dest=CONFIG_DIR/"git"),
         FilesInstall(source=PROJECT_DIR/"misc", dest=CONFIG_DIR/"misc"),
         FilesInstall(source=PROJECT_DIR/"misc/alacritty.yml", dest=CONFIG_DIR/"alacritty/alacritty.yml"),
