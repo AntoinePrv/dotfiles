@@ -17,6 +17,7 @@ require("telescope").setup({
 		results_title = false,
 		prompt_prefix="  ",
 		selection_caret=" ",
+		sorting_strategy="ascending",
 		border=true,
 		borderchars={"─", "│", "─", "│", "┌", "┐", "┘", "└"},
 		color_devicons=true,
