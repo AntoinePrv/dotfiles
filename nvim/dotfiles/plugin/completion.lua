@@ -38,6 +38,7 @@ local cmp_sources = {
 	luasnip = "[]",
 	nvim_lua = "[]",
 	latex_symbols = "[]",
+	treesitter = "[]",
 }
 
 -- Check whether there are words before the cursor
@@ -104,9 +105,11 @@ cmp.setup({
 	-- Only show buffer sourec when the first set is not available.
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
+		{ name = "treesitter" },
 		{ name = "vsnip" },
 		{ name = "path", option = { get_cwd = function(params) return vim.fn.getcwd() end } },
 	}, {
+		{ name = "treesitter" },
 		{ name = "buffer" },
 	}),
 })
