@@ -62,7 +62,7 @@ vim.keymap.set(
 	"n",
 	"n",
 	function()
-		vim.cmd("normal! n")
+		vim.cmd("silent! normal! n")
 		specs.show_specs()
 	end,
 	{silent=true, desc="Go to next search result"}
@@ -71,7 +71,7 @@ vim.keymap.set(
 	"n",
 	"N",
 	function()
-		vim.cmd("normal! N")
+		vim.cmd("silent! normal! N")
 		specs.show_specs()
 	end,
 	{silent=true, desc="Go to previous search result"}
