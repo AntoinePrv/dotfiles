@@ -16,7 +16,7 @@ require("nvim-treesitter.configs").setup {
 		},
 	},
 
-	indent = { enable = true }
+	indent = { enable = false }
 }
 
 vim.opt.foldmethod = "expr"
