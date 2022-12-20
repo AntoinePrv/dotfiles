@@ -39,7 +39,7 @@ zi light @junegunn/fzf
 zi ice lucid from='gh-r' sbin='**/gh(.exe|) -> gh' atclone='gh completion -s zsh > _gh' atpull='%atclone'
 zi light @cli/cli
 
-zi ice lucide from='gh-r' sbin='**/task(.exe|) -> task'
+zi ice lucid from='gh-r' sbin='**/task(.exe|) -> task'
 zi light @go-task/task
 
 # For downloading arbitrary assets from URLs
