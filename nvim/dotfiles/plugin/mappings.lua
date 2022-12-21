@@ -66,6 +66,9 @@ vim.keymap.set("n", "[l", repeatable(vim.cmd, ":lprevious"))
 vim.keymap.set("n", "]l", repeatable(vim.cmd, ":lnext"))
 vim.keymap.set("n", "[L", repeatable(vim.cmd, ":lfirst"))
 vim.keymap.set("n", "]L", repeatable(vim.cmd, ":llast"))
+-- Navigation
+vim.keymap.set("n", "[[", "<C-O>")
+vim.keymap.set("n", "]]", "<C-I>")
 
 -- Nerd Commenter
 vim.keymap.set({"n", "v"}, "<leader>/", ":call nerdcommenter#Comment(0, 'toggle')<CR>")
