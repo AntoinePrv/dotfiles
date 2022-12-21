@@ -39,6 +39,7 @@ require("packer").startup({
 
 		-- Completion and and syntax
 		use {"nvim-treesitter/nvim-treesitter", run=":TSUpdate"}
+		use "nvim-treesitter/nvim-treesitter-textobjects"
 		use "rbberger/vim-singularity-syntax"
 		use "neovim/nvim-lspconfig"
 		use "hrsh7th/cmp-nvim-lsp"
