@@ -88,3 +88,6 @@ set wildmode=longest:full,full
 " Completion mode
 set completeopt=menuone,noinsert,noselect  " Use longest ?
 set pumheight=7
+
+" Use % with <>
+set matchpairs+=<:>
