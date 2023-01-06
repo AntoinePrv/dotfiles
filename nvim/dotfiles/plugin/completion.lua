@@ -153,16 +153,24 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>s", vim.lsp.buf.signature_help, opts)
 	vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
 	vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-	vim.keymap.set('n', '<space>wl', function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, bufopts)
+	vim.keymap.set(
+		"n",
+		"<space>wl",
+		function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+		bufopts
+	)
 	vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
 	vim.keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
 	vim.keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
 	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
-	vim.keymap.set("n", "<leader>f", vim.lsp.buf.formatting, opts)
+	vim.keymap.set(
+		"n",
+		"<leader>f",
+		function() vim.lsp.buf.format({async=true}) end,
+		opts
+	)
 end
 
 local nvim_lsp = require("lspconfig")
