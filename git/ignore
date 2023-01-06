@@ -1,8 +1,7 @@
 # nvim artifact
 .netrwhist
-
-# Python et al.
-.ipynb_checkpoints
+*.swap
+*.swp
 
 # Mergetools backup files
 *.orig
@@ -12,3 +11,50 @@
 
 # MacOs
 .DS_Store
+
+# Jupyter
+Untitled*.ipynb
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# IPython
+profile_default/
+ipython_config.py
+.ipynb_checkpoints/
+
+# Python virtual environments
+.env/
+.venv/
+env/
+venv/
+env.bak/
+venv.bak/
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Scikit-build build folder
+_skbuild/
+
+# C++ LSP tools
+.cache/
+compile_commands.json
