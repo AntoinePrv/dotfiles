@@ -58,3 +58,6 @@ _skbuild/
 # C++ LSP tools
 .cache/
 compile_commands.json
+
+# CMake user files
+CMakeUserPresets.json
