@@ -20,6 +20,6 @@ vim.opt.colorcolumn = "100"
 vim.opt.showcmd = true
 
 -- Default folding level when opening new buffer
-vim.opt.foldlevelstart = 4
+vim.opt.foldlevelstart = 99
 
 vim.cmd([[highlight EndOfBuffer ctermfg=bg guifg=bg]])
