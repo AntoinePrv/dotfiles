@@ -109,6 +109,10 @@ if python3 -c 'import importlib.util as u; exit(u.find_spec("IPython") is None)'
 	export PYTEST_ADDOPTS="--pdbcls=IPython.core.debugger:Pdb"
 fi
 
+# JupyterLab directories
+export JUPYTERLAB_SETTINGS_DIR="${XDG_DATA_HOME}/jupyter"
+export JUPYTERLAB_WORKSPACES_DIR="${XDG_DATA_HOME}/jupyter/lab/workspaces"
+
 # CCache directory
 export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
 export SCCACHE_DIR="${XDG_CACHE_HOME}/sccache"
