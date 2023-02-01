@@ -1,0 +1,25 @@
+- keyboards: ["ThinkPad Extra Buttons"]
+  keymap:
+    bookmarks: playcd
+    hangup_phone: nextsong
+    pickup_phone: previoussong
+- keyboards: ["AT Translated Set 2 keyboard"]
+  keymap:
+    capslock: leftmeta
+    leftalt: leftctrl
+    leftmeta: leftalt
+    leftctrl: leftmeta
+  layers:
+    - modifiers: ["leftmeta"]  # Without remap, so mentally "leftalt"
+      keymap:
+        h: left
+        j: down
+        k: up
+        l: right
+    - modifiers: ["leftmeta", "leftshift"]
+      keymap:
+        h: home
+        j: pagedown
+        k: pageup
+        l: end
+

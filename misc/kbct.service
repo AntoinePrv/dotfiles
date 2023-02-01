@@ -1,0 +1,14 @@
+[Unit]
+Description=Keyboard keycode mapping utility for Linux supporting layered configuration
+
+[Install]
+WantedBy=default.target
+
+[Service]
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStart="/usr/local/bin/kbct" remap --config "/home/antoine/workspace/github.com/AntoinePrv/dotfiles/misc/kbct.yaml"
+ExecStop=/bin/kill -s QUIT $MAINPID
+PIDFile=/run/kpct.pid
+PrivateTmp=true
+Restart=always
+Type=simple
