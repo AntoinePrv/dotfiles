@@ -1,6 +1,9 @@
 -- Various remaping.
 -- Inspiration from https://github.com/ibhagwan/nvim-lua/blob/main/lua/keymaps.lua
 
+-- Don't let default ftplugins files add mappings
+vim.g.no_plugin_maps = true
+
 -- Use space as leader but allow it to display properly with \
 vim.g.mapleader = "\\"
 vim.keymap.set({"n", "v"}, "<space>", "<leader>", {remap=true})
