@@ -19,6 +19,7 @@ bind \\ split-window -h -c "#{pane_current_path}"  # Key for | (escaped)
 # Create new window in current directory
 unbind c
 bind t new-window -c "#{pane_current_path}"
+bind n new-session -c "#{pane_current_path}"
 
 # Navigates windows
 unbind n
@@ -43,6 +44,7 @@ bind m resize-pane -Z
 # Rename
 # Already redefined: unbind ,
 bind r command-prompt -I "#W" "rename-window -- '%%'"
+bind R command-prompt -I "#S" "rename-session -- '%%'"
 # Kill the current window
 unbind &
 bind q kill-window
