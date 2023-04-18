@@ -162,8 +162,30 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
-	vim.keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
-	vim.keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
+	vim.keymap.set(
+		"n",
+		"[w",
+		function() vim.diagnostic.goto_prev({severity=vim.diagnostic.severity.WARN}) end,
+		opts
+	)
+	vim.keymap.set(
+		"n",
+		"]w",
+		function() vim.diagnostic.goto_next({severity=vim.diagnostic.severity.WARN}) end,
+		opts
+	)
+	vim.keymap.set(
+		"n",
+		"[e",
+		function() vim.diagnostic.goto_prev({severity=vim.diagnostic.severity.ERROR}) end,
+		opts
+	)
+	vim.keymap.set(
+		"n",
+		"]e",
+		function() vim.diagnostic.goto_next({severity=vim.diagnostic.severity.ERROR}) end,
+		opts
+	)
 	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 	vim.keymap.set(
 		"n",
