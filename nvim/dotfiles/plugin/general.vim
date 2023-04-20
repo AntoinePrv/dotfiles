@@ -4,6 +4,8 @@ set encoding=utf-8
 " Default position for opening
 set splitbelow
 set splitright
+" Keep screen as is when splitting
+set splitkeep=topline
 
 " Format based on file type
 filetype on
