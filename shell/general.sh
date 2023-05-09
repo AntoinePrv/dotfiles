@@ -79,9 +79,9 @@ export BAT_THEME='base16'
 type -P bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Conda directories
-export CONDA_ENVS_PATH="${XDG_DATA_HOME}/conda/envs"
+export CONDA_ENVS_DIRS="${XDG_DATA_HOME}/conda/envs"
 export CONDA_PKGS_DIRS="${XDG_CACHE_HOME}/conda/pkgs"
-export CONDA_BLD_PATH="${XDG_CACHE_HOME}/conda/channel"
+export CONDA_BLD_PATH="${XDG_CACHE_HOME}/conda/build"
 
 # Initialize conda if found
 conda_exe="${CONDA_EXE:-conda}"
