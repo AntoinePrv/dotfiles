@@ -1,5 +1,6 @@
 [Unit]
 Description=Keyboard keycode mapping utility for Linux supporting layered configuration
+After=multi-user.target
 
 [Install]
 WantedBy=default.target
