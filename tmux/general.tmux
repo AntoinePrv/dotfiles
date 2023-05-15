@@ -16,11 +16,6 @@ unbind %
 bind - split-window -c "#{pane_current_path}"      # Key for -
 bind \\ split-window -h -c "#{pane_current_path}"  # Key for | (escaped)
 
-# Create new window in current directory
-unbind c
-bind t new-window -c "#{pane_current_path}"
-bind n new-session -c "#{pane_current_path}"
-
 # Navigates windows
 unbind n
 unbind p
@@ -29,6 +24,11 @@ bind L      select-window -t '{end}'
 bind h      select-window -t '{previous}'
 bind H      select-window -t '{start}'
 bind BSpace select-window -t '{last}'
+
+# Create new window in current directory
+unbind c
+bind t new-window -c "#{pane_current_path}"
+bind n new-session -c "#{pane_current_path}"
 
 # Navigates sessions
 unbind (
