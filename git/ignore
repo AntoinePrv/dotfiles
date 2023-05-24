@@ -58,6 +58,7 @@ _skbuild/
 # C++ LSP tools
 .cache/
 .clangd/
+.clangd
 compile_commands.json
 
 # CMake user files
