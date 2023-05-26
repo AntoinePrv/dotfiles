@@ -2,7 +2,9 @@
   keymap:
     bookmarks: playcd
     hangup_phone: nextsong
+    cancel: nextsong
     pickup_phone: previoussong
+    connect: previoussong
 - keyboards: ["AT Translated Set 2 keyboard"]
   keymap:
     capslock: leftmeta
