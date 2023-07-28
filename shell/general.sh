@@ -125,3 +125,6 @@ export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 
 # Task
 export TASK_TEMP_DIR="${XDG_CACHE_HOME}/taskfile"
+
+export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
+export CARGO_HOME="${XDG_DATA_HOME}/cargo"
