@@ -222,6 +222,9 @@ for _, lsp in ipairs(servers) do
 	}
 end
 
+nvim_lsp.rust_analyzer.setup({
+	on_attach=on_attach,
+})
 
 -----------------------------
 -- Configuring builtin LSP --
