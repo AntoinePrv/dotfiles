@@ -14,7 +14,7 @@ require("telescope").setup({
 		layout_config={
 			prompt_position="top",
 		},
-		results_title = false,
+		results_title=false,
 		prompt_prefix="  ",
 		selection_caret=" ",
 		sorting_strategy="ascending",
@@ -26,8 +26,8 @@ require("telescope").setup({
 	extensions={
 		["ui-select"]={
 			previewer=false,
-			layout_strategy = "center",
-			borderchars = {
+			layout_strategy="center",
+			borderchars={
 				prompt={"─", "│", "─", "│", "┌", "┐", "┘", "└"},
 				results={"─", "│", "─", "│", "├", "┤", "┘", "└"},
 			},
@@ -35,7 +35,7 @@ require("telescope").setup({
 	}
 })
 
-require("telescope").load_extension("ui-select")
+telescope_ui = require("telescope").load_extension("ui-select")
 
 vim.keymap.set("n", "gf", function() telescope_builtin.git_files({show_untracked=true}) end, {})
 vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, {})
@@ -47,3 +47,4 @@ vim.keymap.set("n", "ge", function() telescope_builtin.diagnostics({bufnr=0}) en
 vim.keymap.set("n", "gE", telescope_builtin.diagnostics, {})
 vim.keymap.set("n", "g*", telescope_builtin.grep_string, {})
 vim.keymap.set("n", "g/", telescope_builtin.live_grep, {})
+vim.keymap.set("n", "gb", telescope_builtin.buffers, {})
