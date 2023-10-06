@@ -30,15 +30,16 @@ lua << EOF
 
 require("nvim-autopairs").setup()
 
-require("indent_blankline").setup {
-	show_current_context=true,
-	show_current_context_start=false,
-	show_trailing_blankline_indent=false,
-	context_char="┃",
-	max_indent_increase=1,  -- Avoid indents due to alignments
-	show_foldtext=false,    -- Show indents line over folded text
-	use_treesitter=false,
-	use_treesitter_scope=false,
+require("ibl").setup {
+	indent={
+		char="│"
+	},
+	scope={
+		char="┃",
+		show_start=false,
+		show_end=false,
+	highlight={"Identifier"},
+	},
 }
 
 local specs = require("specs")
