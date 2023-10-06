@@ -19,6 +19,7 @@ require("packer").startup({
 		use "preservim/nerdcommenter"
 		use "tpope/vim-sensible"
 		use "tpope/vim-obsession"
+		use "tpope/vim-sleuth"
 		use "stefandtw/quickfix-reflector.vim"
 		use "ton/vim-bufsurf"
 		use "drzel/vim-scrolloff-fraction"
