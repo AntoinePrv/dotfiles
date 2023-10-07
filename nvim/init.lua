@@ -54,7 +54,7 @@ require("packer").startup({
 
 		-- Telescope
 		use {
-		 	"nvim-telescope/telescope.nvim", tag = "0.1.0",
+			"nvim-telescope/telescope.nvim", tag = "0.1.3",
 			requires = {{"nvim-lua/plenary.nvim"}, {"nvim-tree/nvim-web-devicons"}}
 		}
 		use "nvim-telescope/telescope-ui-select.nvim"

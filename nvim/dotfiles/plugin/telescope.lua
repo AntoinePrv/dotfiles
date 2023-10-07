@@ -36,6 +36,14 @@ require("telescope").setup({
 })
 
 telescope_ui = require("telescope").load_extension("ui-select")
+telescope_alternate = require("telescope").load_extension("telescope-alternate")
+
+function alternate_files()
+	telescope_builtin.git_files({
+		show_untracked=true,
+		default_text=vim.fn.expand('%:t:r'):gsub("-", ""):gsub("_", ""):gsub("test", ""),
+	})
+end
 
 vim.keymap.set("n", "gf", function() telescope_builtin.git_files({show_untracked=true}) end, {})
 vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, {})
@@ -48,3 +56,4 @@ vim.keymap.set("n", "gE", telescope_builtin.diagnostics, {})
 vim.keymap.set("n", "g*", telescope_builtin.grep_string, {})
 vim.keymap.set("n", "g/", telescope_builtin.live_grep, {})
 vim.keymap.set("n", "gb", telescope_builtin.buffers, {})
+vim.keymap.set("n", "<tab><tab>", alternate_files, {})
