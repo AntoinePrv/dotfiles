@@ -52,12 +52,13 @@ require("packer").startup({
 		use "ray-x/cmp-treesitter"
 		use "hrsh7th/nvim-cmp"
 
-		-- Telescope
+		-- Telescope and other Windows
 		use {
 			"nvim-telescope/telescope.nvim", tag = "0.1.3",
 			requires = {{"nvim-lua/plenary.nvim"}, {"nvim-tree/nvim-web-devicons"}}
 		}
 		use "nvim-telescope/telescope-ui-select.nvim"
+		use "stevearc/dressing.nvim"
 
 		-- Tmux integration
 		use "christoomey/vim-tmux-navigator"

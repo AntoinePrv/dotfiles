@@ -35,9 +35,6 @@ require("telescope").setup({
 	}
 })
 
-telescope_ui = require("telescope").load_extension("ui-select")
-telescope_alternate = require("telescope").load_extension("telescope-alternate")
-
 function alternate_files()
 	telescope_builtin.git_files({
 		show_untracked=true,
@@ -61,3 +58,55 @@ vim.keymap.set("n", "<tab><tab>", alternate_files, {})
 vim.keymap.set("n", "gh", telescope_builtin.help_tags, {})
 vim.keymap.set("n", "gm", telescope_builtin.marks, {})
 vim.keymap.set("n", "gc", telescope_builtin.quickfix, {})
+
+
+-- Customizing VIM UI callbacks
+
+telescope_ui = require("telescope").load_extension("ui-select")
+
+require("dressing").setup({
+	select={enable=false},--UsingTelescopehere
+	input={
+		default_prompt="Input",
+		title_pos="center",
+		insert_only=false,
+		start_in_insert=true,
+		border="single",
+		relative="editor",
+		--Thesecanbeintegersorafloatbetween0and1(e.g.0.4for40%)
+		prefer_width=.4,
+		win_options={
+			wrap=false,
+			list=true,
+			listchars="precedes:…,extends:…",
+			sidescrolloff=0,
+		},
+		mappings={
+			n={
+				["<Esc>"]="Close",
+				["<CR>"]="Confirm",
+				["<Up>"]="HistoryPrev",
+				["k"]="HistoryPrev",
+				["<Down>"]="HistoryNext",
+				["j"]="HistoryNext",
+			},
+			i={
+				["<C-c>"]="Close",
+				["<CR>"]="Confirm",
+				["<Up>"]="HistoryPrev",
+				["<Down>"]="HistoryNext",
+			},
+		},
+		win_options={
+			winhighlight=
+			"FloatBorder:TelescopePromptBorder"
+			.. ",FloatTitle:TelescopePromptTitle"
+			.. ",NormalFloat:TelescopePromptNormal"
+		},
+		override=function(config)
+		-- Strip last space and colon from potential title
+			config.title = config.title:match("(.-):%s*$") .. " "  
+			return config
+		end,
+	},
+})
