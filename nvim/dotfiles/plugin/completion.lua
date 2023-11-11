@@ -233,8 +233,8 @@ nvim_lsp.rust_analyzer.setup({
 local signs = {
 	DiagnosticSignError = "",
 	DiagnosticSignWarn = "",
-	DiagnosticSignHint = "",
-	DiagnosticSignInfo = "",
+	DiagnosticSignInfo = "",
+	DiagnosticSignHint = "",
 }
 for name, symbol in pairs(signs) do
 	vim.fn.sign_define(name, { texthl = name, text = symbol, numhl = "" })
