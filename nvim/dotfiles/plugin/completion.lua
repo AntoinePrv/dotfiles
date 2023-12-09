@@ -105,14 +105,13 @@ cmp.setup({
 			return vim_item
 		end
 	},
-	-- Only show buffer sourec when the first set is not available.
+	-- Only show buffer source when the first set is not available.
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
+	}, {
 		{ name = "treesitter" },
 		{ name = "vsnip" },
 		{ name = "path", option = { get_cwd = function(params) return vim.fn.getcwd() end } },
-	}, {
-		{ name = "treesitter" },
 		{ name = "buffer" },
 	}),
 })
@@ -211,7 +210,7 @@ local nvim_lsp = require("lspconfig")
 
 -- Map buffer local keybindings when the language server attaches.
 -- :help lspconfig-server-configurations for LSP servers.
-local servers = { "pylsp", "clangd" }
+local servers = { "ruff_lsp", "pylsp",  "clangd" }
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup {
 		on_attach = on_attach,
