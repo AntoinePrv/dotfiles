@@ -59,7 +59,6 @@ require("packer").startup({
 			requires = {{"nvim-lua/plenary.nvim"}, {"nvim-tree/nvim-web-devicons"}}
 		}
 		use "nvim-telescope/telescope-ui-select.nvim"
-		use "stevearc/dressing.nvim"
 
 		-- Tmux integration
 		use "christoomey/vim-tmux-navigator"
