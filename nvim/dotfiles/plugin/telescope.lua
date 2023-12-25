@@ -2,7 +2,6 @@ local telescope_actions=require("telescope.actions")
 local telescope_builtin=require("telescope.builtin")
 local telescope_themes=require("telescope.themes")
 
-
 require("telescope").setup({
 	defaults={
 		mappings={
@@ -62,7 +61,7 @@ vim.keymap.set("n", "gc", telescope_builtin.quickfix, {})
 
 -- Customizing VIM UI callbacks
 
-telescope_ui = require("telescope").load_extension("ui-select")
+local telescope_ui = require("telescope").load_extension("ui-select")
 
 require("dressing").setup({
 	select={enable=false},--UsingTelescopehere
@@ -73,8 +72,9 @@ require("dressing").setup({
 		start_in_insert=true,
 		border="single",
 		relative="editor",
-		--Thesecanbeintegersorafloatbetween0and1(e.g.0.4for40%)
 		prefer_width=.4,
+		max_width = { 80, 0.9 },
+		min_width = { 20, 0.2 },
 		win_options={
 			wrap=false,
 			list=true,
@@ -105,7 +105,7 @@ require("dressing").setup({
 		},
 		override=function(config)
 		-- Strip last space and colon from potential title
-			config.title = config.title:match("(.-):%s*$") .. " "  
+			config.title = config.title:match("(.-):%s*$") .. " "
 			return config
 		end,
 	},
