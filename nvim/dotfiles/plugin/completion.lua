@@ -35,6 +35,7 @@ local cmp_icons = {
 local cmp_sources = {
 	buffer = "[]",
 	nvim_lsp = "[ﬦ]",
+	nvim_lsp_signature_help = "[ﬦ]",
 	luasnip = "[]",
 	nvim_lua = "[]",
 	latex_symbols = "[]",
@@ -108,6 +109,7 @@ cmp.setup({
 	-- Only show buffer source when the first set is not available.
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
 	}, {
 		{ name = "treesitter" },
 		{ name = "vsnip" },
