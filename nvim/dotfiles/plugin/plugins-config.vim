@@ -78,4 +78,43 @@ vim.keymap.set(
 	{silent=true, desc="Go to previous search result"}
 )
 
+
+local statuscol_builtin = require("statuscol.builtin")
+
+require("statuscol").setup({
+	ft_ignore={
+		"lspinfo",
+		"packer",
+		"checkhealth",
+		"help",
+		"man",
+		"TelescopePrompt",
+		"TelescopeResults",
+	},
+	segments = {
+		-- {
+		--   text={ statuscol_builtin.foldfunc },
+		--   click="v:lua.ScFa"  -- Status Col Fold Action
+		-- },
+		{
+			sign={ namespace={ "gitsign" }, colwidth=1, wrap=true, auto=false, fillchar = " ",},
+			click="v:lua.ScSa",  -- Status Col Sign Action
+			condition={ true },
+		},
+		{
+			text={ statuscol_builtin.lnumfunc },
+			click="v:lua.ScLa",  -- Status Col Number/Line Action
+		},
+		{
+			sign={ name={ "Diagnostic" }, colwidth=2, wrap=false, auto=false },
+			condition={ true },
+			click="v:lua.ScSa" -- Status Col Sign Action
+		},
+		{
+			sign={ name = { ".*" }, maxwidth=2, colwidth=1, auto=true, wrap=false },
+			click="v:lua.ScSa" -- Status Col Sign Action
+		},
+	}
+})
+
 EOF

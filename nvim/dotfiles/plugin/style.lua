@@ -7,6 +7,7 @@ vim.opt.mouse = "a"
 -- Hidden characters
 vim.opt.list = true
 vim.opt.listchars = {eol="¬", tab="──→", trail="·", nbsp="⌴", extends="…", precedes="…"}
+vim.opt.fillchars = {}
 
 -- Soft wrap lines with indent
 vim.opt.wrap = true

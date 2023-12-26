@@ -12,9 +12,6 @@ require("packer").startup({
 		-- Plugin manager itself
 		use "wbthomason/packer.nvim"
 
-		-- Local files loaded with plugin manager
-		use {vim.fn.expand("<sfile>:p:h") .. "/dotfiles"}
-
 		-- General
 		use "preservim/nerdcommenter"
 		use "tpope/vim-sensible"
@@ -34,6 +31,7 @@ require("packer").startup({
 		use "ryanoasis/vim-devicons"
 		use "edluffy/specs.nvim"
 		use "lukas-reineke/indent-blankline.nvim"
+		use "luukvbaal/statuscol.nvim"
 
 		-- Git support
 		use {"lewis6991/gitsigns.nvim", requires={"nvim-lua/plenary.nvim"}}
@@ -68,6 +66,9 @@ require("packer").startup({
 		-- Plugins for outside of vim
 		use "edkolev/tmuxline.vim"
 		use "edkolev/promptline.vim"
+
+		-- Local files loaded with plugin manager
+		use {vim.fn.expand("<sfile>:p:h") .. "/dotfiles"}
 
 		-- Automatically set up your configuration after cloning packer.nvim (at the end)
 		if packer_bootstrap then
