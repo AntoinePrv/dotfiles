@@ -58,13 +58,9 @@ vim.keymap.set("n", "gh", telescope_builtin.help_tags, {})
 vim.keymap.set("n", "gm", telescope_builtin.marks, {})
 vim.keymap.set("n", "gc", telescope_builtin.quickfix, {})
 
-
--- Customizing VIM UI callbacks
-
-local telescope_ui = require("telescope").load_extension("ui-select")
-
+-- Customizing vim.ui.intput callback
 require("dressing").setup({
-	select={enable=false},--UsingTelescopehere
+	select={ enable=false },  -- Using Telescope directly here
 	input={
 		default_prompt="Input",
 		title_pos="center",
@@ -110,3 +106,8 @@ require("dressing").setup({
 		end,
 	},
 })
+
+-- Customizing vim.ui.select callback
+-- We need to set this up after `dressing` since it always overrides vim.ui.select with a shim
+-- that is not compatible with telescoe lazy loading
+local telescope_ui = require("telescope").load_extension("ui-select")
