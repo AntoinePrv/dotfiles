@@ -31,6 +31,7 @@ require("packer").startup({
 		use "ryanoasis/vim-devicons"
 		use "edluffy/specs.nvim"
 		use "lukas-reineke/indent-blankline.nvim"
+		use "lukas-reineke/virt-column.nvim"
 		use "luukvbaal/statuscol.nvim"
 
 		-- Git support
