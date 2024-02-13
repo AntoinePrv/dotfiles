@@ -69,6 +69,8 @@ vim.keymap.set(
 	function()
 		vim.cmd("silent! normal! n")
 		specs.show_specs()
+		-- Somehow scrolloff seems to be reset so we set it again
+		vim.cmd("call ScrollOffFraction(g:scrolloff_fraction)")
 	end,
 	{silent=true, desc="Go to next search result"}
 )
@@ -78,6 +80,8 @@ vim.keymap.set(
 	function()
 		vim.cmd("silent! normal! N")
 		specs.show_specs()
+		-- Somehow scrolloff seems to be reset so we set it again
+		vim.cmd("call ScrollOffFraction(g:scrolloff_fraction)")
 	end,
 	{silent=true, desc="Go to previous search result"}
 )
