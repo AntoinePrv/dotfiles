@@ -243,11 +243,12 @@ nvim_lsp.rust_analyzer.setup({
 -- Configuring builtin LSP --
 -----------------------------
 
+-- TODO refactor to use same symbols table with lualine
 local signs = {
 	DiagnosticSignError = "",
 	DiagnosticSignWarn = "",
 	DiagnosticSignInfo = "",
-	DiagnosticSignHint = "",
+	DiagnosticSignHint = "",
 }
 for name, symbol in pairs(signs) do
 	vim.fn.sign_define(name, { texthl = name, text = symbol, numhl = "" })
