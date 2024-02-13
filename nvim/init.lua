@@ -26,8 +26,11 @@ require("packer").startup({
 		use "tinted-theming/base16-vim"
 
 		-- Visual
-		use "vim-airline/vim-airline"
-		use "vim-airline/vim-airline-themes"
+		use {
+			"AntoinePrv/lualine.nvim",
+			branch="cterm",
+			requires={ "nvim-tree/nvim-web-devicons", opt=true }
+		}
 		use "ryanoasis/vim-devicons"
 		use "edluffy/specs.nvim"
 		use "lukas-reineke/indent-blankline.nvim"
