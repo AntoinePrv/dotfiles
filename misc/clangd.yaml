@@ -1,0 +1,4 @@
+CompileFlags:
+  Remove: ['-fvar-tracking-assignments']
+Diagnostics:
+  UnusedIncludes: 'Strict'

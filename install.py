@@ -193,6 +193,7 @@ def main() -> None:
         FilesInstall(source=CONFIG_DIR/"misc/inputrc", dest=HOME_DIR/".inputrc"),
         FilesInstall(source=CONFIG_DIR/"misc/editrc", dest=HOME_DIR/".editrc"),
         FilesInstall(source=CONFIG_DIR/"misc/condarc", dest=HOME_DIR/".condarc"),
+        FilesInstall(source=PROJECT_DIR/"misc/clangd.yaml", dest=CONFIG_DIR/"clangd/config.yaml"),
         UpdateNvimPackages(),
         NvimGeneratePromptline(
             script=PROJECT_DIR/"shell/default-prompt.vim",
