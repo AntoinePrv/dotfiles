@@ -83,6 +83,9 @@ export CONDA_ENVS_DIRS="${XDG_DATA_HOME}/conda/envs"
 export CONDA_PKGS_DIRS="${XDG_CACHE_HOME}/conda/pkgs"
 export CONDA_BLD_PATH="${XDG_CACHE_HOME}/conda/build"
 
+# Pixi directories
+export PIXI_HOME="${XDG_DATA_HOME}/pixi"
+
 # Initialize conda if found
 conda_exe="${CONDA_EXE:-conda}"
 type "${conda_exe}" &> /dev/null && eval "$("${conda_exe}" "shell.$(basename "${SHELL}")" hook)"
