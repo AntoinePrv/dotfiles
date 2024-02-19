@@ -112,7 +112,7 @@ require("dressing").setup({
         },
         override = function(config)
             -- Strip last space and colon from potential title
-            config.title = config.title:match("(.-):%s*$") .. " "
+            config.title = config.title:match("(.-):?%s*$") .. " "
             return config
         end,
     },
