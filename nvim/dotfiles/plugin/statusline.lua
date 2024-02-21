@@ -31,7 +31,7 @@ local colors_base16_cterm = {
 local theme = {
     normal = {
         a = { bg = colors_base16_cterm.base0D, fg = colors_base16_cterm.base06, gui = "bold" },
-        b = { bg = colors_base16_cterm.base07, fg = colors_base16_cterm.base00 },
+        b = { bg = colors_base16_cterm.base03, fg = colors_base16_cterm.base06 },
         c = { bg = colors_base16_cterm.base02, fg = colors_base16_cterm.base06 },
     },
     insert = {
@@ -45,6 +45,8 @@ local theme = {
     },
     command = {
         a = { bg = colors_base16_cterm.base03, fg = colors_base16_cterm.base06, gui = "bold" },
+        b = { bg = colors_base16_cterm.base02, fg = colors_base16_cterm.base06 },
+        c = { bg = colors_base16_cterm.base01, fg = colors_base16_cterm.base06 },
     },
     inactive = {
         a = { bg = colors_base16_cterm.base03, fg = colors_base16_cterm.base06, gui = "bold" },
