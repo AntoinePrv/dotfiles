@@ -46,7 +46,8 @@ require("packer").startup({
         use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
         -- Completion and and syntax
-        use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+        -- Crashed cpp parser last update (?)
+        use({ "nvim-treesitter/nvim-treesitter", tag = "v0.9.2", run = ":TSUpdate" })
         use("nvim-treesitter/nvim-treesitter-textobjects")
         use("rbberger/vim-singularity-syntax")
         use("neovim/nvim-lspconfig")
