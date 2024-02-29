@@ -32,7 +32,12 @@ require("packer").startup({
             requires = { "nvim-tree/nvim-web-devicons", opt = true },
         })
         use("ryanoasis/vim-devicons")
-        use("edluffy/specs.nvim")
+        use({
+            -- https://github.com/edluffy/specs.nvim/pull/30
+            -- "edluffy/specs.nvim"
+            "AntoinePrv/specs.nvim",
+            branch = "fix-ft",
+        })
         use("lukas-reineke/indent-blankline.nvim")
         use("lukas-reineke/virt-column.nvim")
         use("luukvbaal/statuscol.nvim")
