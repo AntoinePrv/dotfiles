@@ -1,12 +1,3 @@
-# Add path for executable if not aleard there
-for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
-	case ":$PATH:" in
-		*":$x:"*) : ;; # already there
-		*) PATH="$x:$PATH";;
-	esac
-done
-export PATH
-
 export EDITOR=nvim
 
 # Number of commands saved in memory
@@ -129,6 +120,16 @@ export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 # Task
 export TASK_TEMP_DIR="${XDG_CACHE_HOME}/taskfile"
 
+# Cargo and rust tools
 export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
-export PATH="${PATH};${CARGO_HOME}/bin"
+
+# Add path for executable if not aleard there
+for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
+	case ":$PATH:" in
+		*":$x:"*) : ;; # already there
+		*) PATH="$x:$PATH";;
+	esac
+done
+export PATH="${CARGO_HOME}/bin:${PATH}"
+export PATH="${PIXI_HOME}/bin:${PATH}"
