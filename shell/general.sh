@@ -77,16 +77,6 @@ export CONDA_BLD_PATH="${XDG_CACHE_HOME}/conda/build"
 # Pixi directories
 export PIXI_HOME="${XDG_DATA_HOME}/pixi"
 
-# Initialize conda if found
-conda_exe="${CONDA_EXE:-conda}"
-type "${conda_exe}" &> /dev/null && eval "$("${conda_exe}" "shell.$(basename "${SHELL}")" hook)"
-unset conda_exe
-# Fix Tmux Conda path conflict
-if is-this tmux ; then
-	conda deactivate &> /dev/null
-	conda activate base &> /dev/null
-fi
-
 # Mamba package and environments prefix
 export MAMBA_ROOT_PREFIX="${XDG_DATA_HOME}/mamba"
 
