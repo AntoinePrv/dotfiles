@@ -1,3 +1,9 @@
+# Set default terminal
+set -g default-terminal "${TERM}"
+
+# Activate underline colors
+set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+
 # Set default shell
 set -g default-shell "${SHELL}"
 
