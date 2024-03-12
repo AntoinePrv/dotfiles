@@ -75,7 +75,7 @@ cmp.setup({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
         -- Super-Tab like mapping
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
