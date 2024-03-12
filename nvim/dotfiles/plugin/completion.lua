@@ -256,6 +256,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
             source = "always",
             prefix = " ",
             scope = "cursor",
+            noautocmd = true,
         })
     end,
 })
