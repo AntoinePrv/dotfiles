@@ -11,6 +11,11 @@
 	forward = merge --ff-only
 	st = status
 	hub = !gh
+	# Operations to create push-one command
+	remote-name = !git for-each-ref --format='%(upstream:remotename)' "$(git symbolic-ref -q HEAD)"
+	remote-branch = rev-parse --abbrev-ref --symbolic-full-name @{u}
+	next-push-commit = !git log --pretty=%H --reverse "$(git remote-branch)"..HEAD | head -1
+	push-one = !git push "$(git remote-name)" "$(git next-push-commit)":"$(git remote-branch | cut -d/ -f2)"
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
