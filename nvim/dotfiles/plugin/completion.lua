@@ -261,6 +261,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
     end,
 })
 
+-- TODO API for hihglight in lua
 -- Weirdly complicated for setting the highlight for diagnostic.
 vim.cmd([[
 function! s:underline_highlight(group, color)
@@ -270,9 +271,12 @@ function! s:underline_highlight(group, color)
 	execute l:command
 endfunction
 
+" TODO use base16 codes, but unfortuntely we can only pass RGB
 function! s:diagnostic_highlight()
 	call s:underline_highlight("DiagnosticUnderlineError", "red")
 	call s:underline_highlight("DiagnosticUnderlineWarn", "yellow")
+	call s:underline_highlight("DiagnosticUnderlineInfo", "blue")
+	call s:underline_highlight("DiagnosticUnderlineHint", "cyan")
 endfunction
 
 augroup diagnostic_highlight
