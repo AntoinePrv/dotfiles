@@ -2,9 +2,13 @@
 for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
 	case ":$PATH:" in
 		*":$x:"*) : ;; # already there
-		*) PATH="$x:$PATH";;
+		*) export PATH="$x:$PATH";;
 	esac
 done
+if type brew &> /dev/null; then
+	export PATH="/opt/homebrew/bin:${PATH}"
+fi
+
 
 export EDITOR=nvim
 
