@@ -84,6 +84,8 @@ export CONDA_BLD_PATH="${XDG_CACHE_HOME}/conda/build"
 
 # Pixi directories
 export PIXI_HOME="${XDG_DATA_HOME}/pixi"
+export PIXI_CACHE_DIR="${XDG_CACHE_HOME}/pixi"
+export RATTLER_CACHE_DIR="${XDG_CACHE_HOME}/rattler"
 
 # Mamba package and environments prefix
 export MAMBA_ROOT_PREFIX="${XDG_DATA_HOME}/mamba"
