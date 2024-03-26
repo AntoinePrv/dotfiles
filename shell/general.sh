@@ -5,7 +5,7 @@ for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
 		*) export PATH="$x:$PATH";;
 	esac
 done
-if type brew &> /dev/null; then
+if [ -d "/opt/homebrew/bin" ]; then
 	export PATH="/opt/homebrew/bin:${PATH}"
 fi
 
