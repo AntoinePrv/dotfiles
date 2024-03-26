@@ -1,7 +1,12 @@
-if [ ! -f ~/.zi/bin/zi.zsh ]; then 
-	# source <(curl -sL git.io/zi-loader); zzinit
+typeset -A ZI
+ZI[HOME_DIR]="${XDG_DATA_HOME}/zi"
+ZI[BIN_DIR]="${ZI[HOME_DIR]}/bin"
+ZI[CACHE_DIR]="${XDG_CACHE_HOME}/zi"
+
+if [ ! -f "${ZI[BIN_DIR]}/zi.zsh" ]; then
+	source <(curl -sL git.io/zi-loader); zzinit
 fi
-source ~/.zi/bin/zi.zsh
+source "${ZI[BIN_DIR]}/zi.zsh"
 
 # Provides sbin etc. ice for managing programs as shims
 zi ice compile
