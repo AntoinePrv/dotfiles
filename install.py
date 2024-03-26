@@ -117,6 +117,7 @@ class FilesInstall(Action):
                 else:
                     dest_p.symlink_to(source_p)
         else:
+            self.dest.parent.mkdir(parents=True, exist_ok=True)
             self.dest.symlink_to(self.source)
 
 
