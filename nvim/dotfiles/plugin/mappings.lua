@@ -34,7 +34,12 @@ vim.keymap.set({ "n", "v" }, "<leader>U", "gU", { desc = "Change text to upperca
 
 -- Windows
 vim.keymap.set("n", "<C-W>-", ":split<CR>", { desc = "Make a vertical split", silent = true })
-vim.keymap.set("n", "<C-W><Bslash>", ":vsplit<CR>", { desc = "Make an horizontal split", silent = true })
+vim.keymap.set(
+    "n",
+    "<C-W><Bslash>",
+    ":vsplit<CR>",
+    { desc = "Make an horizontal split", silent = true }
+)
 
 -- Visual mode
 vim.keymap.set({ "n", "v" }, "v-", "V", { desc = "Enter Visual Line mode" })
