@@ -1,0 +1,8 @@
+nvim
+tmux
+gh
+ripgrep
+fd-find
+bat
+fzf
+
