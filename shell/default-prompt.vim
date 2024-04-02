@@ -1,6 +1,7 @@
 " Zsh only prompt generated through vim Promptline
 " This setting is for the default/regular prompt
 " After sourcing this file, run `:PromptlineSnapshot [file]`
+" Plugin use("edkolev/promptline.vim")
 
 " Read the colors from airline extension
 let g:promptline_theme = "airline_insert"

@@ -143,39 +143,6 @@ class UpdateNvimPackages(Action):
         run_nvim_cmd("autocmd User PackerComplete quitall", "PackerSync")
 
 
-class NvimGenerateFile(Action, abc.ABC):
-    def __init__(self, script: pathlib.Path, dest: pathlib.Path) -> None:
-        super().__init__(
-            replace_prompt=f"Location {dest} already exists.",
-            report_message=f"Generated file {dest}.",
-        )
-        self.script = script
-        self.dest = dest
-
-    def exists(self) -> bool:
-        """Return wether the installation target already exists."""
-        return self.dest.exists() or self.dest.is_symlink()
-
-    @abc.abstractmethod
-    def install(self) -> None:
-        """Perform the actual installation."""
-        ...
-
-
-class NvimGeneratePromptline(NvimGenerateFile):
-    def install(self) -> None:
-        """Generate promptline prompt."""
-        run_nvim_cmd(f"source {self.script}", f"PromptlineSnapshot! {self.dest}")
-
-
-class NvimGenerateTmuxline(NvimGenerateFile):
-    def install(self) -> None:
-        """Generate tmuxline tmux conf."""
-        run_nvim_cmd(
-            f"source {self.script}", "Tmuxline", f"TmuxlineSnapshot! {self.dest}"
-        )
-
-
 def main() -> None:
     # fmt: off
     installs = [
@@ -196,18 +163,6 @@ def main() -> None:
         FilesInstall(source=CONFIG_DIR/"misc/condarc", dest=HOME_DIR/".condarc"),
         FilesInstall(source=PROJECT_DIR/"misc/clangd.yaml", dest=CONFIG_DIR/"clangd/config.yaml"),
         UpdateNvimPackages(),
-        NvimGeneratePromptline(
-            script=PROJECT_DIR/"shell/default-prompt.vim",
-            dest=CONFIG_DIR/"shell/default-prompt.sh"
-        ),
-        NvimGeneratePromptline(
-            script=PROJECT_DIR/"shell/tmux-prompt.vim",
-            dest=CONFIG_DIR/"shell/tmux-prompt.sh"
-        ),
-        NvimGenerateTmuxline(
-            script=PROJECT_DIR/"tmux/tmuxline.vim",
-            dest=CONFIG_DIR/"tmux/tmuxline.tmux"
-        ),
     ]
     # fmt: on
 

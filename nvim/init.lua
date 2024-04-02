@@ -74,10 +74,6 @@ require("packer").startup({
         use("christoomey/vim-tmux-navigator")
         use("tmux-plugins/vim-tmux-focus-events")
 
-        -- Plugins for outside of vim
-        use("edkolev/tmuxline.vim")
-        use("edkolev/promptline.vim")
-
         -- Local files loaded with plugin manager
         use({ vim.fn.expand("<sfile>:p:h") .. "/dotfiles" })
 

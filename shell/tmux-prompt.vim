@@ -1,6 +1,7 @@
 " Zsh only prompt generated through vim Promptline
 " This setting is for the prompt inside tmux
 " After sourcing this file, run `:PromptlineSnapshot [file]`
+" Plugin used use("edkolev/tmuxline.vim")
 
 " Read the colors from airline extension
 let g:promptline_theme = "airline_insert"
