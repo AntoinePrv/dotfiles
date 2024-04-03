@@ -1,8 +1,11 @@
-nvim
-tmux
-gh
-ripgrep
-fd-find
 bat
+curl
+fd-find
 fzf
-
+gh
+git
+htop
+nvim
+ripgrep
+tmux
+wget
