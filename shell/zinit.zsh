@@ -31,5 +31,28 @@ zi light @zsh-users/zsh-completions
 zi ice wait compile lucid atload='zicompinit; zicdreplay'
 zi light zdharma-continuum/fast-syntax-highlighting
 
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -i
 zi cdreplay
+
+function __generate_completion () {
+	local -r exe="${1}"
+	if type "${exe}" &> /dev/null; then
+		local -r sha="$("${exe}" --version | sha256sum | cut -d' ' -f1)"
+		# local -r file_path="${USER_ZSH_COMPLETION_DIR}/${exe}-${sha}"
+		# Mpdifying filename does not work with gh completion...
+		local -r file_path="${USER_ZSH_COMPLETION_DIR}/_${exe}"
+		if [[ ! -f "${file_path}" ]]; then
+			# Call the whole completion command
+			"${@}" > "${file_path}"
+		fi
+		local -r file_name="$(basename ${file_path})"
+		autoload -Uz "${file_name}"
+		compdef "${file_name}" "${exe}"
+	fi
+}
+
+# Other completions
+export USER_ZSH_COMPLETION_DIR="${XDG_DATA_HOME}/zsh/site-functions"
+__generate_completion pixi completion --shell zsh
+__generate_completion rg --generate=complete-zsh
+__generate_completion gh completion --shell zsh
