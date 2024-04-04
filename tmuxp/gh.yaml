@@ -1,0 +1,15 @@
+session_name: '${PROJECT}'
+before_script: '${TMUXP_CONFIGDIR}/gh-init'
+start_directory: '${WORKSPACE_DIR}/github.com'
+shell_command_before: 
+  - cd "${WORKSPACE_DIR}/github.com/${PROJECT}"
+windows:
+  - window_name: editor
+    panes:
+      - nvim --cmd "let g:project='github.com/${PROJECT}'"
+  - window_name: dev
+    layout: main-vertical
+    panes:
+      - shell_command: clear
+      - shell_command: clear
+      - shell_command: clear
