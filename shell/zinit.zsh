@@ -34,16 +34,17 @@ zi light zdharma-continuum/fast-syntax-highlighting
 autoload -Uz compinit && compinit -i
 zi cdreplay
 
-function __generate_completion () {
+function __generate_completion_for_exe () {
 	local -r exe="${1}"
 	if type "${exe}" &> /dev/null; then
-		local -r sha="$("${exe}" --version | sha256sum | cut -d' ' -f1)"
 		# local -r file_path="${USER_ZSH_COMPLETION_DIR}/${exe}-${sha}"
-		# Mpdifying filename does not work with gh completion...
+		# Modifying filename does not work with gh completion...
+		# local -r sha="$("${exe}" --version | sha256sum | cut -d' ' -f1)"
 		local -r file_path="${USER_ZSH_COMPLETION_DIR}/_${exe}"
 		if [[ ! -f "${file_path}" ]]; then
-			# Call the whole completion command
-			"${@}" > "${file_path}"
+			# Call the completion command
+			mkdir -p "${USER_ZSH_COMPLETION_DIR}"
+			"${@:2}" > "${file_path}"
 		fi
 		local -r file_name="$(basename ${file_path})"
 		autoload -Uz "${file_name}"
@@ -51,8 +52,15 @@ function __generate_completion () {
 	fi
 }
 
+function __generate_completion () {
+		# When the executable has the same name it can be omitted with this function
+	__generate_completion_for_exe "${1}" "${@}"
+}
+
 # Other completions
 export USER_ZSH_COMPLETION_DIR="${XDG_DATA_HOME}/zsh/site-functions"
 __generate_completion pixi completion --shell zsh
 __generate_completion rg --generate=complete-zsh
 __generate_completion gh completion --shell zsh
+__generate_completion rustup completions zsh rustup
+__generate_completion_for_exe cargo rustup completions zsh cargo
