@@ -9,6 +9,8 @@ if [ -d "/opt/homebrew/bin" ]; then
 	export PATH="/opt/homebrew/bin:${PATH}"
 fi
 
+# Add local zsh functions (used im completion)
+fpath=("${USER_ZSH_COMPLETION_DIR}" "${fpath[@]}" )
 
 export EDITOR=nvim
 
@@ -94,7 +96,6 @@ export CONDA_BLD_PATH="${XDG_CACHE_HOME}/conda/build"
 export PIXI_HOME="${XDG_DATA_HOME}/pixi"
 export PIXI_CACHE_DIR="${XDG_CACHE_HOME}/pixi"
 export RATTLER_CACHE_DIR="${XDG_CACHE_HOME}/rattler"
-type pixi &> /dev/null && eval "$(pixi completion --shell "$(basename "${SHELL}")")"
 
 # Mamba package and environments prefix
 export MAMBA_ROOT_PREFIX="${XDG_DATA_HOME}/mamba"
@@ -135,3 +136,8 @@ export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 
 export PATH="${CARGO_HOME}/bin:${PATH}"
 export PATH="${PIXI_HOME}/bin:${PATH}"
+
+if is-this macos; then
+	# For CMake to poperly find package
+	export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
+fi
