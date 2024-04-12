@@ -4,6 +4,7 @@ tap "homebrew/cask-fonts"
 brew "bash"
 brew "coreutils"
 brew "pixi"
+brew "rustup-init"
 
 cask "alacritty"
 cask "bitwarden"

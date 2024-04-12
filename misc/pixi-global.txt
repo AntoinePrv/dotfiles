@@ -8,4 +8,6 @@ htop
 nvim
 ripgrep
 tmux
+tmuxp
+tree
 wget
