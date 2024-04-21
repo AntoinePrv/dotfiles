@@ -19,6 +19,7 @@ require("packer").startup({
         use("tpope/vim-sleuth")
         use("stefandtw/quickfix-reflector.vim")
         use("ton/vim-bufsurf")
+        use("nvimdev/hlsearch.nvim")
         use("drzel/vim-scrolloff-fraction")
         use("windwp/nvim-autopairs")
 
