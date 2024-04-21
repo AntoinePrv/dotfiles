@@ -9,8 +9,11 @@ if [ -d "/opt/homebrew/bin" ]; then
 	export PATH="/opt/homebrew/bin:${PATH}"
 fi
 
-# Add local zsh functions (used im completion)
-fpath=("${USER_ZSH_COMPLETION_DIR}" "${fpath[@]}" )
+# Add zsh functions (used im completion)
+if type -P brew &> /dev/null; then
+	FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+FPATH="${USER_ZSH_COMPLETION_DIR}:${FPATH}"
 
 export EDITOR=nvim
 
