@@ -63,9 +63,11 @@ augroup buffer_view
 augroup end
 
 " Tabs and spaces
+set autoindent  " Auto indenent when creating new lines
 set tabstop=2  " Width of tab character
-set shiftwidth=2
-set smarttab
+set shiftwidth=2  " Width  for shifting left or right
+set smarttab  " Indent with shiftwidth
+set expandtab  " Default to using spaces
 
 " Autoreload buffer when file has changed
 set autoread
