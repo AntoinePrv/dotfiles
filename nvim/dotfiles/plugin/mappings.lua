@@ -13,8 +13,8 @@ vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit inster mode" })
 
 -- Usual expected bindings
 vim.keymap.set("n", "<C-S>", ":wa<CR>", { silent = true, desc = "Save all buffers" })
-vim.keymap.set({ "n", "v" }, "<C-V>", '"*p', { silent = true, desc = "Paste form clipboard" })
-vim.keymap.set("i", "<C-V>", "<C-r>*", { silent = true, desc = "Paste form clipboard" })
+vim.keymap.set({ "n", "v" }, "<C-V>", 'i<C-r><C-p>*<Esc>', { silent = true, desc = "Paste form clipboard" })
+vim.keymap.set("i", "<C-V>", "<C-r><C-p>*", { silent = true, desc = "Paste form clipboard" })
 vim.keymap.set("v", "<C-c>", '"*y', { silent = true, desc = "Copy to clipboard" })
 vim.keymap.set("v", "<C-x>", '"*d', { silent = true, desc = "Cut to clipboard" })
 
