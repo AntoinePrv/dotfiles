@@ -61,6 +61,7 @@ require("packer").startup({
         use("hrsh7th/cmp-vsnip")
         use("ray-x/cmp-treesitter")
         use("hrsh7th/nvim-cmp")
+        use("b0o/schemastore.nvim")
 
         -- Telescope and other Windows
         use({

@@ -3,6 +3,7 @@
 ------------------------
 
 local cmp = require("cmp")
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 local cmp_icons = {
     Text = "󰊄",
@@ -139,10 +140,6 @@ cmp.setup.cmdline(":", {
     }),
 })
 
--- Fetch lsp completion source
-local cmp_nvim_lsp_capabilities =
-    require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 -------------------------
 -- Setup for lspconfig --
 -------------------------
@@ -207,18 +204,66 @@ end
 
 local nvim_lsp = require("lspconfig")
 
+
+local function merge_tables(a, b)
+    local merged = {}
+    for k, v in pairs(b) do merged[k] = v end
+    for k, v in pairs(a) do merged[k] = v end
+    return merged
+end
+
+
+-- Fetch lsp completion source
+local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+local server_setup = {
+    on_attach = on_attach,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    capabilities = capabilities,
+}
+
 -- Map buffer local keybindings when the language server attaches.
 -- :help lspconfig-server-configurations for LSP servers.
-local servers = { "ruff_lsp", "pylsp", "clangd" }
+local servers = {
+    -- Ruff does not provide completion
+    "ruff_lsp", "pylsp",
+    -- Clangd for C/C++
+    "clangd",
+    -- typescript-language-server typescript
+    "tsserver",
+    -- vscode-langservers-extracted
+    "eslint", "cssls", "html",
+    -- @tailwindcss/language-server
+    "tailwindcss",
+}
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup({
-        on_attach = on_attach,
-        flags = {
-            debounce_text_changes = 150,
-        },
-        capabilities = cmp_nvim_lsp_capabilities,
-    })
+    nvim_lsp[lsp].setup(server_setup)
 end
+
+-- @biomejs/biome
+nvim_lsp.biome.setup(
+    merge_tables(
+        server_setup,
+        { root_dir = nvim_lsp.util.root_pattern('biome.json', 'biome.jsonc', "package.json") }
+    )
+)
+
+-- vscode-langservers-extracted
+nvim_lsp.jsonls.setup(
+    merge_tables(
+        server_setup,
+        {
+            settings = {
+                json = {
+                    schemas = require('schemastore').json.schemas(),
+                    validate = { enable = true },
+                },
+            },
+        }
+    )
+)
 
 nvim_lsp.rust_analyzer.setup({
     on_attach = on_attach,
