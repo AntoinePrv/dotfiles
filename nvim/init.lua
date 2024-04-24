@@ -21,7 +21,6 @@ require("packer").startup({
         use("ton/vim-bufsurf")
         use("nvimdev/hlsearch.nvim")
         use("drzel/vim-scrolloff-fraction")
-        use("windwp/nvim-autopairs")
 
         -- Colors themes
         use("tinted-theming/base16-vim")
@@ -62,6 +61,8 @@ require("packer").startup({
         use("ray-x/cmp-treesitter")
         use("hrsh7th/nvim-cmp")
         use("b0o/schemastore.nvim")
+        use("windwp/nvim-autopairs")
+        use("windwp/nvim-ts-autotag")
 
         -- Telescope and other Windows
         use({

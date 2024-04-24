@@ -23,6 +23,8 @@ lua << EOF
 
 require("nvim-autopairs").setup()
 
+require("nvim-ts-autotag").setup()
+
 require("hlsearch").setup()
 
 require("ibl").setup {
