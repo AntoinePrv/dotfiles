@@ -1,6 +1,9 @@
 # Set default terminal
 set -g default-terminal "${TERM}"
 
+# Fallback to another session when killing a session
+set-option -g detach-on-destroy off
+
 # Activate underline colors
 set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
