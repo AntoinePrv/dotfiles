@@ -3,6 +3,7 @@ tap "homebrew/cask-fonts"
 
 brew "bash"
 brew "coreutils"
+brew "mas"
 brew "pixi"
 brew "rustup-init"
 
@@ -26,3 +27,5 @@ cask "signal"
 cask "spotify"
 cask "transmission"
 cask "vlc"
+
+mas "Enchanted", id: 6474268307
