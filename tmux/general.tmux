@@ -69,8 +69,9 @@ bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X end-selection
 
 # Setup 'v' to begin selection as in Vim
 bind -T copy-mode-vi v send-keys -X begin-selection
-# Setup 'y' to yank (copy) selection
-bind -T copy-mode-vi y send-keys -X copy-selection
+# Setup 'y' and Ctrl-C to yank (copy) selection
+bind -T copy-mode-vi y send-keys -X copy-pipe
+bind -T copy-mode-vi C-c send-keys -X copy-pipe-and-cancel
 
 # Remove default bindings, leaving only one way to do things
 unbind -T copy-mode-vi Enter
