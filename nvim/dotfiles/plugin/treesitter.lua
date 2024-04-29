@@ -6,7 +6,15 @@ require("nvim-treesitter.configs").setup({
         additional_vim_regex_highlighting = false,
     },
 
-    incremental_selection = { enable = false },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "v]",   -- Intuitively a "visual" mode
+            scope_incremental = "]",
+            node_incremental = "=",  -- Key for +
+            node_decremental = "-",  -- Key for -
+        },
+    },
 
     indent = { enable = false },
 
