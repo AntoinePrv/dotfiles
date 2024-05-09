@@ -140,25 +140,62 @@ function init {
 ###################
 
 
-function load {
-	local dir="${workspace}/${provider}/${org}/${repo}"
-	if [[ ! -d "${dir}" ]]; then
-		local path="$(find "${workspace}" -type d -maxdepth 3 -mindepth 3 -iname "${repo}")"
-		set_option repo "$(basename "${path}")"
-		path="$(dirname "${path}")"  # Strip last part
-		set_option org "$(basename "${path}")"
-		path="$(dirname "${path}")"  # Strip last part
-		set_option provider "$(basename "${path}")"
-		if [[ ! -n "${path}" ]]; then
-			error "Could not find \"${repo}\" in \"${workspace}\"."
-		fi
-		dir="${workspace}/${provider}/${org}/${repo}"  # Update
+function update_repo_vars {
+	local -r q="$(query)"
+	local path="${1}"
+	set_option repo "$(basename "${path}")"
+	path="$(dirname "${path}")"  # Strip last part
+	set_option org "$(basename "${path}")"
+	path="$(dirname "${path}")"  # Strip last part
+	set_option provider "$(basename "${path}")"
+	if [[ ! -n "${path}" ]]; then
+		error "Error finding \"${q}\" in \"${workspace}\"."
 	fi
+}
 
+
+function query {
+	echo "${provider}${provider:+/}${org}${org:+/}${org:-${provider:+/}}${repo}"
+}
+
+
+function find_repo {
+	local candidate_dir="${workspace}/${provider}/${org}/${repo}"
+	if \
+		[[ -n "${provider}" ]] \
+		&& [[ -n "${org}" ]]\
+		&& [[ -n "${repo}" ]] \
+		&& [[ -d "${candidate_dir}" ]]
+	then
+		update_repo_vars "${candidate_dir}"
+	elif type fzf &> /dev/null; then
+		local -r subdir="$(
+			find "${workspace}" -type d -maxdepth 3 -mindepth 3 \
+			| sed "s:${workspace}::" \
+			| sed "s:^/::" \
+			| fzf --query "$(query)" --select-1 --height=~10 --layout=reverse
+		)"
+		update_repo_vars "${subdir}"
+	else
+		local path="$(find "${workspace}" -type d -maxdepth 3 -mindepth 3 -iname "${repo}")"
+		if [[ $(echo "${path}" | wc -l ) -gt 1 ]]; then
+			error "Query \"$(query)\" is under-specified"
+		elif [[ $(echo "${path}" | wc -l ) -eq 0 ]]; then
+			error "Could not find \"$(query)\" in \"${workspace}\""
+		fi
+		update_repo_vars "${}"
+		
+	fi
+}
+
+
+function load {
+	find_repo
 	status "Loading ${provider}/${org}/${repo}"
 
 	# May be provider specific
 	# TODO the file tmuxp file could be reused
+	local -r dir="${workspace}/${provider}/${org}/${repo}"
 	execute git -C "${dir}" fetch --prune --all
 	export PROJECT="${org}/${repo}"
 	execute tmuxp load --yes gh
@@ -234,6 +271,12 @@ function parse_cmd {
 				;;
 			init)
 				cmd="init"
+				shift
+				;;
+			*/*/*)
+				set_option provider "$(dirname "$(dirname "${1}")")"
+				set_option org "$(basename "$(dirname "${1}")")"
+				set_option repo "$(basename "${1}")"
 				shift
 				;;
 			*/*)
