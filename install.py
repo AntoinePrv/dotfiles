@@ -90,13 +90,25 @@ class Action(abc.ABC):
 
 
 class FilesInstall(Action):
-    def __init__(self, source: pathlib.Path, dest: pathlib.Path) -> None:
+    def __init__(
+            self,
+            source: pathlib.Path,
+            dest: pathlib.Path,
+            hardlink: bool = False
+        ) -> None:
         super().__init__(
             replace_prompt=f"Location {dest} already exists.",
             report_message=f"Installed {dest}.",
         )
         self.source = source
         self.dest = dest
+        self.hardlink = hardlink
+
+    def _link(from: pathlib.Path, to: pathlib.Path) -> None:
+        if self.hardlink:
+            to.hardlink_to(from)
+        else:
+            to.symlink_to(from)
 
     def exists(self) -> bool:
         """Return wether the installation target already exists."""
@@ -115,9 +127,10 @@ class FilesInstall(Action):
                 if source_p.is_dir():
                     dest_p.mkdir(parents=True)
                 else:
-                    dest_p.symlink_to(source_p)
+                    self._link(from=source_p, to=dest_p)
         else:
             self.dest.parent.mkdir(parents=True, exist_ok=True)
+            self._link(from=self.source, to=self.dest)
             self.dest.symlink_to(self.source)
 
 
@@ -163,6 +176,11 @@ def main() -> None:
         FilesInstall(source=CONFIG_DIR/"misc/editrc", dest=HOME_DIR/".editrc"),
         FilesInstall(source=CONFIG_DIR/"misc/condarc", dest=HOME_DIR/".condarc"),
         FilesInstall(source=PROJECT_DIR/"misc/clangd.yaml", dest=CONFIG_DIR/"clangd/config.yaml"),
+        FilesInstall(
+            source=PROJECT_DIR/"misc/karabiner.json",
+            dest=CONFIG_DIR/"karabiner/karabiner.json",
+            hardlink=True,
+        ),
         UpdateNvimPackages(),
     ]
     # fmt: on
