@@ -1,5 +1,7 @@
 require("nvim-treesitter.configs").setup({
     ensure_installed = "all",
+    -- Bad actors at some point in time
+    ignore_install = { "wing" },
 
     highlight = {
         enable = true,
