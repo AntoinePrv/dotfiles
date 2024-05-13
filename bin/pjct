@@ -100,8 +100,10 @@ function init_github.com {
 	local -r dir_org="${workspace}/github.com/${org}"
 	local -r dir_repo="${dir_org}/${repo}"
 
-	if [[ ! -d "${dir_repo}" ]]; then
-		if [[ "${org}" == "AntoinePrv" ]]; then
+	if [[ ! -d "${dir_repo,,}" ]]; then
+		if [[ "${org}" == "antoineprv" ]]; then
+			execute gh repo clone "${org}/${repo}" "${dir_repo}"
+		elif [[ "${org,,}" == "zero-opt" ]]; then
 			execute gh repo clone "${org}/${repo}" "${dir_repo}"
 		else
 			local -r fork_name="fork-${org}-${repo}"
@@ -274,7 +276,7 @@ function parse_cmd {
 				shift
 				;;
 			*/*/*)
-				set_option provider "$(dirname "$(dirname "${1}")")"
+				set_option provider "$(basename "$(dirname "$(dirname "${1}")")")"
 				set_option org "$(basename "$(dirname "${1}")")"
 				set_option repo "$(basename "${1}")"
 				shift
