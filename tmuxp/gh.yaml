@@ -1,4 +1,4 @@
-session_name: '${PROJECT}'
+session_name: '${PROJECT_NAME}'
 start_directory: '${WORKSPACE_DIR}/github.com/${PROJECT}'
 windows:
   - window_name: editor

@@ -199,6 +199,7 @@ function load {
 	# TODO the file tmuxp file could be reused
 	local -r dir="${workspace}/${provider}/${org}/${repo}"
 	execute git -C "${dir}" fetch --prune --all
+	export PROJECT_NAME="${org//./_}/${repo//./_}"
 	export PROJECT="${org}/${repo}"
 	execute tmuxp load --yes gh
 }
