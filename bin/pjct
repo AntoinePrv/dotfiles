@@ -157,7 +157,15 @@ function update_repo_vars {
 
 
 function query {
-	echo "${provider}${provider:+/}${org}${org:+/}${org:-${provider:+/}}${repo}"
+	# Provider and trailing slash if provider not empty
+	if [[ -n "${provider}" ]]; then
+		echo -n "${provider}/"
+	fi
+	# Provider and trailing slash if org or provider not empty
+	if [[ -n "${org}" ]] || [[ -n "${provider}" ]]; then
+		echo -n "${org}/"
+	fi
+	echo -n "${repo}"
 }
 
 
