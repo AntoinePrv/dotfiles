@@ -75,12 +75,6 @@ if ! {is-this tmux || is-this ssh}; then
 	eval "$(ssh-agent -s)" &> /dev/null
 fi
 
-if is-this wsl; then
-	# Fix for tmux on openSuse with WSL2. https://github.com/microsoft/WSL/issues/2530
-	export TMUX_TMPDIR="/tmp/${USER}/tmux"
-	mkdir -p "${TMUX_TMPDIR}"
-fi
-
 # Fzf color
 export FZF_DEFAULT_OPTS='--color=16'
 
