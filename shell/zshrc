@@ -4,7 +4,7 @@
 # Script directory requires non POSIX shell dependant function in the case the script is sourced (use Bashe).
 DIR="$(cd "$(dirname "$(readlink "${(%):-%x}")" )" && pwd)"
 
-source "${DIR}/machines.sh"  # Need to be sourced first
+source "${DIR}/profile"  # Need to be sourced first
 if [ -f "${DIR}/secrets.sh" ]; then
 	source "${DIR}/secrets.sh"
 fi
