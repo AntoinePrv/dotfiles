@@ -1,0 +1,7 @@
+default-scheme = "base16-humanoid-dark"
+
+[[items]]
+name = "shell"
+path = "https://github.com/tinted-theming/tinted-shell"
+themes-dir = "scripts"
+hook = "source %f"

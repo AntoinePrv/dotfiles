@@ -7,6 +7,9 @@ brew "mas"          # Mac App Store CLI
 brew "pixi"
 brew "rustup-init"
 
+tap "tinted-theming/tinted"
+brew "tinty"
+
 cask "alacritty"
 cask "bitwarden"
 cask "breaktimer"

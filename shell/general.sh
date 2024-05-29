@@ -29,19 +29,11 @@ export SAVEHIST=${HISTSIZE}
 export CLICOLOR=1
 
 
-export BASE16_LIGHT_THEME="humanoid-light"
-export BASE16_DARK_THEME="humanoid-dark"
+export USER_TINTED_THEMING_DIR="${XDG_DATA_HOME}/tinted-theming"
 
+export BASE16_LIGHT_THEME="base16-humanoid-light"
+export BASE16_DARK_THEME="base16-humanoid-dark"
 
-function base16 (){
-	if [ "$1" = "light" ]; then
-		bash "${BASE16_DIR:?}/scripts/base16-${BASE16_LIGHT_THEME}.sh"
-	elif [ "${1}" = "dark" ]; then
-		bash "${BASE16_DIR:?}/scripts/base16-${BASE16_DARK_THEME}.sh"
-	else
-		bash "${BASE16_DIR:?}/scripts/base16-${1}.sh"
-	fi
-}
 
 function set_theme () {
 	# TODO find a better way to run in the background? Or make is an executable?
@@ -49,12 +41,21 @@ function set_theme () {
 		(
 			# Broken in https://github.com/tinted-theming/tinted-shell/pull/52
 			export TTY="$(tty)"
-			dark-mode base16 --root "${BASE16_DIR:?}" \
-				--light "${BASE16_LIGHT_THEME}" --dark "${BASE16_DARK_THEME}" &
+			dark-mode listen \
+				--dark "${BASE16_DARK_THEME}" \
+				--light "${BASE16_LIGHT_THEME}" \
+				tinty \
+					-d "${USER_TINTED_THEMING_DIR}" \
+					-c "${XDG_CONFIG_HOME}/misc/tinty.toml" \
+					apply \
+				&
 			bash -c "while ps -p $$ 2>&1 1>/dev/null; do sleep 600; done; pkill -P $!" &
 		)
 	else
-		base16 dark
+		tinty \
+			-d "${USER_TINTED_THEMING_DIR}" \
+			-c "${XDG_CONFIG_HOME}/misc/tinty.toml" \
+			init
 	fi
 }
 
