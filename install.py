@@ -104,7 +104,7 @@ class FilesInstall(Action):
         self.dest = dest
         self.hardlink = hardlink
 
-    def _link(from: pathlib.Path, to: pathlib.Path) -> None:
+    def _link(self, from: pathlib.Path, to: pathlib.Path) -> None:
         if self.hardlink:
             to.hardlink_to(from)
         else:
@@ -131,7 +131,6 @@ class FilesInstall(Action):
         else:
             self.dest.parent.mkdir(parents=True, exist_ok=True)
             self._link(from=self.source, to=self.dest)
-            self.dest.symlink_to(self.source)
 
 
 def run_nvim_cmd(*cmds: str) -> None:
