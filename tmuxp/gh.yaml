@@ -3,7 +3,9 @@ start_directory: '${WORKSPACE_DIR}/github.com/${PROJECT}'
 windows:
   - window_name: editor
     panes:
-      - nvim --cmd "let g:project='github.com/${PROJECT}'"
+      - |
+        launcher="$(test -f pixi.lock && echo "pixi run -e dev" || echo)";
+        ${launcher} nvim --cmd "let g:project='github.com/${PROJECT}'"
   - window_name: dev
     layout: main-vertical
     panes:
