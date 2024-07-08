@@ -27,16 +27,15 @@ require("packer").startup({
 
         -- Visual
         use({
-            "AntoinePrv/lualine.nvim",
-            branch = "cterm",
+            "nvim-lualine/lualine.nvim",
             requires = { "nvim-tree/nvim-web-devicons", opt = true },
         })
         use("ryanoasis/vim-devicons")
         use({
             -- https://github.com/edluffy/specs.nvim/pull/30
+            -- https://github.com/edluffy/specs.nvim/issues/31
             -- "edluffy/specs.nvim"
             "AntoinePrv/specs.nvim",
-            branch = "fix-ft",
         })
         use("lukas-reineke/indent-blankline.nvim")
         use("lukas-reineke/virt-column.nvim")
