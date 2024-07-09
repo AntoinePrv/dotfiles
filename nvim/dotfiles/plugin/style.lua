@@ -73,11 +73,26 @@ local function set_tinty_theme()
   vim.cmd("colorscheme " .. read_file_or_default(tinty_path()))
 end
 
--- Missing highlight groups in 
+function base16_gui(num)
+    return "#" .. vim.g["base16_gui" .. num]
+end
+
 vim.api.nvim_create_autocmd(
     "ColorScheme",
     {
-        callback = function()
+        callback=function()
+            vim.api.nvim_set_hl(
+                 0, "DiagnosticUnderlineError", { sp=base16_gui("08"), undercurl=true }
+            )
+            vim.api.nvim_set_hl(
+                 0, "DiagnosticUnderlineWarn", { sp=base16_gui("0A"), undercurl=true }
+            )
+            vim.api.nvim_set_hl(
+                 0, "DiagnosticUnderlineInfo", { sp=base16_gui("0D"), underdashed=true }
+            )
+            vim.api.nvim_set_hl(
+                 0, "DiagnosticUnderlineHint", { sp=base16_gui("0C"), underdotted=true }
+            )
             -- Set highlights here, for example
             -- vim.api.nvim_set_hl(0, "@include", { link="@keyword.import" })
             -- vim.api.nvim_set_hl(
