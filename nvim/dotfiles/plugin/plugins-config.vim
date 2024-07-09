@@ -14,11 +14,6 @@ let g:NERDToggleCheckAllLines = 1
 
 let g:scrolloff_absolute_filetypes = ["qf", "specs.nvim"]
 
-" Base16 colors
-let base16colorspace=256
-colorscheme base16-default-dark
-
-
 lua << EOF
 
 require("nvim-autopairs").setup()
