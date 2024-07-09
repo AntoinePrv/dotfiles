@@ -23,11 +23,12 @@ require("packer").startup({
         use("drzel/vim-scrolloff-fraction")
 
         -- Colors themes
+        -- TODO consider echasnovski/mini.base16 when migrated to neovim 0.10
         use({
             -- "tinted-theming/base16-vim"
             -- https://github.com/tinted-theming/base16-vim/pull/82 but missing rerender
             "AntoinePrv/fork-tinted-theming-base16-vim",
-            branch = "nvim-0.10"
+            branch = "nvim-0.10-rendered"
         })
 
         -- Visual
