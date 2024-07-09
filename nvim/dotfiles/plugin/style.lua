@@ -25,7 +25,7 @@ vim.opt.showcmd = true
 vim.opt.foldlevelstart = 99
 
 -- Use full color scale
-vim.cmd([[set termguicolors]])
+vim.opt.termguicolors = true
 
 local function simple_on_file_change(path, callback)
 	handle = vim.uv.new_fs_event()
@@ -70,13 +70,26 @@ local function read_file_or_default(filename, default)
 end
 
 local function set_tinty_theme()
-	vim.cmd("colorscheme " .. read_file_or_default(tinty_path()))
+  vim.cmd("colorscheme " .. read_file_or_default(tinty_path()))
 end
+
+-- Missing highlight groups in 
+vim.api.nvim_create_autocmd(
+    "ColorScheme",
+    {
+        callback = function()
+            -- Set highlights here, for example
+            -- vim.api.nvim_set_hl(0, "@include", { link="@keyword.import" })
+            -- vim.api.nvim_set_hl(
+            --     0, "@variable",
+            --     { fg="#" .. vim.g.base16_gui05, ctermfg=tonumber(vim.g.base16_cterm05) }
+            -- )
+        end
+    }
+)
 
 -- Set current theme
 set_tinty_theme()
+
 -- Change theme whenever tinty changes the theme
 simple_on_file_change(tinty_path(), set_tinty_theme)
-
-
-vim.cmd([[highlight EndOfBuffer ctermfg=bg guifg=bg]])
