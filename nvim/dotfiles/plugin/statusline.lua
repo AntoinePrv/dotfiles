@@ -9,49 +9,60 @@ local colors_ansi = {
     white = 7, -- foreground, is black in dark-mode
 }
 
-local colors_base16_cterm = {
-    base00 = tonumber(vim.g.base16_cterm00), -- base16 shell ANSI: 00
-    base01 = tonumber(vim.g.base16_cterm01), -- base16 shell ANSI: 18
-    base02 = tonumber(vim.g.base16_cterm02), -- base16 shell ANSI: 19
-    base03 = tonumber(vim.g.base16_cterm03), -- base16 shell ANSI: 08
-    base04 = tonumber(vim.g.base16_cterm04), -- base16 shell ANSI: 20
-    base05 = tonumber(vim.g.base16_cterm05), -- base16 shell ANSI: 07
-    base06 = tonumber(vim.g.base16_cterm06), -- base16 shell ANSI: 21
-    base07 = tonumber(vim.g.base16_cterm07), -- base16 shell ANSI: 15
-    base08 = tonumber(vim.g.base16_cterm08), -- base16 shell ANSI: 01
-    base09 = tonumber(vim.g.base16_cterm09), -- base16 shell ANSI: 16
-    base0A = tonumber(vim.g.base16_cterm0A), -- base16 shell ANSI: 03
-    base0B = tonumber(vim.g.base16_cterm0B), -- base16 shell ANSI: 02
-    base0C = tonumber(vim.g.base16_cterm0C), -- base16 shell ANSI: 06
-    base0D = tonumber(vim.g.base16_cterm0D), -- base16 shell ANSI: 04
-    base0E = tonumber(vim.g.base16_cterm0E), -- base16 shell ANSI: 05
-    base0F = tonumber(vim.g.base16_cterm0F), -- base16 shell ANSI: 17
-}
+function load_base16_vars(css)
+    local variables = {}
+
+    -- Iterate over each line in the string
+    for line in css:gmatch("[^\r\n]+") do
+        -- Capture variable name and value
+        local name, value = line:match("%s*%-%-(%w+):%s*(#%x+);")
+        if name and value then
+            variables[name] = value
+        end
+    end
+
+    return variables
+end
+
+local function tinty_path()
+	return os.getenv("USER_TINTED_THEMING_DIR") .. "/css-output-css-variables-file.css"
+end
+
+-- Return the content from a string or return some default content
+local function read_base16_file()
+	local file = io.open(tinty_path(), "r")
+    local content = file:read("*a")
+    file:close()
+    return load_base16_vars(content)
+end
+
+-- FIXME this is is not reloaded, we need to use highlight groups
+local colors = read_base16_file()
 
 local theme = {
     normal = {
-        a = { bg = colors_base16_cterm.base0D, fg = colors_base16_cterm.base06, gui = "bold" },
-        b = { bg = colors_base16_cterm.base03, fg = colors_base16_cterm.base06 },
-        c = { bg = colors_base16_cterm.base02, fg = colors_base16_cterm.base06 },
+        a = { bg = colors.base0D, fg = colors.base06, gui = "bold" },
+        b = { bg = colors.base03, fg = colors.base06 },
+        c = { bg = colors.base02, fg = colors.base06 },
     },
     insert = {
-        a = { bg = colors_base16_cterm.base0B, fg = colors_base16_cterm.base06, gui = "bold" },
+        a = { bg = colors.base0B, fg = colors.base06, gui = "bold" },
     },
     visual = {
-        a = { bg = colors_base16_cterm.base0E, fg = colors_base16_cterm.base06, gui = "bold" },
+        a = { bg = colors.base0E, fg = colors.base06, gui = "bold" },
     },
     replace = {
-        a = { bg = colors_base16_cterm.base08, fg = colors_base16_cterm.base06, gui = "bold" },
+        a = { bg = colors.base08, fg = colors.base06, gui = "bold" },
     },
     command = {
-        a = { bg = colors_base16_cterm.base03, fg = colors_base16_cterm.base06, gui = "bold" },
-        b = { bg = colors_base16_cterm.base02, fg = colors_base16_cterm.base06 },
-        c = { bg = colors_base16_cterm.base01, fg = colors_base16_cterm.base06 },
+        a = { bg = colors.base03, fg = colors.base06, gui = "bold" },
+        b = { bg = colors.base02, fg = colors.base06 },
+        c = { bg = colors.base01, fg = colors.base06 },
     },
     inactive = {
-        a = { bg = colors_base16_cterm.base03, fg = colors_base16_cterm.base06, gui = "bold" },
-        b = { bg = colors_base16_cterm.base02, fg = colors_base16_cterm.base06 },
-        c = { bg = colors_base16_cterm.base01, fg = colors_base16_cterm.base06 },
+        a = { bg = colors.base03, fg = colors.base06, gui = "bold" },
+        b = { bg = colors.base02, fg = colors.base06 },
+        c = { bg = colors.base01, fg = colors.base06 },
     },
 }
 
@@ -82,9 +93,9 @@ local lualine_sections = {
         {
             "diff",
             diff_color = {
-                added = { fg = colors_ansi.green },
-                modified = { fg = colors_ansi.magenta },
-                removed = { fg = colors_ansi.red },
+                added = { fg = colors.base0B },
+                modified = { fg = colors.base0E },
+                removed = { fg = colors.base08 },
             },
         },
     },
@@ -101,10 +112,10 @@ local lualine_sections = {
                 hint = symbols.hint,
             },
             diagnostics_color = {
-                error = { fg = colors_ansi.red },
-                warn = { fg = colors_ansi.yellow },
-                info = { fg = colors_ansi.blue },
-                hint = { fg = colors_ansi.cyan },
+                error = { fg = colors.base08 },
+                warn = { fg = colors.base0A },
+                info = { fg = colors.base0D },
+                hint = { fg = colors.base0C },
             },
             colored = true,
             update_in_insert = false,
