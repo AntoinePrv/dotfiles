@@ -102,7 +102,7 @@ require("statuscol").setup({
 			click="v:lua.ScLa",  -- Status Col Number/Line Action
 		},
 		{
-			sign={ name={ "Diagnostic" }, colwidth=2, wrap=false, auto=false },
+			sign={ namespace = { "diagnostic/signs" }, colwidth=2, wrap=false, auto=false },
 			condition={ true },
 			click="v:lua.ScSa" -- Status Col Sign Action
 		},
