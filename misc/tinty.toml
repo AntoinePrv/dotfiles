@@ -5,8 +5,3 @@ name = "shell"
 path = "https://github.com/tinted-theming/tinted-shell"
 themes-dir = "scripts"
 hook = "source %f"
-
-[[items]]
-name = "css"  # Poor man's replacement for some json
-path = "https://github.com/Base24/base24-css-etc"
-themes-dir = "output/css-variables"
