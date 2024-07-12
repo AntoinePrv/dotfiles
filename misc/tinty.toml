@@ -5,3 +5,9 @@ name = "shell"
 path = "https://github.com/tinted-theming/tinted-shell"
 themes-dir = "scripts"
 hook = "source %f"
+
+[[items]]
+name = " alacritty"
+path = "https://github.com/tinted-theming/tinted-alacritty/"
+themes-dir = "colors"
+hook = "cp %f ${XDG_CONFIG_HOME}/alacritty/colors.toml"

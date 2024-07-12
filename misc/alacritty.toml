@@ -1,3 +1,7 @@
+import = ["colors.toml"]
+
+import = ["colors.toml"]
+
 [window]
 startup_mode = "Fullscreen"
 
