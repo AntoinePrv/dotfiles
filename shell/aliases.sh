@@ -9,6 +9,8 @@ alias grep='grep --color=auto'
 type bat &> /dev/null && alias cat='bat'
 type nvim &> /dev/null && alias vim='nvim'
 
+alias tinty='tinty -d "${USER_TINTED_THEMING_DIR}" -c "${XDG_CONFIG_HOME}/misc/tinty.toml"'
+
 function docker-shell () {
 	docker run \
 		--interactive --tty --rm \
