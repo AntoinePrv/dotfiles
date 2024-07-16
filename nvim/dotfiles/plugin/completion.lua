@@ -231,16 +231,32 @@ local servers = {
     "ruff_lsp", "pylsp",
     -- Clangd for C/C++
     "clangd",
-    -- typescript-language-server typescript
-    "tsserver",
     -- vscode-langservers-extracted
-    "eslint", "cssls", "html",
-    -- @tailwindcss/language-server
-    "tailwindcss",
+    -- "eslint", "cssls", "html",
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup(server_setup)
 end
+
+-- typescript-language-server typescript
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+nvim_lsp.tsserver.setup(
+    merge_tables(
+        server_setup,
+        { cmd = { "npx", "--no-install", "typescript-language-server", "--stdio" }  }
+    )
+)
+
+-- @tailwindcss/language-server
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
+nvim_lsp.tsserver.setup(
+    merge_tables(
+        server_setup,
+        { cmd = { "npx", "--no-install", "tailwindcss-language-server", "--stdio" }  }
+    )
+)
+
+-- vscode-langservers-extracted
 
 -- @biomejs/biome
 nvim_lsp.biome.setup(
