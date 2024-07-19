@@ -243,13 +243,16 @@ end
 nvim_lsp.tsserver.setup(
     merge_tables(
         server_setup,
-        { cmd = { "npx", "--no-install", "typescript-language-server", "--stdio" }  }
+        {
+            cmd = { "npx", "--no-install", "typescript-language-server", "--stdio" },
+            root_dir = nvim_lsp.util.root_pattern("tsconfig.json", "package.json")
+        }
     )
 )
 
 -- @tailwindcss/language-server
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
-nvim_lsp.tsserver.setup(
+nvim_lsp.tailwindcss.setup(
     merge_tables(
         server_setup,
         { cmd = { "npx", "--no-install", "tailwindcss-language-server", "--stdio" }  }
