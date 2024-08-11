@@ -1,7 +1,7 @@
 # Exit if non-interactive shell
 [[ $- != *i* ]] && return
 
-# Script directory requires non POSIX shell dependant function in the case the script is sourced (use Bashe).
+# Script directory requires non POSIX shell dependant function in the case the script is sourced (use Bash).
 DIR="$(cd "$(dirname "$(readlink "${(%):-%x}")" )" && pwd)"
 
 source "${DIR}/profile"  # Need to be sourced first
@@ -13,10 +13,10 @@ source "${DIR}/general.sh"
 source "${DIR}/aliases.sh"  # Need to be sourced after general
 source "${DIR}/editor.zsh"
 
+export STARSHIP_CONFIG="${DIR}/starship.toml"
+eval "$(starship init zsh)"
+
 # Prompt
 if is-this tmux; then
-	source "${DIR}/tmux-prompt.sh"
 	source "${DIR}/tmux-update.sh"
-else
-	source "${DIR}/default-prompt.sh"
 fi

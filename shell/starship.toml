@@ -1,0 +1,58 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """
+[](fg:white)[](bg:prev_fg fg:black)\
+$sudo\
+$directory\
+$status\
+$cmd_duration\
+$jobs\
+[ ](fg:prev_bg)
+"""
+
+[directory]
+disabled = false
+format = "[ ]($style fg:prev_bg)[$path]($style)[$readonly]($style)[ ]($style)"
+style = "fg:white bg:blue"
+truncation_length = 3
+truncate_to_repo = false
+truncation_symbol = "…/"
+read_only = " "
+[directory.substitutions]
+  "github.com" = " "
+
+[status]
+disabled = false
+style = "fg:white bg:red"
+format = """
+[ ]($style fg:prev_bg)\
+[$symbol$common_meaning$maybe_int]($style)\
+[$signal_name]($style)\
+[ ]($style)\
+"""
+symbol = " "
+not_executable_symbol = " "
+not_found_symbol = "󰦀 "
+signal_symbol = " "
+sigint_symbol = " "
+success_symbol = ""
+map_symbol = true
+
+[cmd_duration]
+disabled = false
+style = "fg:white bg:yellow"
+format = "[ ]($style fg:prev_bg)[ $duration ]($style)"
+
+[sudo]
+disabled = false
+style = "fg:red bg:white bold"
+format = "[ ]($style fg:prev_bg)[$symbol]($style)"
+symbol = " "
+
+[jobs]
+disabled = false
+style = "fg:white bg:purple"
+format = "[ ]($style fg:prev_bg)[$symbol$number ]($style)"
+symbol = " "
