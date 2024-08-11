@@ -127,12 +127,8 @@ export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 # Npm
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
 
-# Volta Js toolchain
-export VOLTA_HOME="${XDG_DATA_HOME}/volta"
-
 export PATH="${CARGO_HOME}/bin:${PATH}"
 export PATH="${PIXI_HOME}/bin:${PATH}"
-export PATH="${VOLTA_HOME}/bin:${PATH}"
 
 if is-this macos; then
 	# For CMake to poperly find package
