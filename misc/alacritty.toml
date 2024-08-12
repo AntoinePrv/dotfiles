@@ -1,4 +1,4 @@
-import = ["colors.toml"]
+import = ["~/.config/alacritty/colors.toml"]
 
 [window]
 startup_mode = "Fullscreen"

@@ -1,13 +1,13 @@
 default-scheme = "base16-humanoid-dark"
 
-# [[items]]
-# name = "shell"
-# path = "https://github.com/tinted-theming/tinted-shell"
-# themes-dir = "scripts"
-# hook = "source %f"
+[[items]]
+name = "shell"
+path = "https://github.com/tinted-theming/tinted-shell"
+themes-dir = "scripts"
+hook = "source %f"
 
 [[items]]
 name = "alacritty"
 path = "https://github.com/tinted-theming/tinted-alacritty/"
-themes-dir = "colors"
+themes-dir = "colors-256"
 hook = "cp %f ${XDG_CONFIG_HOME}/alacritty/colors.toml"
