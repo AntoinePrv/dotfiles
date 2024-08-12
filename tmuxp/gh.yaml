@@ -5,7 +5,7 @@ windows:
     panes:
       - |
         launcher=($(test -f pixi.lock && echo 'pixi run -e dev' || echo));
-        ${launcher[@]} nvim --cmd "let g:project='github.com/${PROJECT}'"
+        ${launcher[@]} nvim --cmd 'let g:project="github.com/${PROJECT}"'
   - window_name: dev
     layout: main-vertical
     panes:
