@@ -1,21 +1,20 @@
-# This tmux statusbar config was created by tmuxline.vim
-# on Sun, 30 Oct 2022
-
-set -g status-justify "left"
-set -g status "on"
-set -g status-left-style "none"
 set -g message-command-style "fg=colour21,bg=colour19"
-set -g status-right-style "none"
 set -g pane-active-border-style "fg=colour2"
-set -g status-style "none,bg=colour18"
 set -g message-style "fg=colour21,bg=colour19"
 set -g pane-border-style "fg=colour19"
-set -g status-right-length "100"
-set -g status-left-length "100"
+
+set -g status "on"
+set -g status-justify "centre"
+set -g status-style "none,bg=colour0"
+
 setw -g window-status-activity-style "none,fg=colour2,bg=colour18"
 setw -g window-status-separator ""
-setw -g window-status-style "none,fg=colour16,bg=colour18"
-set -g status-left "#[fg=colour18,bg=colour2] %a %R #[fg=colour2,bg=colour19,nobold,nounderscore,noitalics]#[fg=colour21,bg=colour19]  #h #[fg=colour19,bg=colour18,nobold,nounderscore,noitalics]#[fg=colour16,bg=colour18]  #S #[fg=colour18,bg=colour18,nobold,nounderscore,noitalics]"
-set -g status-right "#[fg=colour18,bg=colour18,nobold,nounderscore,noitalics]#[fg=colour16,bg=colour18] #(OUT=$(tmux showenv __TMUX#{pane_id}_PWD) && PWD=\${OUT#__TMUX#{pane_id}_PWD=} && cd \$PWD && bash ${HOME}/workspace/github.com/AntoinePrv/dotfiles/tmux/tmuxline-git.sh) #[fg=colour19,bg=colour18,nobold,nounderscore,noitalics]#[fg=colour21,bg=colour19]  #(OUT=$(tmux showenv __TMUX#{pane_id}_PWD) && PWD=\${OUT#__TMUX#{pane_id}_PWD=} && cd \$PWD && pwd | xargs basename) #[fg=colour2,bg=colour19,nobold,nounderscore,noitalics]#[fg=colour18,bg=colour2] #((OUT=$(tmux showenv __TMUX#{pane_id}_CONDA_DEFAULT_ENV) && CONDA_DEFAULT_ENV=\${OUT#__TMUX#{pane_id}_CONDA_DEFAULT_ENV=} && printf \" \${CONDA_DEFAULT_ENV?}\") && space=\" \"; (OUT=$(tmux showenv __TMUX#{pane_id}_VIRTUAL_ENV) && VIRTUAL_ENV=\${OUT#__TMUX#{pane_id}_VIRTUAL_ENV=} && printf \"\${space} \$(basename \$VIRTUAL_ENV)\")) "
-setw -g window-status-format "#[fg=colour18,bg=colour18,nobold,nounderscore,noitalics]#[default] #I #W #[fg=colour18,bg=colour18,nobold,nounderscore,noitalics]"
-setw -g window-status-current-format "#[fg=colour18,bg=colour19,nobold,nounderscore,noitalics]#[fg=colour21,bg=colour19]  #W #(printf \"#F\" | tr -d \"*\" | tr \"Z\" \"ﬕ\") #[fg=colour19,bg=colour18,nobold,nounderscore,noitalics]"
+setw -g window-status-style "none,fg=colour7,bg=colour0"
+setw -g window-status-format "#[default,fg=color18]#[fg=colour7,bg=colour18] #I #W #[default,fg=color18]"
+setw -g window-status-current-format "#[default,fg=color19]#[fg=colour16,bg=colour19]  #I #W #(printf \"#F\" | tr -d \"*\" | tr \"Z\" \"󰘖\") #[default,fg=color19]"
+
+set -g status-left-style "none"
+set -g status-left "#(STARSHIP_CONFIG=$HOME/.config/tmux/starship.toml starship prompt)"
+
+set -g status-right-style "none"
+set -g status-right '#(STARSHIP_CONFIG=$HOME/.config/tmux/starship.toml starship prompt --right --path="$(tmux showenv __TMUX#{pane_id}_PWD | cut -d= -f2)")'

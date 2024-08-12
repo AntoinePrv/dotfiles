@@ -1,0 +1,86 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+
+format = """
+#\\[bg=colour8,fg=colour7\\]\
+$time\
+#\\[fg=colour8,bg=colour19,nobold,nounderscore,noitalics\\]#\\[fg=colour7\\]\
+${custom.tmux-session}\
+#\\[fg=colour19,bg=colour0,nobold,nounderscore,noitalics\\]#\\[fg=colour16,bold\\]\
+$hostname
+"""
+
+right_format = """
+#\\[fg=colour19\\]#\\[fg=colour16,bg=colour19\\]\
+(${git_status})(${git_state})${git_branch}\
+(\
+#\\[fg=colour2\\]#\\[fg=colour7,bg=colour2\\]\
+${custom.tmux-pane-pixi}\
+)\
+"""
+
+[time]
+disabled = false
+format = "$time"
+time_format = "  %a %e   %R "
+
+[hostname]
+disabled = false
+format = " $ssh_symbol$hostname "
+ssh_only = true
+ssh_symbol = " "
+
+[custom.tmux-session]
+disabled = false
+description = "The current tmux session"
+command = "tmux display-message -p '#S'"
+when = true
+format = " $symbol$output "
+symbol = " "
+
+[git_branch]
+disabled = false
+format = " $symbol$branch(:$remote_name/$remote_branch) "
+symbol = " "
+
+[git_state]
+disabled = false
+format = " $state( $progress_current/$progress_total) "
+
+[git_status]
+disabled = false
+format = """
+( \
+($conflicted )\
+($deleted )\
+($renamed )\
+($modified )\
+($typechanged )\
+($staged )\
+($untracked )\
+($stashed ))\
+"""
+ahead = "$count"
+behind = "$count"
+diverged = "$ahead_count $behind-count"
+up_to_date = ""
+conflicted = "✘$count"
+untracked = "…"
+modified = "+$count"
+deleted = "-$count"
+staged = "●$count"
+renamed = "»$count"
+stashed = " $count"
+
+[custom.tmux-pane-pixi]
+disabled = false
+description = ""
+command = """
+pixi info --json | jq --raw-output '.environments_info | map(.name) | join("|")'
+"""
+detect_files = ["pixi.lock"]
+format = " $symbol$output "
+symbol = " "
+
