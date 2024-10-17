@@ -32,5 +32,6 @@ cask "spotify"
 cask "stretchly"
 cask "transmission"
 cask "vlc"
+cask "google-drive"
 
 mas "Enchanted", id: 6474268307
