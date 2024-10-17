@@ -127,8 +127,12 @@ export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 # Npm
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
 
+# Playwright
+export PLAYWRIGHT_BROWSERS_PATH="${XDG_DATA_HOME}/playwright"
+
 export PATH="${CARGO_HOME}/bin:${PATH}"
 export PATH="${PIXI_HOME}/bin:${PATH}"
+
 
 if is-this macos; then
 	# For CMake to poperly find package
