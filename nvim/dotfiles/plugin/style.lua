@@ -81,6 +81,9 @@ vim.api.nvim_create_autocmd(
     "ColorScheme",
     {
         callback=function()
+	    vim.api.nvim_set_hl(0, "Normal", { bg=base16_gui("00") })
+	    vim.api.nvim_set_hl(0, "NormalNC", { bg=base16_gui("00") })
+
             vim.api.nvim_set_hl(0, "Added", { fg=base16_gui("0B") })
             vim.api.nvim_set_hl(0, "Removed", { fg=base16_gui("08") })
             vim.api.nvim_set_hl(0, "Changed", { fg=base16_gui("0C") })

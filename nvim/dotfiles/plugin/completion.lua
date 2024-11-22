@@ -228,7 +228,7 @@ local server_setup = {
 -- :help lspconfig-server-configurations for LSP servers.
 local servers = {
     -- Ruff does not provide completion
-    "ruff_lsp", "pylsp",
+    "ruff", "pylsp",
     -- Clangd for C/C++
     "clangd",
     -- vscode-langservers-extracted
@@ -239,8 +239,8 @@ for _, lsp in ipairs(servers) do
 end
 
 -- typescript-language-server typescript
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
-nvim_lsp.tsserver.setup(
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
+nvim_lsp.ts_ls.setup(
     merge_tables(
         server_setup,
         {

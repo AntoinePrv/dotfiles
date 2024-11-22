@@ -7,16 +7,19 @@ pixi global install --environment devutils \
   git \
   htop \
   jq \
-  nvim \
   ripgrep \
   starship \
   tmux \
   tmuxp \
   tree \
-  wget
+  wget \
 
 pixi global install --environment datascience \
   python \
   jupyter \
   polars \
   pandas \
+
+pixi global install --environment conda-forge \
+  conda-smithy \
+  rattler-build \
