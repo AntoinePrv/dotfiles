@@ -52,7 +52,7 @@ require("packer").startup({
 
         -- Completion and and syntax
         -- Crashed cpp parser last update (?)
-        use({ "nvim-treesitter/nvim-treesitter", tag = "v0.9.2", run = ":TSUpdate" })
+        use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
         use("nvim-treesitter/nvim-treesitter-textobjects")
         use("rbberger/vim-singularity-syntax")
         use("neovim/nvim-lspconfig")
@@ -72,7 +72,7 @@ require("packer").startup({
         -- Telescope and other Windows
         use({
             "nvim-telescope/telescope.nvim",
-            tag = "0.1.5",
+            tag = "0.1.8",
             requires = { { "nvim-lua/plenary.nvim" }, { "nvim-tree/nvim-web-devicons" } },
         })
         use("nvim-telescope/telescope-ui-select.nvim")
