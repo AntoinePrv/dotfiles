@@ -14,5 +14,6 @@ alias tinty='tinty -d "${USER_TINTED_THEMING_DIR}" -c "${XDG_CONFIG_HOME}/misc/t
 function docker-shell () {
 	docker run \
 		--interactive --tty --rm \
-		--workdir "/workspace" --mount "type=bind,source=${PWD},target=/workspace/$(basename ${PWD})" "$@"
+		--workdir "/workspace/$(basename ${PWD})" \
+		--mount "type=bind,source=${PWD},target=/workspace/$(basename ${PWD})" "$@"
 }
