@@ -121,4 +121,46 @@ require("dressing").setup({
 -- Customizing vim.ui.select callback
 -- We need to set this up after `dressing` since it always overrides vim.ui.select with a shim
 -- that is not compatible with telescoe lazy loading
-local telescope_ui = require("telescope").load_extension("ui-select")
+-- TODO archived, use snacks.nvim
+telescope.load_extension("ui-select")
+
+
+-- Use yanky as a yank history selector only
+local yanky_mapping = require("yanky.telescope.mapping")
+local yanky_utils = require("yanky.utils")
+
+telescope.load_extension("yank_history")
+
+require("yanky").setup({
+    ring = {
+        history_length = 20,
+    },
+    highlight = {
+        on_put = false,
+        on_yank = false,
+    },
+})
+
+local function create_yank_history_default(action_function)
+    return function()
+        telescope.extensions.yank_history.yank_history({
+            attach_mappings = function(_, map)
+                map({"i", "n"}, "<CR>", yanky_mapping.put("p"))
+                return true
+            end
+        })
+    end
+end
+
+vim.keymap.set(
+    {"n", "x"},
+    "<leader>p",
+    create_yank_history_default(yanky_mapping.put("p")),
+    {}
+)
+vim.keymap.set(
+    {"n", "x"},
+    "<leader>P",
+    create_yank_history_default(yanky_mapping.put("P")),
+    {}
+)
