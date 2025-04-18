@@ -1,8 +1,9 @@
+local telescope = require("telescope")
 local telescope_actions = require("telescope.actions")
 local telescope_builtin = require("telescope.builtin")
 local telescope_themes = require("telescope.themes")
 
-require("telescope").setup({
+telescope.setup({
     defaults = {
         mappings = {
             -- Telescope insert mode mappings
@@ -52,6 +53,9 @@ vim.keymap.set("n", "gh", telescope_builtin.help_tags, {})
 vim.keymap.set("n", "gm", telescope_builtin.marks, {})
 vim.keymap.set("n", "gc", telescope_builtin.quickfix, {})
 vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, {})
+vim.keymap.set("n", "gi", telescope_builtin.lsp_implementations, {})
+vim.keymap.set("n", "g,", telescope_builtin.lsp_incoming_calls, {})  -- Key for <
+vim.keymap.set("n", "g.", telescope_builtin.lsp_outgoing_calls, {})  -- Key for >
 vim.keymap.set("n", "gt", telescope_builtin.lsp_type_definitions, {})
 vim.keymap.set("n", "gr", telescope_builtin.lsp_references, {})
 vim.keymap.set("n", "gs", telescope_builtin.lsp_document_symbols, {})
