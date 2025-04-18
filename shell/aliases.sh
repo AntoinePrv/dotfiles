@@ -15,5 +15,7 @@ function docker-shell () {
 	docker run \
 		--interactive --tty --rm \
 		--workdir "/workspace/$(basename ${PWD})" \
-		--mount "type=bind,source=${PWD},target=/workspace/$(basename ${PWD})" "$@"
+		--mount "type=bind,source=${PWD},target=/workspace/$(basename ${PWD})" \
+		--volume /var/run/docker.sock:/var/run/docker.sock \
+		"$@"
 }
