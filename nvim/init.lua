@@ -56,7 +56,7 @@ require("packer").startup({
         use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
         use("nvim-treesitter/nvim-treesitter-textobjects")
         use("rbberger/vim-singularity-syntax")
-        use({"neovim/nvim-lspconfig", tag = "v1.0.0"})
+        use({"neovim/nvim-lspconfig", tag = "v2.0.0"})
         use("hrsh7th/cmp-nvim-lsp")
         use("hrsh7th/cmp-nvim-lsp-signature-help")
         use("hrsh7th/cmp-buffer")

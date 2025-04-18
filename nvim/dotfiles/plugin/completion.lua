@@ -48,7 +48,7 @@ local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
         and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s")
-            == nil
+        == nil
 end
 
 -- Call a given key in Nvim
@@ -229,13 +229,80 @@ local server_setup = {
 local servers = {
     -- Ruff does not provide completion
     "ruff", "pylsp",
-    -- Clangd for C/C++
+    -- Clangd cmake for C/C++
     "clangd",
     -- vscode-langservers-extracted
     -- "eslint", "cssls", "html",
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup(server_setup)
+end
+
+nvim_lsp.clangd.setup(
+    merge_tables(
+        server_setup,
+        {
+            cmd = {
+                "clangd",
+                "--all-scopes-completion",
+                "--clang-tidy",
+                "--background-index",
+                "--header-insertion=iwyu",
+                "--function-arg-placeholders",
+            },
+        }
+    )
+)
+
+nvim_lsp.neocmake.setup(
+    merge_tables(
+        server_setup,
+        {
+            init_options = {
+                format = { enable = true },
+                lint = { enable = true },
+            },
+        }
+    )
+)
+
+nvim_lsp.lua_ls.setup(
+    merge_tables(
+        server_setup,
+        {
+            on_init = function(client)
+                if client.workspace_folders then
+                    local path = client.workspace_folders[1].name
+                    if (
+                            (path ~= vim.fn.stdpath('config'))
+                            and (vim.uv.fs_stat(path .. '/.luarc.json')
+                                or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+                        ) then
+                        return
+                    end
+                end
+
+                client.config.settings.Lua = vim.tbl_deep_extend(
+                    "force",
+                    client.config.settings.Lua, {
+                        runtime = {
+                            version = "LuaJIT"
+                        },
+                        workspace = {
+                            checkThirdParty = false,
+                            library = {
+                                vim.env.VIMRUNTIME
+                            }
+                        }
+                    })
+            end,
+            settings = {
+                Lua = {}
+            }
+        }))
+
+if vim.fn.executable("typos-lsp") == 1 then
+    nvim_lsp.typos_lsp.setup(server_setup)
 end
 
 -- typescript-language-server typescript
@@ -255,7 +322,7 @@ nvim_lsp.ts_ls.setup(
 nvim_lsp.tailwindcss.setup(
     merge_tables(
         server_setup,
-        { cmd = { "npx", "--no-install", "tailwindcss-language-server", "--stdio" }  }
+        { cmd = { "npx", "--no-install", "tailwindcss-language-server", "--stdio" } }
     )
 )
 
@@ -311,9 +378,22 @@ vim.diagnostic.config({
 
 -- Show line diagnostics automatically in hover window
 vim.o.updatetime = 500
+
+local function any_floating_win_open()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_config(win).relative ~= "" then
+            return true
+        end
+    end
+    return false
+end
+
 vim.api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
     callback = function()
+        if any_floating_win_open() then
+            return
+        end
         vim.diagnostic.open_float(nil, {
             focusable = false,
             close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
