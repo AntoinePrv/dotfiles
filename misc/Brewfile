@@ -10,6 +10,7 @@ brew "rustup-init"
 tap "tinted-theming/tinted"
 brew "tinty"
 
+brew "stats"
 cask "alacritty"
 cask "docker"
 cask "firefox"

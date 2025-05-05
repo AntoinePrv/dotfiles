@@ -1,4 +1,5 @@
 pixi global install --environment devutils \
+  ast-grep \
   bat \
   curl \
   fd-find \
