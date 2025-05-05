@@ -4,7 +4,13 @@ windows:
   - window_name: editor
     panes:
       - |
-        launcher=($(test -f pixi.lock && echo 'pixi run -e dev' || echo));
+        if pixi info | grep -i 'environment: lsp' 2>&1 > /dev/null; then
+          launcher=(pixi run -e lsp)
+        elif pixi info | grep -i 'environment: dev' 2>&1 > /dev/null; then
+          launcher=(pixi run -e dev)
+        else
+          launcher=()
+        fi
         ${launcher[@]} nvim --cmd 'let g:project="github.com/${PROJECT}"'
   - window_name: dev
     layout: main-vertical
