@@ -1,0 +1,16 @@
+[project]
+name = "dotfiles"
+version = "0.1.0"
+description = "AntoinePrv personal configurations"
+channels = ["https://fast.prefix.dev/conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+[environments]
+default = { features=[], solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }
+
+[feature.dev.dependencies]
+bash-language-server = "*"
+# TODO: package on conda-forge
+# lua-language-server = "*"
+
