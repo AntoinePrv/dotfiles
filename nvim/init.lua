@@ -21,7 +21,6 @@ require("packer").startup({
         use("ton/vim-bufsurf")
         use("nvimdev/hlsearch.nvim")
         use("drzel/vim-scrolloff-fraction")
-        use("gbprod/yanky.nvim")
 
         -- Colors themes
         -- TODO consider echasnovski/mini.base16 when migrated to neovim 0.10
