@@ -212,6 +212,10 @@ function load {
 	execute tmuxp load --yes gh
 }
 
+function attach {
+	execute tmux attach
+}
+
 
 #############
 #  Parsing  #
@@ -284,6 +288,10 @@ function parse_cmd {
 				cmd="init"
 				shift
 				;;
+			attach)
+				cmd="attach"
+				shift
+				;;
 			*/*/*)
 				set_option provider "$(basename "$(dirname "$(dirname "${1}")")")"
 				set_option org "$(basename "$(dirname "${1}")")"
@@ -320,7 +328,11 @@ function run_main {
 	parse_options "$@"
 
 	# The command being executed
-	local cmd="load"
+	if [[ -z "${positional[@]}" ]]; then
+		local cmd="attach"
+	else
+		local cmd="load"
+	fi
 
 	# Parse the argument to the command
 	parse_cmd "${positional[@]}"
