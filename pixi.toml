@@ -11,6 +11,10 @@ dev = { features = ["dev"], solve-group = "default" }
 
 [feature.dev.dependencies]
 bash-language-server = "*"
+stylua = "*"
 # TODO: package on conda-forge
 # lua-language-server = "*"
+
+[feature.dev.tasks]
+fmt-stylua = "stylua nvim/"
 

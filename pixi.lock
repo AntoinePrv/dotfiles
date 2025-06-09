@@ -23,6 +23,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libzlib-1.3.1-hb9d3cd8_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/nodejs-22.13.0-hf235a45_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/openssl-3.5.0-h7b32b05_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/stylua-2.1.0-h6c30b3d_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zlib-1.3.1-hb9d3cd8_2.conda
       osx-arm64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/bash-language-server-5.6.0-hede6621_0.conda
@@ -33,6 +34,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libzlib-1.3.1-h8359307_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/nodejs-22.13.0-h02a13b7_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/openssl-3.5.0-h81ee809_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/stylua-2.1.0-h8dba533_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zlib-1.3.1-h8359307_2.conda
 packages:
 - conda: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
@@ -264,6 +266,31 @@ packages:
   license_family: Apache
   size: 3067649
   timestamp: 1744132084304
+- conda: https://conda.anaconda.org/conda-forge/linux-64/stylua-2.1.0-h6c30b3d_0.conda
+  sha256: d50285c69827573bd960f757d1da33ed982b2bf33e967410cf79c10895d6809c
+  md5: 1f99189f0b58bc24b522434b630e21bf
+  depends:
+  - libgcc >=13
+  - __glibc >=2.17,<3.0.a0
+  constrains:
+  - __glibc >=2.17
+  channel: https://fast.prefix.dev/conda-forge
+  license: MPL-2.0
+  license_family: MOZILLA
+  size: 1847127
+  timestamp: 1745275363825
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/stylua-2.1.0-h8dba533_0.conda
+  sha256: ca0d8a842e97429ee9b0f47f004e1658f474a90b726d0eec8b4bab49c80306d7
+  md5: 90eac5ce1b8196e8d495a23b3cd34108
+  depends:
+  - __osx >=11.0
+  constrains:
+  - __osx >=11.0
+  channel: https://fast.prefix.dev/conda-forge
+  license: MPL-2.0
+  license_family: MOZILLA
+  size: 1674778
+  timestamp: 1745275423490
 - conda: https://conda.anaconda.org/conda-forge/linux-64/zlib-1.3.1-hb9d3cd8_2.conda
   sha256: 5d7c0e5f0005f74112a34a7425179f4eb6e73c92f5d109e6af4ddeca407c92ab
   md5: c9f075ab2f33b3bbee9e62d4ad0a6cd8
