@@ -11,10 +11,10 @@ require("nvim-treesitter.configs").setup({
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = "v]",   -- Intuitively a "visual" mode
+            init_selection = "v]", -- Intuitively a "visual" mode
             scope_incremental = "]",
-            node_incremental = "=",  -- Key for +
-            node_decremental = "-",  -- Key for -
+            node_incremental = "=", -- Key for +
+            node_decremental = "-", -- Key for -
         },
     },
 
@@ -27,6 +27,8 @@ require("nvim-treesitter.configs").setup({
             keymaps = {
                 ["ip"] = { query = "@parameter.inner", desc = "Select inner part of a parameter." },
                 ["ap"] = { query = "@parameter.outer", desc = "Select outter part of a parameter." },
+                ["ir"] = { query = "@return.inner", desc = "Select inner part of a return." },
+                ["ar"] = { query = "@return.outer", desc = "Select outter part of a return." },
                 ["ib"] = { query = "@block.inner", desc = "Select inner part of a block." },
                 ["ab"] = { query = "@block.outer", desc = "Select outter part of a block." },
                 ["if"] = { query = "@function.inner", desc = "Select inner part of a function." },
@@ -34,21 +36,30 @@ require("nvim-treesitter.configs").setup({
                 ["ic"] = { query = "@class.inner", desc = "Select inner part of a class." },
                 ["ac"] = { query = "@class.outter", desc = "Select outter part of a class." },
                 ["a/"] = { query = "@comment.outer", desc = "Select outter part of a comment." },
+                ["as"] = { query = "@statement.outer", desc = "Select outter part of a statement." },
             },
             selection_modes = {
                 -- charwise v
                 ["@parameter.inner"] = "v",
                 ["@parameter.outer"] = "v",
                 -- linewise V
+                ["@return.inner"] = "V",
+                ["@return.outer"] = "V",
                 ["@block.inner"] = "V",
                 ["@block.outer"] = "V",
                 ["@function.inner"] = "V",
                 ["@function.outer"] = "V",
                 ["@class.inner"] = "V",
                 ["@class.outer"] = "V",
+                ["@statement.outer"] = "V",
                 -- blockwise <c-v>
             },
             include_surrounding_whitespace = false,
+        },
+        swap = {
+            enable = true,
+            swap_next = { ["<leader>."] = "@parameter.inner" }, -- Key for >
+            swap_previous = { ["<leader>,"] = "@parameter.inner" }, -- Key for <
         },
         move = {
             enable = true,
