@@ -360,20 +360,30 @@ nvim_lsp.rust_analyzer.setup({
 -----------------------------
 
 -- TODO refactor to use same symbols table with lualine
-local signs = {
-    DiagnosticSignError = "",
-    DiagnosticSignWarn = "",
-    DiagnosticSignInfo = "",
-    DiagnosticSignHint = "",
-}
-for name, symbol in pairs(signs) do
-    vim.fn.sign_define(name, { texthl = name, text = symbol, numhl = "" })
-end
-
 vim.diagnostic.config({
     virtual_text = false,
     underline = true,
     severity_sort = true,
+    signs = {
+       text = {
+          [vim.diagnostic.severity.ERROR] = "",
+          [vim.diagnostic.severity.WARN] =  "",
+          [vim.diagnostic.severity.INFO] = "",
+          [vim.diagnostic.severity.HINT] = "",
+       },
+       texthl = {
+          [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+          [vim.diagnostic.severity.WARN] =  "DiagnosticSignWarn",
+          [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+          [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+       },
+       numhl = {
+          [vim.diagnostic.severity.ERROR] = "",
+          [vim.diagnostic.severity.WARN] =  "",
+          [vim.diagnostic.severity.INFO] = "",
+          [vim.diagnostic.severity.HINT] = "",
+       },
+    },
 })
 
 -- Show line diagnostics automatically in hover window
