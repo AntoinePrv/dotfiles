@@ -2,6 +2,7 @@
 local packer_url = "https://github.com/wbthomason/packer.nvim"
 local packer_dir = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
+local packer_bootstrap
 if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
     packer_bootstrap = vim.fn.system({ "git", "clone", "--depth", "1", packer_url, packer_dir })
     vim.cmd([[packadd packer.nvim]])
@@ -28,7 +29,7 @@ require("packer").startup({
             -- "tinted-theming/base16-vim"
             -- https://github.com/tinted-theming/base16-vim/pull/82 but missing rerender
             "AntoinePrv/fork-tinted-theming-base16-vim",
-            branch = "nvim-0.10-rendered"
+            branch = "nvim-0.10-rendered",
         })
 
         -- Visual
@@ -55,7 +56,7 @@ require("packer").startup({
         use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
         use("nvim-treesitter/nvim-treesitter-textobjects")
         use("rbberger/vim-singularity-syntax")
-        use({"neovim/nvim-lspconfig", tag = "v2.0.0"})
+        use({ "neovim/nvim-lspconfig", tag = "v2.0.0" })
         use("hrsh7th/cmp-nvim-lsp")
         use("hrsh7th/cmp-nvim-lsp-signature-help")
         use("hrsh7th/cmp-buffer")
