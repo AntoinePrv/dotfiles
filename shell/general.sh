@@ -33,6 +33,7 @@ export USER_TINTED_THEMING_DIR="${XDG_DATA_HOME}/tinted-theming"
 
 export BASE16_LIGHT_THEME="base16-humanoid-light"
 export BASE16_DARK_THEME="base16-humanoid-dark"
+export BASE16_SHELL_SET_BACKGROUND="true"
 
 
 function set_theme () {
