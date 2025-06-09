@@ -24,3 +24,4 @@ pixi global install --environment datascience \
 pixi global install --environment conda-forge \
   conda-smithy \
   rattler-build \
+  conda-recipe-manager \
