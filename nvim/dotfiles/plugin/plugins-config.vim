@@ -113,4 +113,54 @@ require("statuscol").setup({
 	}
 })
 
+
+require("render-markdown").setup({
+    file_types = { "markdown", "codecompanion" },
+})
+
+-- Only needed to authenticate copilot, needs nodejs
+-- Maybe vendor :Copilot auth
+-- require("copilot").setup({
+--     panel = { enabled = false },
+--     suggestion = { enabled = false },
+-- })
+
+require("codecompanion").setup({
+  strategies = {
+    chat = {
+      adapter = "copilot",
+       keymaps = {
+        send = {
+          modes = { n = "<CR>" },
+          opts = {},
+        },
+        close = {
+          modes = { n = "<ESC>"},
+          opts = {},
+        },
+       },
+    },
+    inline = {
+      adapter = "copilot",
+    },
+    cmd = {
+      adapter = "copilot",
+    }
+  },
+  display = {
+    action_palette = {
+      width = 95,
+      height = 10,
+      provider = "telescope",
+      opts = {
+        show_default_actions = true,
+        show_default_prompt_library = true,
+      },
+    },
+    chat = {
+	show_header_separator = true,
+    },
+  },
+})
+
 EOF

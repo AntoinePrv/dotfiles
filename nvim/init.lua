@@ -47,6 +47,10 @@ require("packer").startup({
         use("lukas-reineke/indent-blankline.nvim")
         use("lukas-reineke/virt-column.nvim")
         use("luukvbaal/statuscol.nvim")
+        use({
+            "MeanderingProgrammer/render-markdown.nvim",
+            requires = { "nvim-tree/nvim-web-devicons", opt = true },
+        })
 
         -- Git support
         use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
@@ -69,6 +73,16 @@ require("packer").startup({
         use("b0o/schemastore.nvim")
         use("windwp/nvim-autopairs")
         use("windwp/nvim-ts-autotag")
+
+        -- AI
+        use({ "zbirenbaum/copilot.lua" }) -- For authenticating
+        use({
+            "olimorris/codecompanion.nvim",
+            requires = {
+                "nvim-lua/plenary.nvim",
+                "nvim-treesitter/nvim-treesitter",
+            },
+        })
 
         -- Telescope and other Windows
         use({
