@@ -12,10 +12,30 @@ $jobs\
 [ ](fg:prev_bg)
 """
 
+palette = "base16"
+
+[palettes.base16]
+base00 = "00"
+base01 = "18"  # Base16-shell
+base02 = "19"  # Base16-shell
+base03 = "08"
+base04 = "20"  # Base16-shell
+base05 = "07"
+base06 = "21"  # Base16-shell
+base07 = "15"
+base08 = "01"
+base09 = "16"  # Base16-shell
+base0a = "03"
+base0b = "02"
+base0c = "06"
+base0d = "04"
+base0e = "05"
+base0f = "17"  # Base16-shell
+
 [directory]
 disabled = false
 format = "[ ]($style fg:prev_bg)[$path]($style)[$readonly]($style)[ ]($style)"
-style = "fg:white bg:blue"
+style = "fg:base00 bg:base0d"
 truncation_length = 3
 truncate_to_repo = false
 truncation_symbol = "…/"
