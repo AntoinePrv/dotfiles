@@ -1,7 +1,7 @@
 local telescope = require("telescope")
 local telescope_actions = require("telescope.actions")
 local telescope_builtin = require("telescope.builtin")
-local telescope_themes = require("telescope.themes")
+local lga_actions = require("telescope-live-grep-args.actions")
 
 telescope.setup({
     defaults = {
@@ -32,10 +32,26 @@ telescope.setup({
                 results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
             },
         },
+        live_grep_args = {
+            auto_quoting = true,
+            mappings = {
+                i = {
+                    ["<C-k>"] = lga_actions.quote_prompt(),
+                    ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                    -- freeze the current list and start a fuzzy search in the frozen list
+                    ["<C-f>"] = lga_actions.to_fuzzy_refine,
+                },
+            },
+        },
+        ast_grep = {
+            command = { "sg", "--json=stream" },
+            grep_open_files = false,
+            lang = nil,
+        },
     },
 })
 
-function alternate_files()
+local function alternate_files()
     telescope_builtin.git_files({
         show_untracked = true,
         default_text = vim.fn.expand("%:t:r"):gsub("-", ""):gsub("_", ""):gsub("test", ""),
@@ -48,14 +64,16 @@ end, {})
 vim.keymap.set("n", "g*", telescope_builtin.grep_string, {})
 vim.keymap.set("n", "g/", telescope_builtin.current_buffer_fuzzy_find, {})
 vim.keymap.set("n", "gg", telescope_builtin.live_grep, {})
+vim.keymap.set("n", "gk", telescope.extensions.live_grep_args.live_grep_args, {})
+vim.keymap.set("n", "ga", telescope.extensions.ast_grep.ast_grep, {})
 vim.keymap.set("n", "gb", telescope_builtin.buffers, {})
 vim.keymap.set("n", "gh", telescope_builtin.help_tags, {})
 vim.keymap.set("n", "gm", telescope_builtin.marks, {})
 vim.keymap.set("n", "gc", telescope_builtin.quickfix, {})
 vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, {})
 vim.keymap.set("n", "gi", telescope_builtin.lsp_implementations, {})
-vim.keymap.set("n", "g,", telescope_builtin.lsp_incoming_calls, {})  -- Key for <
-vim.keymap.set("n", "g.", telescope_builtin.lsp_outgoing_calls, {})  -- Key for >
+vim.keymap.set("n", "g,", telescope_builtin.lsp_incoming_calls, {}) -- Key for <
+vim.keymap.set("n", "g.", telescope_builtin.lsp_outgoing_calls, {}) -- Key for >
 vim.keymap.set("n", "gt", telescope_builtin.lsp_type_definitions, {})
 vim.keymap.set("n", "gr", telescope_builtin.lsp_references, {})
 vim.keymap.set("n", "gs", telescope_builtin.lsp_document_symbols, {})
@@ -92,6 +110,9 @@ require("dressing").setup({
             list = true,
             listchars = "precedes:…,extends:…",
             sidescrolloff = 0,
+            winhighlight = "FloatBorder:TelescopePromptBorder"
+                .. ",FloatTitle:TelescopePromptTitle"
+                .. ",NormalFloat:TelescopePromptNormal",
         },
         mappings = {
             n = {
@@ -109,11 +130,6 @@ require("dressing").setup({
                 ["<Down>"] = "HistoryNext",
             },
         },
-        win_options = {
-            winhighlight = "FloatBorder:TelescopePromptBorder"
-                .. ",FloatTitle:TelescopePromptTitle"
-                .. ",NormalFloat:TelescopePromptNormal",
-        },
         override = function(config)
             -- Strip last space and colon from potential title
             config.title = config.title:match("(.-):?%s*$") .. " "
@@ -128,10 +144,11 @@ require("dressing").setup({
 -- TODO archived, use snacks.nvim
 telescope.load_extension("ui-select")
 
+-- Live grep with arguments
+telescope.load_extension("live_grep_args")
 
 -- Use yanky as a yank history selector only
 local yanky_mapping = require("yanky.telescope.mapping")
-local yanky_utils = require("yanky.utils")
 
 telescope.load_extension("yank_history")
 
@@ -149,22 +166,12 @@ local function create_yank_history_default(action_function)
     return function()
         telescope.extensions.yank_history.yank_history({
             attach_mappings = function(_, map)
-                map({"i", "n"}, "<CR>", yanky_mapping.put("p"))
+                map({ "i", "n" }, "<CR>", yanky_mapping.put("p"))
                 return true
-            end
+            end,
         })
     end
 end
 
-vim.keymap.set(
-    {"n", "x"},
-    "<leader>p",
-    create_yank_history_default(yanky_mapping.put("p")),
-    {}
-)
-vim.keymap.set(
-    {"n", "x"},
-    "<leader>P",
-    create_yank_history_default(yanky_mapping.put("P")),
-    {}
-)
+vim.keymap.set({ "n", "x" }, "<leader>p", create_yank_history_default(yanky_mapping.put("p")), {})
+vim.keymap.set({ "n", "x" }, "<leader>P", create_yank_history_default(yanky_mapping.put("P")), {})

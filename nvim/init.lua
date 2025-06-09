@@ -91,6 +91,9 @@ require("packer").startup({
             requires = { { "nvim-lua/plenary.nvim" }, { "nvim-tree/nvim-web-devicons" } },
         })
         use("nvim-telescope/telescope-ui-select.nvim")
+        use("nvim-telescope/telescope-live-grep-args.nvim")
+        use("Marskey/telescope-sg")
+        use("gbprod/yanky.nvim")
         -- TODO archived, use snacks.nvim
         use("stevearc/dressing.nvim")
 
