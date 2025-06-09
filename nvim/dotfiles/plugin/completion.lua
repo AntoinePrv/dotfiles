@@ -46,9 +46,7 @@ local cmp_sources = {
 -- Check whether there are words before the cursor
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0
-        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s")
-        == nil
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 -- Call a given key in Nvim
@@ -204,14 +202,16 @@ end
 
 local nvim_lsp = require("lspconfig")
 
-
 local function merge_tables(a, b)
     local merged = {}
-    for k, v in pairs(b) do merged[k] = v end
-    for k, v in pairs(a) do merged[k] = v end
+    for k, v in pairs(b) do
+        merged[k] = v
+    end
+    for k, v in pairs(a) do
+        merged[k] = v
+    end
     return merged
 end
-
 
 -- Fetch lsp completion source
 local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -228,7 +228,8 @@ local server_setup = {
 -- :help lspconfig-server-configurations for LSP servers.
 local servers = {
     -- Ruff does not provide completion
-    "ruff", "pylsp",
+    "ruff",
+    "pylsp",
     -- Clangd cmake for C/C++
     "clangd",
     -- vscode-langservers-extracted
@@ -238,68 +239,52 @@ for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup(server_setup)
 end
 
-nvim_lsp.clangd.setup(
-    merge_tables(
-        server_setup,
-        {
-            cmd = {
-                "clangd",
-                "--all-scopes-completion",
-                "--clang-tidy",
-                "--background-index",
-                "--header-insertion=iwyu",
-                "--function-arg-placeholders",
+nvim_lsp.clangd.setup(merge_tables(server_setup, {
+    cmd = {
+        "clangd",
+        "--all-scopes-completion",
+        "--clang-tidy",
+        "--background-index",
+        "--header-insertion=iwyu",
+        "--function-arg-placeholders",
+    },
+}))
+
+nvim_lsp.neocmake.setup(merge_tables(server_setup, {
+    init_options = {
+        format = { enable = true },
+        lint = { enable = true },
+    },
+}))
+
+nvim_lsp.lua_ls.setup(merge_tables(server_setup, {
+    on_init = function(client)
+        if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if
+                (path ~= vim.fn.stdpath("config"))
+                and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+            then
+                return
+            end
+        end
+
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+            runtime = {
+                version = "LuaJIT",
             },
-        }
-    )
-)
-
-nvim_lsp.neocmake.setup(
-    merge_tables(
-        server_setup,
-        {
-            init_options = {
-                format = { enable = true },
-                lint = { enable = true },
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                },
             },
-        }
-    )
-)
-
-nvim_lsp.lua_ls.setup(
-    merge_tables(
-        server_setup,
-        {
-            on_init = function(client)
-                if client.workspace_folders then
-                    local path = client.workspace_folders[1].name
-                    if (
-                            (path ~= vim.fn.stdpath('config'))
-                            and (vim.uv.fs_stat(path .. '/.luarc.json')
-                                or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
-                        ) then
-                        return
-                    end
-                end
-
-                client.config.settings.Lua = vim.tbl_deep_extend(
-                    "force",
-                    client.config.settings.Lua, {
-                        runtime = {
-                            version = "LuaJIT"
-                        },
-                        workspace = {
-                            checkThirdParty = false,
-                            library = {
-                                vim.env.VIMRUNTIME
-                            }
-                        }
-                    })
-            end,
-            settings = {
-                Lua = {}
-            }
-        }))
+        })
+    end,
+    settings = {
+        Lua = {},
+    },
+}))
 
 if vim.fn.executable("typos-lsp") == 1 then
     nvim_lsp.typos_lsp.setup(server_setup)
@@ -307,49 +292,33 @@ end
 
 -- typescript-language-server typescript
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
-nvim_lsp.ts_ls.setup(
-    merge_tables(
-        server_setup,
-        {
-            cmd = { "npx", "--no-install", "typescript-language-server", "--stdio" },
-            root_dir = nvim_lsp.util.root_pattern("tsconfig.json", "package.json")
-        }
-    )
-)
+nvim_lsp.ts_ls.setup(merge_tables(server_setup, {
+    cmd = { "npx", "--no-install", "typescript-language-server", "--stdio" },
+    root_dir = nvim_lsp.util.root_pattern("tsconfig.json", "package.json"),
+}))
 
 -- @tailwindcss/language-server
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
 nvim_lsp.tailwindcss.setup(
-    merge_tables(
-        server_setup,
-        { cmd = { "npx", "--no-install", "tailwindcss-language-server", "--stdio" } }
-    )
+    merge_tables(server_setup, { cmd = { "npx", "--no-install", "tailwindcss-language-server", "--stdio" } })
 )
 
 -- vscode-langservers-extracted
 
 -- @biomejs/biome
 nvim_lsp.biome.setup(
-    merge_tables(
-        server_setup,
-        { root_dir = nvim_lsp.util.root_pattern('biome.json', 'biome.jsonc', "package.json") }
-    )
+    merge_tables(server_setup, { root_dir = nvim_lsp.util.root_pattern("biome.json", "biome.jsonc", "package.json") })
 )
 
 -- vscode-langservers-extracted
-nvim_lsp.jsonls.setup(
-    merge_tables(
-        server_setup,
-        {
-            settings = {
-                json = {
-                    schemas = require('schemastore').json.schemas(),
-                    validate = { enable = true },
-                },
-            },
-        }
-    )
-)
+nvim_lsp.jsonls.setup(merge_tables(server_setup, {
+    settings = {
+        json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+        },
+    },
+}))
 
 nvim_lsp.rust_analyzer.setup({
     on_attach = on_attach,
@@ -365,24 +334,24 @@ vim.diagnostic.config({
     underline = true,
     severity_sort = true,
     signs = {
-       text = {
-          [vim.diagnostic.severity.ERROR] = "",
-          [vim.diagnostic.severity.WARN] =  "",
-          [vim.diagnostic.severity.INFO] = "",
-          [vim.diagnostic.severity.HINT] = "",
-       },
-       texthl = {
-          [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-          [vim.diagnostic.severity.WARN] =  "DiagnosticSignWarn",
-          [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-          [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-       },
-       numhl = {
-          [vim.diagnostic.severity.ERROR] = "",
-          [vim.diagnostic.severity.WARN] =  "",
-          [vim.diagnostic.severity.INFO] = "",
-          [vim.diagnostic.severity.HINT] = "",
-       },
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "",
+        },
+        texthl = {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+            [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+        },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "",
+        },
     },
 })
 
