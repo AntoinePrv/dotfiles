@@ -8,6 +8,7 @@ pixi global install --environment devutils \
   git \
   htop \
   jq \
+  nvim \
   ripgrep \
   starship \
   tmux \
