@@ -6,6 +6,7 @@ pixi global install --environment devutils \
   fzf \
   gh \
   git \
+  git-lfs \
   htop \
   jq \
   nvim \
@@ -16,11 +17,12 @@ pixi global install --environment devutils \
   tree \
   wget \
 
-pixi global install --environment datascience \
-  python \
+pix global install --environment datascience \
   jupyter \
-  polars \
   pandas \
+  polars \
+  python \
+  seaborn \
 
 pixi global install --environment conda-forge \
   conda-smithy \
