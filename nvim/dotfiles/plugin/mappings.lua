@@ -12,11 +12,16 @@ vim.keymap.set({ "n", "v" }, "<space>", "<leader>", { remap = true })
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit inster mode" })
 
 -- Usual expected bindings
+-- Save
 vim.keymap.set("n", "<C-S>", ":wa<CR>", { silent = true, desc = "Save all buffers" })
+-- Clipboard
 vim.keymap.set({ "n", "v" }, "<C-V>", "i<C-r><C-p>*<Esc>", { silent = true, desc = "Paste form clipboard" })
 vim.keymap.set("i", "<C-V>", "<C-r><C-p>*", { silent = true, desc = "Paste form clipboard" })
 vim.keymap.set("v", "<C-c>", '"*y', { silent = true, desc = "Copy to clipboard" })
 vim.keymap.set("v", "<C-x>", '"*d', { silent = true, desc = "Cut to clipboard" })
+-- Indent
+vim.keymap.set("v", "<Tab>", ">gv", { silent = true, desc = "Indent selection" })
+vim.keymap.set("v", "<S-Tab>", "<gv", { silent = true, desc = "Deindent selection" })
 
 -- Deactivated
 vim.keymap.set({ "n", "v" }, "q:", "<nop>", { desc = "Does not open command history buffer" })
