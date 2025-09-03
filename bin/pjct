@@ -206,7 +206,9 @@ function load {
 	# May be provider specific
 	# TODO the file tmuxp file could be reused
 	local -r dir="${workspace}/${provider}/${org}/${repo}"
-	execute git -C "${dir}" fetch --prune --all
+	git -C "${dir}" remote | grep -E '(origin|upstream)' | while IFS="" read -r remote; do
+		execute git -C "${dir}" fetch --prune --tags "${remote}"
+	done
 	export PROJECT_NAME="${org//./_}/${repo//./_}"
 	export PROJECT="${org}/${repo}"
 	execute tmuxp load --yes gh
