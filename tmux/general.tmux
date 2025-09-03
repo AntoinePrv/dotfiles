@@ -67,6 +67,8 @@ set -s copy-command 'clipboard copy'
 # Set the mouse in Tmux selection to only select but not copy
 bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X end-selection
 
+# Leave with escape
+bind -T copy-mode-vi Escape send-keys -X cancel
 # Setup 'v' to begin selection as in Vim
 bind -T copy-mode-vi v send-keys -X begin-selection
 # Setup 'y' and Ctrl-C to yank (copy) selection
