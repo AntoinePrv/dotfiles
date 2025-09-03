@@ -112,6 +112,12 @@ export JUPYTERLAB_WORKSPACES_DIR="${XDG_DATA_HOME}/jupyter/lab/workspaces"
 export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
 export SCCACHE_DIR="${XDG_CACHE_HOME}/sccache"
 
+# MyPy
+export MYPY_CACHE_DIR="${XDG_CACHE_HOME}/mypy"
+
+# Ruff
+export RUFF_CACHE_DIR="${XDG_CACHE_HOME}/ruff"
+
 # Conan cache directory
 export CONAN_USER_HOME="${XDG_CACHE_HOME}/conan"
 
