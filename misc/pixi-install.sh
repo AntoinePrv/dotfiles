@@ -9,12 +9,14 @@ pixi global install --environment devutils \
   git-lfs \
   htop \
   jq \
-  nvim \
+  nvim'>=0.11' \
   ripgrep \
   starship \
   tmux \
   tmuxp \
   tree \
+  watch \
+  watchexec \
   wget \
 
 pix global install --environment datascience \
