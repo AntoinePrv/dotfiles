@@ -19,10 +19,11 @@ pixi global install --environment devutils \
   watchexec \
   wget \
 
-pix global install --environment datascience \
+pixi global install --environment datascience \
   jupyter \
   pandas \
   polars \
+  pyarrow \
   python \
   seaborn \
 
