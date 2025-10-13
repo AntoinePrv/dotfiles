@@ -104,11 +104,11 @@ class FilesInstall(Action):
         self.dest = dest
         self.hardlink = hardlink
 
-    def _link(self, from: pathlib.Path, to: pathlib.Path) -> None:
+    def _link(self, frm: pathlib.Path, to: pathlib.Path) -> None:
         if self.hardlink:
-            to.hardlink_to(from)
+            to.hardlink_to(frm)
         else:
-            to.symlink_to(from)
+            to.symlink_to(frm)
 
     def exists(self) -> bool:
         """Return wether the installation target already exists."""
@@ -127,10 +127,10 @@ class FilesInstall(Action):
                 if source_p.is_dir():
                     dest_p.mkdir(parents=True)
                 else:
-                    self._link(from=source_p, to=dest_p)
+                    self._link(frm=source_p, to=dest_p)
         else:
             self.dest.parent.mkdir(parents=True, exist_ok=True)
-            self._link(from=self.source, to=self.dest)
+            self._link(frm=self.source, to=self.dest)
 
 
 def run_nvim_cmd(*cmds: str) -> None:
