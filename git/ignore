@@ -14,6 +14,7 @@
 
 # Jupyter
 Untitled*.ipynb
+.virtual_documents/
 
 # Python
 __pycache__/
