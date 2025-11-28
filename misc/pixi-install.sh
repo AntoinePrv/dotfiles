@@ -9,6 +9,7 @@ pixi global install --environment devutils \
   git-lfs \
   htop \
   jq \
+  mosh \
   nvim'>=0.11' \
   ripgrep \
   starship \
