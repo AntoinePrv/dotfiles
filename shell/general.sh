@@ -67,6 +67,10 @@ if ! {is-this tmux || is-this ssh}; then
 	# Start the ssh-agent if it is not started and track the socket.
 	# ssh-add is handled by the .ssh/config
 	eval "$(ssh-agent -s)" &> /dev/null
+	# Reset environment variable
+	export TERM=xterm-256color
+	export LANG=C.UTF-8
+	export LC_CTYPE=C.UTF-8
 fi
 
 # Fzf color
