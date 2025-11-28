@@ -247,6 +247,8 @@ nvim_lsp.clangd.setup(merge_tables(server_setup, {
         "--background-index",
         "--header-insertion=iwyu",
         "--function-arg-placeholders",
+        "--completion-style=detailed",
+        "--limit-results=1000000",
     },
 }))
 
