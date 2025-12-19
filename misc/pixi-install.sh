@@ -13,7 +13,7 @@ pixi global install --environment devutils \
   nvim'>=0.11' \
   ripgrep \
   starship \
-  tmux'!=3.6' \
+  tmux \
   tmuxp \
   tree \
   watch \
@@ -32,3 +32,4 @@ pixi global install --environment conda-forge \
   conda-smithy \
   rattler-build \
   conda-recipe-manager \
+  rattler-sandbox \
