@@ -12,6 +12,7 @@ brew "tinty"
 
 brew "stats"
 cask "alacritty"
+cask "claude-code"
 cask "docker"
 cask "firefox"
 cask "font-fira-code-nerd-font"
