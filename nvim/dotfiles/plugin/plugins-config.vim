@@ -129,6 +129,7 @@ require("codecompanion").setup({
   strategies = {
     chat = {
       adapter = "copilot",
+      model = "gpt-5-mini",
        keymaps = {
         send = {
           modes = { n = "<CR>" },
@@ -142,9 +143,11 @@ require("codecompanion").setup({
     },
     inline = {
       adapter = "copilot",
+      model = "gpt-5-mini",
     },
     cmd = {
       adapter = "copilot",
+      model = "gpt-5-mini",
     }
   },
   display = {
