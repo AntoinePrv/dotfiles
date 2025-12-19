@@ -65,3 +65,6 @@ compile_commands.json
 # CMake user files
 CMakeUserPresets.json
 CMakeProjectPresets.json  # A custom one
+
+# LLM tools
+**/.claude/
