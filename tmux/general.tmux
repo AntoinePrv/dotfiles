@@ -13,8 +13,8 @@ set -g default-shell "${SHELL}"
 # Mouse control
 set -g mouse on
 
-# Change prefix
-set -g prefix C-a
+# Change prefix to Ctrl-A, or Ctrl-B over SSH
+if-shell 'test -n "$SSH_CONNECTION"' 'set -g prefix C-b' 'set -g prefix C-a'
 
 # Start numbering at 1
 set -g base-index 1
