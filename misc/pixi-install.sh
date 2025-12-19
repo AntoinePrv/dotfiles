@@ -13,7 +13,7 @@ pixi global install --environment devutils \
   nvim'>=0.11' \
   ripgrep \
   starship \
-  tmux \
+  tmux!=3.6 \
   tmuxp \
   tree \
   watch \
