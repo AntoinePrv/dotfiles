@@ -154,7 +154,7 @@ telescope.load_extension("yank_history")
 
 require("yanky").setup({
     ring = {
-        history_length = 20,
+        history_length = 50,
     },
     highlight = {
         on_put = false,
