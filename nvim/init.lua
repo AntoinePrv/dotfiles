@@ -56,9 +56,9 @@ require("packer").startup({
         use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
         -- Completion and and syntax
-        -- Crashed cpp parser last update (?)
-        use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-        use("nvim-treesitter/nvim-treesitter-textobjects")
+        -- master is the legacy branch, should switch to main
+        use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", branch = "master"})
+        use({ "nvim-treesitter/nvim-treesitter-textobjects", branch = "master" })
         use("rbberger/vim-singularity-syntax")
         use({ "neovim/nvim-lspconfig", tag = "v2.0.0" })
         use("hrsh7th/cmp-nvim-lsp")
