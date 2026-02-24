@@ -1,4 +1,4 @@
-[project]
+[workspace]
 name = "dotfiles"
 version = "0.1.0"
 description = "AntoinePrv personal configurations"
