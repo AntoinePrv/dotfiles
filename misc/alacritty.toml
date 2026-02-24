@@ -13,6 +13,7 @@ family = "FiraCode Nerd Font"
 [keyboard]
 bindings = [
     { mods="Control", key="V",  action="Paste" },
+    { mods="Shift", key="Return",  chars="\u001b\r" },
 ]
 
 [mouse]
