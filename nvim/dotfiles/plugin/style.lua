@@ -26,23 +26,30 @@ vim.opt.foldlevelstart = 99
 -- Use full color scale
 vim.opt.termguicolors = true
 
+-- Watch a file for changes by watching the parent directory.
 local function simple_on_file_change(path, callback)
-    handle = vim.uv.new_fs_event()
+    local handle = vim.uv.new_fs_event()
     if not handle then
         return nil
     end
 
+    -- Watching the file directly fails when the file is atomically replaced (write
+    -- to tmp + rename) because fs_event watches the inode, not the path, so the
+    -- watch dies with the old inode.
+    local dir = vim.fn.fnamemodify(path, ":h")
+    local basename = vim.fn.fnamemodify(path, ":t")
+
     local flags = {
-        watch_entry = false, -- when dir, watch dir inode, not dir content
-        stat = false, -- don't use inotify/kqueue but periodic check
-        recursive = false, -- watch dirs inside dirs
+        watch_entry = false,
+        stat = false,
+        recursive = false,
     }
 
-    local event_cb = function(err, filename, events)
-        callback()
-    end
-
-    vim.uv.fs_event_start(handle, path, flags, vim.schedule_wrap(event_cb))
+    vim.uv.fs_event_start(handle, dir, flags, vim.schedule_wrap(function(err, filename, events)
+        if filename == basename then
+            callback()
+        end
+    end))
 
     return handle
 end
@@ -64,7 +71,7 @@ local function read_file_or_default(filename, default)
 end
 
 local function set_tinty_theme()
-    vim.cmd("colorscheme " .. read_file_or_default(tinty_path()))
+    vim.cmd("colorscheme " .. read_file_or_default(tinty_path(), ""))
 end
 
 function base16_gui(num)
