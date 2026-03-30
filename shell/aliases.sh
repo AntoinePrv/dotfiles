@@ -22,3 +22,34 @@ function docker-shell () {
 		--volume /var/run/docker.sock:/var/run/docker.sock \
 		"$@"
 }
+
+safe() {
+	# TODO how to set elsewhere for vim
+	# TODO nvimd wants XDG_DATA_HOME/nvim mutable
+	export XDG_STATE_HOME="${HOME}/.local/state"
+
+	safehouse \
+		--add-dirs-ro="${XDG_CONFIG_HOME}"  \
+		--env-pass "XDG_CONFIG_HOME" \
+		--add-dirs-ro="${XDG_DATA_HOME}"  \
+		--env-pass "XDG_DATA_HOME" \
+		--add-dirs-ro="${XDG_CACHE_HOME}"  \
+		--env-pass "XDG_CACHE_HOME" \
+		--add-dirs-ro="${WORKSPACE_DIR}"  \
+		--add-dirs="${XDG_STATE_HOME}"  \
+		--env-pass "XDG_STATE_HOME" \
+		--env-pass "EDITOR" \
+		"$@"
+}
+
+claude() {
+	export CLAUDE_CODE_TMPDIR="$(mktemp -d)"
+
+	safe \
+		--add-dirs "${CLAUDE_CODE_TMPDIR}" \
+		--env-pass "CLAUDE_CODE_TMPDIR" \
+		claude --dangerously-skip-permissions "$@"
+
+	rm -rf "${CLAUDE_CODE_TMPDIR}"
+	unset CLAUDE_CODE_TMPDIR
+}

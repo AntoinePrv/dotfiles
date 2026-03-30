@@ -6,6 +6,7 @@ brew "ghostscript"  # Pdf manip
 brew "mas"          # Mac App Store CLI
 brew "pixi"
 brew "rustup-init"
+brew "eugene1g/safehouse/agent-safehouse"
 
 tap "tinted-theming/tinted"
 brew "tinty"
