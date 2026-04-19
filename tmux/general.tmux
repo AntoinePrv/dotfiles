@@ -47,6 +47,27 @@ bind K run-shell "${HOME}/.config/tmux/tmux-utils.sh start-session"
 bind j run-shell "${HOME}/.config/tmux/tmux-utils.sh next-session"
 bind J run-shell "${HOME}/.config/tmux/tmux-utils.sh end-session"
 
+# Pane navigation with Ctrl+Option+hjkl (no prefix)
+bind -n C-M-h select-pane -L
+bind -n C-M-j select-pane -D
+bind -n C-M-k select-pane -U
+bind -n C-M-l select-pane -R
+
+# Window navigation with Ctrl+Option+Left/Right (no prefix)
+bind -n C-M-Left    select-window -t '{previous}'
+bind -n C-M-Right   select-window -t '{next}'
+bind -n C-M-S-Left  select-window -t '{start}'
+bind -n C-M-S-Right select-window -t '{end}'
+# With keys for (/)
+bind -n C-M-9    select-window -t '{previous}'
+bind -n C-M-0    select-window -t '{next}'
+
+# Session navigation with Ctrl+Option+Up/Down (no prefix)
+bind -n C-M-Up     run-shell "${HOME}/.config/tmux/tmux-utils.sh previous-session"
+bind -n C-M-S-Up   run-shell "${HOME}/.config/tmux/tmux-utils.sh start-session"
+bind -n C-M-Down   run-shell "${HOME}/.config/tmux/tmux-utils.sh next-session"
+bind -n C-M-S-Down run-shell "${HOME}/.config/tmux/tmux-utils.sh end-session"
+
 # Maximize
 unbind z
 bind m resize-pane -Z
@@ -57,6 +78,9 @@ bind R command-prompt -I "#S" "rename-session -- '%%'"
 # Kill the current window
 unbind &
 bind q kill-window
+
+# Extended keys for CSI u sequences (e.g. C-M-9, C-M-0)
+set -g extended-keys on
 
 # Vim mode
 setw -g mode-keys vi

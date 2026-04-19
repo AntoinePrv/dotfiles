@@ -14,6 +14,22 @@ family = "FiraCode Nerd Font"
 bindings = [
     { mods="Control", key="V",  action="Paste" },
     { mods="Shift", key="Return",  chars="\u001b\r" },
+    { mods="Control|Alt", key="H", chars="\u001b\u0008" },
+    { mods="Control|Alt", key="J", chars="\u001b\u000a" },
+    { mods="Control|Alt", key="K", chars="\u001b\u000b" },
+    { mods="Control|Alt", key="L", chars="\u001b\u000c" },
+    { mods="Control", key="0", chars="\u001b[48;5u" },
+    { mods="Control", key="1", chars="\u001b[49;5u" },
+    { mods="Control", key="2", chars="\u001b[50;5u" },
+    { mods="Control", key="3", chars="\u001b[51;5u" },
+    { mods="Control", key="4", chars="\u001b[52;5u" },
+    { mods="Control", key="5", chars="\u001b[53;5u" },
+    { mods="Control", key="6", chars="\u001b[54;5u" },
+    { mods="Control", key="7", chars="\u001b[55;5u" },
+    { mods="Control", key="8", chars="\u001b[56;5u" },
+    { mods="Control", key="9", chars="\u001b[57;5u" },
+    { mods="Control|Alt", key="9", chars="\u001b[57;7u" },
+    { mods="Control|Alt", key="0", chars="\u001b[48;7u" },
 ]
 
 [mouse]

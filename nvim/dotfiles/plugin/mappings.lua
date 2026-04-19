@@ -37,9 +37,17 @@ vim.keymap.set({ "n", "v" }, "<leader>j", "J", { desc = "Join lines" })
 vim.keymap.set({ "n", "v" }, "<leader>u", "gu", { desc = "Change text to lowercase" })
 vim.keymap.set({ "n", "v" }, "<leader>U", "gU", { desc = "Change text to uppercase" })
 
+-- Pane
+vim.keymap.set("n", "<C-H>", "<C-W>h", { desc = "Move to left pane", silent = true })
+vim.keymap.set("n", "<C-J>", "<C-W>j", { desc = "Move to lower pane", silent = true })
+vim.keymap.set("n", "<C-K>", "<C-W>k", { desc = "Move to upper pane", silent = true })
+vim.keymap.set("n", "<C-L>", "<C-W>l", { desc = "Move to right pane", silent = true })
 -- Windows
 vim.keymap.set("n", "<C-W>-", ":split<CR>", { desc = "Make a vertical split", silent = true })
 vim.keymap.set("n", "<C-W><Bslash>", ":vsplit<CR>", { desc = "Make an horizontal split", silent = true })
+-- Tab navigation (keys for parentheses)
+vim.keymap.set("n", "<C-9>", ":tabprevious<CR>", { desc = "Previous tab", silent = true })
+vim.keymap.set("n", "<C-0>", ":tabnext<CR>", { desc = "Next tab", silent = true })
 
 -- Visual mode
 vim.keymap.set({ "n", "v" }, "v-", "V", { desc = "Enter Visual Line mode" })
