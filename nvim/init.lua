@@ -105,7 +105,6 @@ require("pckr").add({
     "stevearc/dressing.nvim",
 
     -- Tmux integration
-    "christoomey/vim-tmux-navigator",
     "tmux-plugins/vim-tmux-focus-events",
 
     -- Local files loaded with plugin manager

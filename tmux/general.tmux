@@ -28,11 +28,6 @@ bind \\ split-window -h -c "#{pane_current_path}"  # Key for | (escaped)
 # Navigates windows
 unbind n
 unbind p
-bind l      select-window -t '{next}'
-bind L      select-window -t '{end}'
-bind h      select-window -t '{previous}'
-bind H      select-window -t '{start}'
-bind BSpace select-window -t '{last}'
 
 # Create new window in current directory
 unbind c
@@ -42,10 +37,6 @@ bind n new-session -c "#{pane_current_path}"
 # Navigates sessions
 unbind (
 unbind )
-bind k run-shell "${HOME}/.config/tmux/tmux-utils.sh previous-session"
-bind K run-shell "${HOME}/.config/tmux/tmux-utils.sh start-session"
-bind j run-shell "${HOME}/.config/tmux/tmux-utils.sh next-session"
-bind J run-shell "${HOME}/.config/tmux/tmux-utils.sh end-session"
 
 # Pane navigation with Ctrl+Option+hjkl (no prefix)
 bind -n C-M-h select-pane -L

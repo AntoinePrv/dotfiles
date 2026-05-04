@@ -7,7 +7,6 @@ set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 
 # Vim tmux pane navigation
-set -g @plugin 'christoomey/vim-tmux-navigator'
 
 
 # Auto install tmux plugin manager in "${XDG_DATA_HOME}/tmux/tpm" and install plugins.
