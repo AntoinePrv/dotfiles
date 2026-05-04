@@ -7,7 +7,8 @@ themes-dir = "scripts"
 hook = "source %f"
 
 [[items]]
-name = "alacritty"
-path = "https://github.com/tinted-theming/tinted-alacritty/"
-themes-dir = "colors-256"
+name = "tinted-terminal"
+path = "https://github.com/tinted-theming/tinted-terminal"
+themes-dir = "themes/alacritty"
+supported-systems = ["base16", "base24"]
 hook = "cp %f ${XDG_CONFIG_HOME}/alacritty/colors.toml"
