@@ -7,8 +7,19 @@ themes-dir = "scripts"
 hook = "source %f"
 
 [[items]]
-name = "tinted-terminal"
+name = "tinted-terminal-alacritty"
 path = "https://github.com/tinted-theming/tinted-terminal"
 themes-dir = "themes/alacritty"
 supported-systems = ["base16", "base24"]
 hook = "cp %f ${XDG_CONFIG_HOME}/alacritty/colors.toml"
+
+[[items]]
+name = "tinted-terminal-ghostty"
+path = "https://github.com/tinted-theming/tinted-terminal"
+themes-dir = "themes/ghostty"
+supported-systems = ["base16", "base24"]
+hook = """
+mkdir -p ${XDG_CONFIG_HOME}/ghostty/themes
+command cp -f "${TINTY_THEME_FILE_PATH}" "${XDG_CONFIG_HOME}/ghostty/themes/tinted-theming"
+killall -SIGUSR2 ghostty 2>/dev/null || true
+"""
