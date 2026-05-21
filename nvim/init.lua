@@ -94,7 +94,7 @@ require("pckr").add({
     -- Telescope and other Windows
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
+        tag = "v0.2.1",
         requires = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
     },
     "nvim-telescope/telescope-ui-select.nvim",
