@@ -10,7 +10,22 @@ alias pst="clipboard paste"
 alias grep='grep --color=auto'
 type bat &> /dev/null && alias cat='bat'
 type nvim &> /dev/null && alias vim='nvim'
-alias git-tree='rg --files | tree --fromfile'
+function git-tree () {
+	local dir="."
+	if [[ -d "$1" ]]; then
+		dir="$1"
+		shift
+	fi
+	(
+		cd "${dir}" || return
+		if type git &> /dev/null && git rev-parse --is-inside-work-tree &> /dev/null; then
+			git ls-files --cached --others --exclude-standard | tree --fromfile "$@"
+		else
+			tree "$@"
+		fi
+	)
+}
+alias gtree='git-tree'
 
 alias tinty='tinty -d "${USER_TINTED_THEMING_DIR}" -c "${XDG_CONFIG_HOME}/misc/tinty.toml"'
 
