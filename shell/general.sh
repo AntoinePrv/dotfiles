@@ -82,64 +82,17 @@ export BAT_THEME='base16'
 # Use bat as man pager if available
 type -P bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-# Conda directories
-export CONDA_ENVS_DIRS="${XDG_DATA_HOME}/conda/envs"
-export CONDA_PKGS_DIRS="${XDG_CACHE_HOME}/conda/pkgs"
-export CONDA_BLD_PATH="${XDG_CACHE_HOME}/conda/build"
+source "${DIR}/isolation.sh"
+export_tool_storage_env \
+	"${XDG_CACHE_HOME}" "${XDG_CONFIG_HOME}" "${XDG_DATA_HOME}"
 
-# Pixi directories
-export PIXI_HOME="${XDG_DATA_HOME}/pixi"
-export PIXI_CACHE_DIR="${XDG_CACHE_HOME}/pixi"
-export RATTLER_CACHE_DIR="${XDG_CACHE_HOME}/rattler"
-
-# Mamba package and environments prefix
-export MAMBA_ROOT_PREFIX="${XDG_DATA_HOME}/mamba"
-
-# Tmuxp configuration directory
-export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"
-
-# Python tools
-export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/cpython"
-export WORKON_HOME="${XDG_DATA_HOME}/pipenv/venvs"
-export PIP_CACHE_DIR="${XDG_CACHE_HOME}/pip"
-export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
 if python3 -c 'import importlib.util as u; exit(u.find_spec("IPython") is None)' &> /dev/null ; then
 	export PYTHONBREAKPOINT="ipdb.set_trace"
 	export PYTEST_ADDOPTS="--pdbcls=IPython.core.debugger:Pdb"
 fi
 
-# JupyterLab directories
-export JUPYTERLAB_SETTINGS_DIR="${XDG_DATA_HOME}/jupyter"
-export JUPYTERLAB_WORKSPACES_DIR="${XDG_DATA_HOME}/jupyter/lab/workspaces"
-
-# CCache directory
-export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
-export SCCACHE_DIR="${XDG_CACHE_HOME}/sccache"
-
-# MyPy
-export MYPY_CACHE_DIR="${XDG_CACHE_HOME}/mypy"
-
-# Ruff
-export RUFF_CACHE_DIR="${XDG_CACHE_HOME}/ruff"
-
-# Conan cache directory
-export CONAN_USER_HOME="${XDG_CACHE_HOME}/conan"
-
-# GPG
-export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
-
-# Task
-export TASK_TEMP_DIR="${XDG_CACHE_HOME}/taskfile"
-
-# Cargo and rust tools
-export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
-export CARGO_HOME="${XDG_DATA_HOME}/cargo"
-
-# Npm
-export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
-
-# Playwright
-export PLAYWRIGHT_BROWSERS_PATH="${XDG_DATA_HOME}/playwright"
+# Tmuxp configuration directory (user-shell config, kept out of tool_storage_env)
+export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"
 
 export PATH="${CARGO_HOME}/bin:${PATH}"
 export PATH="${PIXI_HOME}/bin:${PATH}"

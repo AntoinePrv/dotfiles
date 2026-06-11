@@ -38,18 +38,22 @@ safe() {
 		--add-dirs-ro="${WORKSPACE_DIR}"  \
 		--add-dirs="${XDG_STATE_HOME}"  \
 		--env-pass "XDG_STATE_HOME" \
+		--env-pass "SCCACHE_DIR" \
 		--env-pass "EDITOR" \
 		"$@"
 }
 
 claude() {
-	export CLAUDE_CODE_TMPDIR="$(mktemp -d)"
+	brew upgrade claude-code@latest
 
-	safe \
-		--add-dirs "${CLAUDE_CODE_TMPDIR}" \
-		--env-pass "CLAUDE_CODE_TMPDIR" \
-		claude --dangerously-skip-permissions "$@"
+	CLAUDE_CODE_TMPDIR="$(mktemp -d)"
+	(
+		export CLAUDE_CODE_TMPDIR
+		call_safe "${XDG_CACHE_HOME}/claude" \
+			--add-dirs "${CLAUDE_CODE_TMPDIR}" \
+			--env-pass "CLAUDE_CODE_TMPDIR" \
+			claude --dangerously-skip-permissions "$@"
+	)
 
 	rm -rf "${CLAUDE_CODE_TMPDIR}"
-	unset CLAUDE_CODE_TMPDIR
 }
