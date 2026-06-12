@@ -16,6 +16,7 @@ pixi global install --environment devutils \
   tmux!=3.6 \
   tmuxp \
   tree \
+  tree-sitter-cli \
   watch \
   watchexec \
   wget \
@@ -33,3 +34,4 @@ pixi global install --environment conda-forge \
   rattler-build \
   conda-recipe-manager \
   rattler-sandbox \
+  micromamba=2.4 \

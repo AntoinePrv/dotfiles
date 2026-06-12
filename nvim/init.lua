@@ -62,9 +62,8 @@ require("pckr").add({
     { "lewis6991/gitsigns.nvim",                     requires = { "nvim-lua/plenary.nvim" } },
 
     -- Completion and syntax
-    -- master is the legacy branch, should switch to main
-    { "nvim-treesitter/nvim-treesitter",             run = ":TSUpdate",                     branch = "master" },
-    { "nvim-treesitter/nvim-treesitter-textobjects", branch = "master" },
+    { "nvim-treesitter/nvim-treesitter",             run = ":TSUpdate",                     branch = "main" },
+    { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
     "rbberger/vim-singularity-syntax",
     { "neovim/nvim-lspconfig", tag = "v2.0.0" },
     "hrsh7th/cmp-nvim-lsp",
