@@ -65,7 +65,7 @@ require("pckr").add({
     { "nvim-treesitter/nvim-treesitter",             run = ":TSUpdate",                     branch = "main" },
     { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
     "rbberger/vim-singularity-syntax",
-    { "neovim/nvim-lspconfig", tag = "v2.0.0" },
+    { "neovim/nvim-lspconfig", tag = "v2.10.0" },
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-buffer",

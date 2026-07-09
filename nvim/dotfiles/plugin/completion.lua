@@ -200,46 +200,21 @@ local on_attach = function(client, bufnr)
     end, opts)
 end
 
-local nvim_lsp = require("lspconfig")
-
-local function merge_tables(a, b)
-    local merged = {}
-    for k, v in pairs(b) do
-        merged[k] = v
-    end
-    for k, v in pairs(a) do
-        merged[k] = v
-    end
-    return merged
-end
-
 -- Fetch lsp completion source
 local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local server_setup = {
+-- Defaults merged into every server config (nvim-lspconfig ships the per-server
+-- `lsp/<name>.lua` definitions; we only customize and enable them here).
+vim.lsp.config("*", {
     on_attach = on_attach,
     flags = {
         debounce_text_changes = 150,
     },
     capabilities = capabilities,
-}
+})
 
--- Map buffer local keybindings when the language server attaches.
--- :help lspconfig-server-configurations for LSP servers.
-local servers = {
-    -- Ruff does not provide completion
-    "ruff",
-    "pylsp",
-    -- Clangd cmake for C/C++
-    "clangd",
-    -- vscode-langservers-extracted
-    -- "eslint", "cssls", "html",
-}
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup(server_setup)
-end
-
-nvim_lsp.clangd.setup(merge_tables(server_setup, {
+-- Clangd cmake for C/C++
+vim.lsp.config("clangd", {
     cmd = {
         "clangd",
         "--all-scopes-completion",
@@ -250,16 +225,16 @@ nvim_lsp.clangd.setup(merge_tables(server_setup, {
         "--completion-style=detailed",
         "--limit-results=1000000",
     },
-}))
+})
 
-nvim_lsp.neocmake.setup(merge_tables(server_setup, {
+vim.lsp.config("neocmake", {
     init_options = {
         format = { enable = true },
         lint = { enable = true },
     },
-}))
+})
 
-nvim_lsp.lua_ls.setup(merge_tables(server_setup, {
+vim.lsp.config("lua_ls", {
     on_init = function(client)
         if client.workspace_folders then
             local path = client.workspace_folders[1].name
@@ -286,45 +261,65 @@ nvim_lsp.lua_ls.setup(merge_tables(server_setup, {
     settings = {
         Lua = {},
     },
-}))
-
-if vim.fn.executable("typos-lsp") == 1 then
-    nvim_lsp.typos_lsp.setup(server_setup)
-end
+})
 
 -- typescript-language-server typescript
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
-nvim_lsp.ts_ls.setup(merge_tables(server_setup, {
+vim.lsp.config("ts_ls", {
     cmd = { "npx", "--no-install", "typescript-language-server", "--stdio" },
-    root_dir = nvim_lsp.util.root_pattern("tsconfig.json", "package.json"),
-}))
+    root_markers = { "tsconfig.json", "package.json" },
+})
 
 -- @tailwindcss/language-server
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
-nvim_lsp.tailwindcss.setup(
-    merge_tables(server_setup, { cmd = { "npx", "--no-install", "tailwindcss-language-server", "--stdio" } })
-)
-
--- vscode-langservers-extracted
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss
+vim.lsp.config("tailwindcss", {
+    cmd = { "npx", "--no-install", "tailwindcss-language-server", "--stdio" },
+})
 
 -- @biomejs/biome
-nvim_lsp.biome.setup(
-    merge_tables(server_setup, { root_dir = nvim_lsp.util.root_pattern("biome.json", "biome.jsonc", "package.json") })
-)
+vim.lsp.config("biome", {
+    root_markers = { "biome.json", "biome.jsonc", "package.json" },
+})
 
 -- vscode-langservers-extracted
-nvim_lsp.jsonls.setup(merge_tables(server_setup, {
+vim.lsp.config("jsonls", {
     settings = {
         json = {
             schemas = require("schemastore").json.schemas(),
             validate = { enable = true },
         },
     },
-}))
-
-nvim_lsp.rust_analyzer.setup({
-    on_attach = on_attach,
 })
+
+-- r-languageserver
+vim.lsp.config("r_language_server", {
+    filetypes = { "r", "rmd" },
+})
+
+-- Enable the configured language servers for their filetypes.
+-- :help lspconfig-all for the list of server configs shipped by nvim-lspconfig.
+local servers = {
+    -- Ruff does not provide completion
+    "ruff",
+    "pylsp",
+    "clangd",
+    "neocmake",
+    "lua_ls",
+    "ts_ls",
+    "tailwindcss",
+    "biome",
+    "jsonls",
+    "rust_analyzer",
+    "r_language_server",
+    -- vscode-langservers-extracted
+    -- "eslint", "cssls", "html",
+}
+
+if vim.fn.executable("typos-lsp") == 1 then
+    table.insert(servers, "typos_lsp")
+end
+
+vim.lsp.enable(servers)
 
 -----------------------------
 -- Configuring builtin LSP --
