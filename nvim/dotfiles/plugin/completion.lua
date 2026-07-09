@@ -223,7 +223,7 @@ vim.lsp.config("clangd", {
         "--header-insertion=iwyu",
         "--function-arg-placeholders",
         "--completion-style=detailed",
-        "--limit-results=1000000",
+        "--limit-results=500",
     },
 })
 

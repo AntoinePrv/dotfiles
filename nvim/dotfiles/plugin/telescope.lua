@@ -77,7 +77,7 @@ vim.keymap.set("n", "g.", telescope_builtin.lsp_outgoing_calls, {}) -- Key for >
 vim.keymap.set("n", "gt", telescope_builtin.lsp_type_definitions, {})
 vim.keymap.set("n", "gr", telescope_builtin.lsp_references, {})
 vim.keymap.set("n", "gs", telescope_builtin.lsp_document_symbols, {})
-vim.keymap.set("n", "gS", telescope_builtin.lsp_workspace_symbols, {})
+vim.keymap.set("n", "gS", telescope_builtin.lsp_dynamic_workspace_symbols, {})
 vim.keymap.set("n", "ge", function()
     telescope_builtin.diagnostics({ severity = vim.diagnostic.severity.ERROR, bufnr = 0 })
 end, {})
