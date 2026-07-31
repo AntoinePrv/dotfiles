@@ -200,13 +200,21 @@ local on_attach = function(client, bufnr)
     end, opts)
 end
 
+-- Set the mappings on attach. Done through the autocmd rather than the `on_attach` of
+-- `vim.lsp.config("*", ...)` because configs are merged with `tbl_deep_extend`, so a server
+-- config shipping its own `on_attach` (e.g. nvim-lspconfig's clangd) would replace ours.
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        on_attach(vim.lsp.get_client_by_id(args.data.client_id), args.buf)
+    end,
+})
+
 -- Fetch lsp completion source
 local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Defaults merged into every server config (nvim-lspconfig ships the per-server
 -- `lsp/<name>.lua` definitions; we only customize and enable them here).
 vim.lsp.config("*", {
-    on_attach = on_attach,
     flags = {
         debounce_text_changes = 150,
     },
