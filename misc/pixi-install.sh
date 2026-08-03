@@ -9,8 +9,9 @@ pixi global install --environment devutils \
   git-lfs \
   htop \
   jq \
+  jujutsu \
   mosh \
-  nvim'>=0.11' \
+  nvim'>=0.12' \
   ripgrep \
   starship \
   tmux!=3.6 \
