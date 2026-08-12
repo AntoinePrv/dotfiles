@@ -51,10 +51,10 @@ function system_install() {
 function install_dotfiles() {
     # shellcheck source=shell/profile
     source "${ROOT}/shell/profile"
-    # shellcheck source=shell/isolation.sh
-    source "${ROOT}/shell/isolation.sh"
+    # shellcheck source=shell/environment.sh
+    source "${ROOT}/shell/environment.sh"
     export_tool_storage_env "${XDG_CACHE_HOME}" "${XDG_CONFIG_HOME}" "${XDG_DATA_HOME}"
-    export PATH="${PIXI_HOME}/bin:${PATH}"
+    adjust_path
     local conf="${XDG_CONFIG_HOME:-${HOME}/.config}"
 
     system_install

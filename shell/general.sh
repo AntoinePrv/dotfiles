@@ -1,20 +1,3 @@
-# Add path for executable if not aleard there
-for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
-	case ":$PATH:" in
-		*":$x:"*) : ;; # already there
-		*) export PATH="$x:$PATH";;
-	esac
-done
-if [ -d "/opt/homebrew/bin" ]; then
-	export PATH="/opt/homebrew/bin:${PATH}"
-fi
-
-# Add zsh functions (used im completion)
-if type -P brew &> /dev/null; then
-	FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
-FPATH="${USER_ZSH_COMPLETION_DIR}:${FPATH}"
-
 export EDITOR=nvim
 
 # Number of commands saved in memory
@@ -82,10 +65,6 @@ export BAT_THEME='base16'
 # Use bat as man pager if available
 type -P bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-source "${DIR}/isolation.sh"
-export_tool_storage_env \
-	"${XDG_CACHE_HOME}" "${XDG_CONFIG_HOME}" "${XDG_DATA_HOME}"
-
 if python3 -c 'import importlib.util as u; exit(u.find_spec("IPython") is None)' &> /dev/null ; then
 	export PYTHONBREAKPOINT="ipdb.set_trace"
 	export PYTEST_ADDOPTS="--pdbcls=IPython.core.debugger:Pdb"
@@ -93,10 +72,6 @@ fi
 
 # Tmuxp configuration directory (user-shell config, kept out of tool_storage_env)
 export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"
-
-export PATH="${CARGO_HOME}/bin:${PATH}"
-export PATH="${PIXI_HOME}/bin:${PATH}"
-
 
 if [[ "${OSTYPE}" == "darwin"* ]]; then
 	# For CMake to poperly find package

@@ -4,12 +4,23 @@
 # Script directory requires non POSIX shell dependant function in the case the script is sourced (use Bash).
 DIR="$(cd "$(dirname "$(readlink "${(%):-%x}")" )" && pwd)"
 
-source "${DIR}/profile"  # Need to be sourced first
+# Defines XDG locations (need to be sourced first)
+source "${DIR}/profile"
+
+# Define tool locations and path modifications (need to be sourced second)
+source "${DIR}/environment.sh"
+export_tool_storage_env "${XDG_CACHE_HOME}" "${XDG_CONFIG_HOME}" "${XDG_DATA_HOME}"
+adjust_path
+adjust_fpath
+
+# Define some available secrets
 if [ -f "${DIR}/secrets.sh" ]; then
 	source "${DIR}/secrets.sh"
 fi
+
 source "${DIR}/zinit.zsh"
 source "${DIR}/general.sh"
+source "${DIR}/isolation.sh"  # Need to be sourced before aliases
 source "${DIR}/aliases.sh"  # Need to be sourced after general
 source "${DIR}/editor.zsh"
 
