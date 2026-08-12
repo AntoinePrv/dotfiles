@@ -5,7 +5,7 @@ ZI[CACHE_DIR]="${XDG_CACHE_HOME}/zi"
 
 # Cloning directly rather than using the upstream loader, which silently fails to install
 if [ ! -f "${ZI[BIN_DIR]}/zi.zsh" ]; then
-	git clone --branch main https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
+    git clone --branch main https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
 fi
 source "${ZI[BIN_DIR]}/zi.zsh"
 
@@ -14,10 +14,10 @@ zi ice compile
 zi light @z-shell/z-a-bin-gem-node
 
 zi ice lucid from='gh' if='[[ "$(uname -s)" == Darwin* ]]' \
-	atclone='swiftc -o dark-mode macos/dark-mode.swift' atpull='%atclone' sbin='dark-mode'
+    atclone='swiftc -o dark-mode macos/dark-mode.swift' atpull='%atclone' sbin='dark-mode'
 zi light @AntoinePrv/dark-mode
 zi ice lucid from='gh' if='[[ "$(uname -s)" == Linux* ]]' \
-	sbin='linux/gnome/dark-mode.sh -> dark-mode'
+    sbin='linux/gnome/dark-mode.sh -> dark-mode'
 zi light @AntoinePrv/dark-mode
 
 zi ice wait compile lucid blockf
@@ -30,27 +30,27 @@ zi light zdharma-continuum/fast-syntax-highlighting
 autoload -Uz compinit && compinit -i
 zi cdreplay
 
-function __generate_completion_for_exe () {
-	local -r exe="${1}"
-	if type "${exe}" &> /dev/null; then
-		# local -r file_path="${USER_ZSH_COMPLETION_DIR}/${exe}-${sha}"
-		# Modifying filename does not work with gh completion...
-		# local -r sha="$("${exe}" --version | sha256sum | cut -d' ' -f1)"
-		local -r file_path="${USER_ZSH_COMPLETION_DIR}/_${exe}"
-		if [[ ! -f "${file_path}" ]]; then
-			# Call the completion command
-			mkdir -p "${USER_ZSH_COMPLETION_DIR}"
-			"${@:2}" > "${file_path}"
-		fi
-		local -r file_name="$(basename ${file_path})"
-		autoload -Uz "${file_name}"
-		compdef "${file_name}" "${exe}"
-	fi
+function __generate_completion_for_exe() {
+    local -r exe="${1}"
+    if type "${exe}" &> /dev/null; then
+        # local -r file_path="${USER_ZSH_COMPLETION_DIR}/${exe}-${sha}"
+        # Modifying filename does not work with gh completion...
+        # local -r sha="$("${exe}" --version | sha256sum | cut -d' ' -f1)"
+        local -r file_path="${USER_ZSH_COMPLETION_DIR}/_${exe}"
+        if [[ ! -f "${file_path}" ]]; then
+            # Call the completion command
+            mkdir -p "${USER_ZSH_COMPLETION_DIR}"
+            "${@:2}" > "${file_path}"
+        fi
+        local -r file_name="$(basename ${file_path})"
+        autoload -Uz "${file_name}"
+        compdef "${file_name}" "${exe}"
+    fi
 }
 
-function __generate_completion () {
-		# When the executable has the same name it can be omitted with this function
-	__generate_completion_for_exe "${1}" "${@}"
+function __generate_completion() {
+    # When the executable has the same name it can be omitted with this function
+    __generate_completion_for_exe "${1}" "${@}"
 }
 
 # Other completions

@@ -1,10 +1,10 @@
 # Prints one KEY=VALUE per line for all isolated tool-storage env vars.
 # Args: <cache> <config> <data>
-function tool_storage_env_pairs () {
-	local cache="$1"
-	local config="$2"
-	local data="$3"
-	cat <<-EOF
+function tool_storage_env_pairs() {
+    local cache="$1"
+    local config="$2"
+    local data="$3"
+    cat <<- EOF
 		CONDA_ENVS_DIRS=${data}/conda/envs
 		CONDA_PKGS_DIRS=${cache}/conda/pkgs
 		CONDA_BLD_PATH=${cache}/conda/build
@@ -32,34 +32,34 @@ function tool_storage_env_pairs () {
 	EOF
 }
 
-function export_tool_storage_env () {
-	local pair
-	while IFS= read -r pair; do
-		[ -n "$pair" ] && export "$pair"
-	done < <(tool_storage_env_pairs "$1" "$2" "$3")
+function export_tool_storage_env() {
+    local pair
+    while IFS= read -r pair; do
+        [ -n "$pair" ] && export "$pair"
+    done < <(tool_storage_env_pairs "$1" "$2" "$3")
 }
 
-function adjust_path () {
-	# Add path for executable if not aleard there
-	for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
-		case ":$PATH:" in
-			*":$x:"*) : ;; # already there
-			*) export PATH="$x:$PATH";;
-		esac
-	done
-	# Homebrew
-	if [ -d "/opt/homebrew/bin" ]; then
-		export PATH="/opt/homebrew/bin:${PATH}"
-	fi
-	# Other tools
-	export PATH="${CARGO_HOME}/bin:${PATH}"
-	export PATH="${PIXI_HOME}/bin:${PATH}"
+function adjust_path() {
+    # Add path for executable if not aleard there
+    for x in "/usr/local/bin" "/usr/local/sbin" "${HOME}/.local/bin"; do
+        case ":$PATH:" in
+            *":$x:"*) : ;; # already there
+            *) export PATH="$x:$PATH" ;;
+        esac
+    done
+    # Homebrew
+    if [ -d "/opt/homebrew/bin" ]; then
+        export PATH="/opt/homebrew/bin:${PATH}"
+    fi
+    # Other tools
+    export PATH="${CARGO_HOME}/bin:${PATH}"
+    export PATH="${PIXI_HOME}/bin:${PATH}"
 }
 
 # Add zsh functions (used im completion)
-function adjust_fpath () {
-	if type -P brew &> /dev/null; then
-		FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-	fi
-	FPATH="${USER_ZSH_COMPLETION_DIR}:${FPATH}"
+function adjust_fpath() {
+    if type -P brew &> /dev/null; then
+        FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    fi
+    FPATH="${USER_ZSH_COMPLETION_DIR}:${FPATH}"
 }
