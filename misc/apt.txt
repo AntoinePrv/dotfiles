@@ -13,5 +13,10 @@ binutils
 
 # lscpu, lsblk, hexdump, taskset
 util-linux
+
 # ps, top, free, vmstat
 procps
+
+# Benchmarking
+linux-cpupower
+util-linux

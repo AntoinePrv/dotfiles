@@ -57,6 +57,9 @@ function install_dotfiles() {
     export PATH="${PIXI_HOME}/bin:${PATH}"
     local conf="${XDG_CONFIG_HOME:-${HOME}/.config}"
 
+    system_install
+    bash "${ROOT}/misc/pixi-install.sh"
+
     # Use recursive=true for shared bin directory
     symlink "${ROOT}/bin" "${HOME}/.local/bin" "true"
 
@@ -80,6 +83,4 @@ function install_dotfiles() {
     nvim -n --headless +'lua require("pckr.actions").sync(nil, nil, function() vim.cmd("qa!") end)'
 }
 
-system_install
-bash "${ROOT}/misc/pixi-install.sh"
 install_dotfiles
