@@ -1,0 +1,17 @@
+# Basics
+git
+curl
+wget
+zsh
+
+# Compilers and build tools
+build-essential
+pkg-config
+
+# readelf, objdump, nm, strings, ld
+binutils
+
+# lscpu, lsblk, hexdump, taskset
+util-linux
+# ps, top, free, vmstat
+procps
