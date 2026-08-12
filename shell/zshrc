@@ -17,6 +17,6 @@ export STARSHIP_CONFIG="${DIR}/starship.toml"
 eval "$(starship init zsh)"
 
 # Prompt
-if is-this tmux; then
+if [[ -n "${TMUX}" ]]; then
 	source "${DIR}/tmux-update.sh"
 fi

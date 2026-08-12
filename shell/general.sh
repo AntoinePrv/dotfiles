@@ -38,7 +38,7 @@ export BASE16_SHELL_SET_BACKGROUND="true"
 
 function set_theme () {
 	# TODO find a better way to run in the background? Or make is an executable?
-	if is-this macos || is-this linux; then
+	if [[ "${OSTYPE}" == "darwin"* || "${OSTYPE}" == "linux"* ]]; then
 		(
 			# Broken in https://github.com/tinted-theming/tinted-shell/pull/52
 			export TTY="$(tty)"
@@ -61,7 +61,7 @@ function set_theme () {
 }
 
 
-if ! {is-this tmux || is-this ssh}; then
+if [[ -z "${TMUX}" && -z "${SSH_CLIENT}" && -z "${SSH_TTY}" ]]; then
 	# Terminal Base16 color theme
 	set_theme
 	# Start the ssh-agent if it is not started and track the socket.
@@ -98,7 +98,7 @@ export PATH="${CARGO_HOME}/bin:${PATH}"
 export PATH="${PIXI_HOME}/bin:${PATH}"
 
 
-if is-this macos; then
+if [[ "${OSTYPE}" == "darwin"* ]]; then
 	# For CMake to poperly find package
 	export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 fi

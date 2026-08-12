@@ -2,8 +2,8 @@
 
 # Script to have a similar clipbard interface in all systems.
 
-if is-this linux ; then
-	if is-this wsl ; then
+if [[ "${OSTYPE}" == "linux"* ]] ; then
+	if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
 		function copy () {
 			/mnt/c/Windows/System32/clip.exe "$@"
 		}
@@ -34,7 +34,7 @@ if is-this linux ; then
 			}
 		fi
 	fi
-elif is-this macos ; then
+elif [[ "${OSTYPE}" == "darwin"* ]] ; then
 	function copy () {
 		pbcopy "$@"
 	}
