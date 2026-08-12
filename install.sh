@@ -43,7 +43,8 @@ install_dotfiles() {
     symlink "$root/misc/clangd.yaml"     "$conf/clangd/config.yaml"
     hardlink "$root/misc/karabiner.json" "$conf/karabiner/karabiner.json"
 
-    nvim -n --headless +'autocmd User PackerComplete quitall' +'PackerSync' +'qa!'
+    # pckr has no completion event, but its actions take a callback as last argument
+    nvim -n --headless +'lua require("pckr.actions").sync(nil, nil, function() vim.cmd("qa!") end)'
 }
 
 install_dotfiles

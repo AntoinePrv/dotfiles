@@ -3,8 +3,9 @@ ZI[HOME_DIR]="${XDG_DATA_HOME}/zi"
 ZI[BIN_DIR]="${ZI[HOME_DIR]}/bin"
 ZI[CACHE_DIR]="${XDG_CACHE_HOME}/zi"
 
+# Cloning directly rather than using the upstream loader, which silently fails to install
 if [ ! -f "${ZI[BIN_DIR]}/zi.zsh" ]; then
-	source <(curl -sL git.io/zi-loader); zzinit
+	git clone --branch main https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
 fi
 source "${ZI[BIN_DIR]}/zi.zsh"
 
