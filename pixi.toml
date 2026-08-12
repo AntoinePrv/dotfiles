@@ -11,10 +11,13 @@ dev = { features = ["dev"], solve-group = "default" }
 
 [feature.dev.dependencies]
 bash-language-server = "*"
+go-shfmt = "*"
 stylua = "*"
+shellcheck = "*"
 # TODO: package on conda-forge
 # lua-language-server = "*"
 
 [feature.dev.tasks]
 fmt-stylua = "stylua nvim/"
+fmt-shfmt = "shfmt --write --indent 4 --space-redirects --case-indent"
 
