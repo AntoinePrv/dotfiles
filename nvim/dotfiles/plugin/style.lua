@@ -45,11 +45,16 @@ local function simple_on_file_change(path, callback)
         recursive = false,
     }
 
-    vim.uv.fs_event_start(handle, dir, flags, vim.schedule_wrap(function(err, filename, events)
-        if filename == basename then
-            callback()
-        end
-    end))
+    vim.uv.fs_event_start(
+        handle,
+        dir,
+        flags,
+        vim.schedule_wrap(function(err, filename, events)
+            if filename == basename then
+                callback()
+            end
+        end)
+    )
 
     return handle
 end

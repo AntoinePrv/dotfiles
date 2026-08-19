@@ -59,10 +59,10 @@ require("pckr").add({
     },
 
     -- Git support
-    { "lewis6991/gitsigns.nvim",                     requires = { "nvim-lua/plenary.nvim" } },
+    { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } },
 
     -- Completion and syntax
-    { "nvim-treesitter/nvim-treesitter",             run = ":TSUpdate",                     branch = "main" },
+    { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", branch = "main" },
     { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
     "rbberger/vim-singularity-syntax",
     { "neovim/nvim-lspconfig", tag = "v2.10.0" },

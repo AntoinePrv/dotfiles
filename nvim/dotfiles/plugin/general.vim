@@ -73,7 +73,7 @@ set expandtab  " Default to using spaces
 set autoread
 augroup auto_reload
 	autocmd!
-	autocmd FocusGained,BufEnter * :checktime
+	autocmd FocusGained,BufEnter,CursorHold,TermLeave * :checktime
 augroup end
 
 " Authorize hidden buffer with modification
