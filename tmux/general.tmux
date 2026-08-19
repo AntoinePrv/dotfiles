@@ -1,11 +1,18 @@
-# Set default terminal
-set -g default-terminal "${TERM}"
+# Set default terminal — must be a tmux-aware terminfo, not the outer TERM
+set -g default-terminal "tmux-256color"
+
+# Advertise true colour for the outer terminal(s)
+set -as terminal-features 'xterm-ghostty:RGB'
+set -as terminal-features 'xterm-256color:RGB'
 
 # Fallback to another session when killing a session
 set-option -g detach-on-destroy off
 
-# Activate underline colors
-set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+# Pass through styled SGR attributes the tmux-256color terminfo omits
+set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'                  # curly/wavy underline
+set -as terminal-overrides ',*:smxx=\E[9m:rmxx=\E[29m'             # strikethrough
+set -as terminal-overrides ',*:Smol=\E[53m:Rmol=\E[55m'           # overline
+set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underline color
 
 # Set default shell
 set -g default-shell "${SHELL}"
