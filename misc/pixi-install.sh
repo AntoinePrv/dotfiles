@@ -21,6 +21,7 @@ pixi global install --environment devutils \
   watch \
   watchexec \
   wget \
+  zellij \
 
 pixi global install --environment datascience \
   jupyter \

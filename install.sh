@@ -3,15 +3,16 @@
 ROOT=$(cd "$(dirname "$0")" && pwd)
 
 function symlink() {
-    local src="${1}" dst="${2}" recursive="${3}"
-    if [[ -d "${src}" && "${recursive}" == "true" ]]; then
-        find "${src}" -type f | while read -r file; do
-            symlink "${file}" "${dst}/${file#${src}/}"
-        done
-    else
-        mkdir -p "$(dirname "${dst}")"
-        ln -sfn "${src}" "${dst}"
-    fi
+    local src="${1}" dst="${2}"
+    mkdir -p "$(dirname "${dst}")"
+    ln -sfn "${src}" "${dst}"
+}
+
+function symlink_tree() {
+    local src="${1}" dst="${2}"
+    find "${src}" -type f | while read -r file; do
+        symlink "${file}" "${dst}/${file#${src}/}"
+    done
 }
 
 function hardlink() {
@@ -60,23 +61,25 @@ function install_dotfiles() {
     system_install
     bash "${ROOT}/misc/pixi-install.sh"
 
-    # Use recursive=true for shared bin directory
-    symlink "${ROOT}/bin" "${HOME}/.local/bin" "true"
+    # Link files individually since ~/.local/bin is shared with other tools
+    symlink_tree "${ROOT}/bin" "${HOME}/.local/bin"
 
-    for d in shell nvim tmux tmuxp git misc; do symlink "${ROOT}/${d}" "${conf}/${d}"; done
+    for d in shell nvim tmux tmuxp zellij git misc; do
+        symlink "${ROOT}/${d}" "${conf}/${d}"
+    done
 
-    symlink "${conf}/shell/profile"    "${HOME}/.profile"
-    symlink "${conf}/shell/profile"    "${HOME}/.zprofile"
-    symlink "${conf}/shell/bashrc"     "${HOME}/.bashrc"
-    symlink "${conf}/shell/zshrc"      "${HOME}/.zshrc"
-    symlink "${conf}/tmux/tmux.conf"   "${HOME}/.tmux.conf"
-    symlink "${conf}/misc/inputrc"     "${HOME}/.inputrc"
-    symlink "${conf}/misc/editrc"      "${HOME}/.editrc"
-    symlink "${conf}/misc/condarc"     "${HOME}/.condarc"
+    symlink "${conf}/shell/profile" "${HOME}/.profile"
+    symlink "${conf}/shell/profile" "${HOME}/.zprofile"
+    symlink "${conf}/shell/bashrc" "${HOME}/.bashrc"
+    symlink "${conf}/shell/zshrc" "${HOME}/.zshrc"
+    symlink "${conf}/tmux/tmux.conf" "${HOME}/.tmux.conf"
+    symlink "${conf}/misc/inputrc" "${HOME}/.inputrc"
+    symlink "${conf}/misc/editrc" "${HOME}/.editrc"
+    symlink "${conf}/misc/condarc" "${HOME}/.condarc"
 
-    symlink "${ROOT}/misc/alacritty.toml"  "${conf}/alacritty/alacritty.toml"
-    symlink "${ROOT}/misc/ipython"         "${conf}/ipython"
-    symlink "${ROOT}/misc/clangd.yaml"     "${conf}/clangd/config.yaml"
+    symlink "${ROOT}/misc/alacritty.toml" "${conf}/alacritty/alacritty.toml"
+    symlink "${ROOT}/misc/ipython" "${conf}/ipython"
+    symlink "${ROOT}/misc/clangd.yaml" "${conf}/clangd/config.yaml"
     hardlink "${ROOT}/misc/karabiner.json" "${conf}/karabiner/karabiner.json"
 
     # pckr has no completion event, but its actions take a callback as last argument

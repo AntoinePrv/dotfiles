@@ -70,6 +70,8 @@ fi
 # Tmuxp configuration directory (user-shell config, kept out of tool_storage_env)
 export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"
 
+export ZELLIJ_CONFIG_DIR="${XDG_CONFIG_HOME}/zellij"
+
 if [[ "${OSTYPE}" == "darwin"* ]]; then
     # For CMake to poperly find package
     export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
