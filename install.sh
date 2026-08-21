@@ -49,6 +49,13 @@ function system_install() {
     fi
 }
 
+function install_theme() {
+    local data_dir="${XDG_DATA_HOME}/tinted-theming"
+    tinty -d "${data_dir}" -c "${ROOT}/misc/tinty.toml" sync
+    # Local template repositories ship no themes, they must be built from schemes
+    tinty -d "${data_dir}" build "${ROOT}/tinty"
+}
+
 function install_dotfiles() {
     # shellcheck source=shell/profile
     source "${ROOT}/shell/profile"
@@ -81,6 +88,8 @@ function install_dotfiles() {
     symlink "${ROOT}/misc/ipython" "${conf}/ipython"
     symlink "${ROOT}/misc/clangd.yaml" "${conf}/clangd/config.yaml"
     hardlink "${ROOT}/misc/karabiner.json" "${conf}/karabiner/karabiner.json"
+
+    install_theme
 
     # pckr has no completion event, but its actions take a callback as last argument
     nvim -n --headless +'lua require("pckr.actions").sync(nil, nil, function() vim.cmd("qa!") end)'

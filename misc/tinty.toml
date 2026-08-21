@@ -1,5 +1,10 @@
 default-scheme = "base16-humanoid-dark"
 
+# TODO working to get rid of that and to remove the 16-21 ANSI color overloading
+# https://github.com/tinted-theming/tinted-terminal/issues/52
+# Remainging usage:
+#   - tmux/starship.toml -> use only tinted?
+#   - tmux/tmuxline.sh -> use only tinted?
 [[items]]
 name = "shell"
 path = "https://github.com/tinted-theming/tinted-shell"
@@ -11,7 +16,9 @@ name = "tinted-terminal-alacritty"
 path = "https://github.com/tinted-theming/tinted-terminal"
 themes-dir = "themes/alacritty"
 supported-systems = ["base16", "base24"]
-hook = "cp %f ${XDG_CONFIG_HOME}/alacritty/colors.toml"
+hook = """
+command cp -f "${TINTY_THEME_FILE_PATH}" "${XDG_CONFIG_HOME}/alacritty/colors.toml"
+"""
 
 [[items]]
 name = "tinted-terminal-ghostty"
@@ -22,4 +29,15 @@ hook = """
 mkdir -p ${XDG_CONFIG_HOME}/ghostty/themes
 command cp -f "${TINTY_THEME_FILE_PATH}" "${XDG_CONFIG_HOME}/ghostty/themes/tinted-theming"
 killall -SIGUSR2 ghostty 2>/dev/null || true
+"""
+
+[[items]]
+name = "starship"
+# TODO find a way to not hardcode path
+path = "~/workspace/github.com/AntoinePrv/dotfiles/tinty"
+themes-dir = "colors/starship"
+supported-systems = ["base16"]
+hook = """
+command cat "${XDG_CONFIG_HOME}/shell/starship-base.toml" "${TINTY_THEME_FILE_PATH}" \
+  > "${XDG_CONFIG_HOME}/shell/starship.toml"
 """

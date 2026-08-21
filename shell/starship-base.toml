@@ -12,25 +12,8 @@ $jobs\
 [ ](fg:prev_bg)
 """
 
+# Palette definition added by tinty
 palette = "base16"
-
-[palettes.base16]
-base00 = "00"
-base01 = "18"  # Base16-shell
-base02 = "19"  # Base16-shell
-base03 = "08"
-base04 = "20"  # Base16-shell
-base05 = "07"
-base06 = "21"  # Base16-shell
-base07 = "15"
-base08 = "01"
-base09 = "16"  # Base16-shell
-base0a = "03"
-base0b = "02"
-base0c = "06"
-base0d = "04"
-base0e = "05"
-base0f = "17"  # Base16-shell
 
 [directory]
 disabled = false

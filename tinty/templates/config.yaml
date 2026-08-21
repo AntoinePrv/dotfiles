@@ -1,0 +1,3 @@
+starship-base16:
+  filename: colors/starship/{{ scheme-system }}-{{ scheme-slug }}.toml
+  supported-systems: [base16]
