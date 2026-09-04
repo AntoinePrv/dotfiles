@@ -319,6 +319,7 @@ local servers = {
     "jsonls",
     "rust_analyzer",
     "r_language_server",
+    "zls",
     -- vscode-langservers-extracted
     -- "eslint", "cssls", "html",
 }
