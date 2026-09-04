@@ -3,20 +3,22 @@
 add_newline = false
 
 
+# Styling is emitted as literal tmux `#[...]` directives because the tmux status
+# line does not interpret the ANSI escapes that starship's own styles would produce.
 format = """
-#\\[bg=colour8,fg=colour7\\]\
+#\\[bg=colour7,fg=colour0\\]\
 $time\
-#\\[fg=colour8,bg=colour19,nobold,nounderscore,noitalics\\]#\\[fg=colour7\\]\
+#\\[fg=colour7,bg=colour8,nobold,nounderscore,noitalics\\]#\\[fg=colour7\\]\
 ${custom.tmux-session}\
-#\\[fg=colour19,bg=colour0,nobold,nounderscore,noitalics\\]#\\[fg=colour16,bold\\]\
+#\\[fg=colour8,bg=colour0,nobold,nounderscore,noitalics\\]#\\[fg=colour16,bold\\]\
 $hostname
 """
 
 right_format = """
-#\\[fg=colour19\\]#\\[fg=colour16,bg=colour19\\]\
+#\\[fg=colour8\\]#\\[fg=colour7,bg=colour8\\]\
 (${git_status})(${git_state})${git_branch}\
 (\
-#\\[fg=colour2\\]#\\[fg=colour7,bg=colour2\\]\
+#\\[fg=colour2\\]#\\[fg=colour0,bg=colour2\\]\
 ${custom.tmux-pane-pixi}\
 )\
 """
@@ -24,7 +26,7 @@ ${custom.tmux-pane-pixi}\
 [time]
 disabled = false
 format = "$time"
-time_format = "  %a %e   %R "
+time_format = "  %a%e   %R "
 
 [hostname]
 disabled = false
@@ -63,7 +65,7 @@ diverged = "$ahead_count $behind_count"
 up_to_date = "󰄭"
 conflicted = "✘$count"
 untracked = "…"
-modified = "+$count"
+modified = "~$count"
 deleted = "-$count"
 staged = "●$count"
 renamed = "»$count"
