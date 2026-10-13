@@ -1,0 +1,67 @@
+// CapsLock is remapped by Karabiner to Ctrl+Option inside terminals, making
+// Ctrl+Alt a modifier that can never collide with the shell or Vim. Every
+// multiplexer binding lives there, so no prefix key is needed.
+
+
+// TODO zellij run --floating
+
+show_startup_tips false
+
+keybinds {
+    shared_except "locked" {
+        // Zellij's Ctrl defaults are all shell keys once Cmd is mapped to Ctrl.
+        unbind "Ctrl b" "Ctrl g" "Ctrl h" "Ctrl n" "Ctrl o" "Ctrl p" "Ctrl q" "Ctrl s" "Ctrl t"
+
+        // Panes
+        bind "Ctrl Alt h" { MoveFocus "Left"; }
+        bind "Ctrl Alt j" { MoveFocus "Down"; }
+        bind "Ctrl Alt k" { MoveFocus "Up"; }
+        bind "Ctrl Alt l" { MoveFocus "Right"; }
+        bind "Ctrl Alt Shift h" { MovePane "Left"; }
+        bind "Ctrl Alt Shift j" { MovePane "Down"; }
+        bind "Ctrl Alt Shift k" { MovePane "Up"; }
+        bind "Ctrl Alt Shift l" { MovePane "Right"; }
+        bind "Ctrl Alt -" { NewPane "Down"; }
+        bind "Ctrl Alt \\" { NewPane "Right"; }
+        bind "Ctrl Alt m" { ToggleFocusFullscreen; }
+        bind "Ctrl Alt f" { ToggleFloatingPanes; }
+        bind "Ctrl Alt e" { TogglePaneEmbedOrFloating; }
+        bind "Ctrl Alt x" { CloseFocus; }
+
+        // Tabs
+        bind "Ctrl Alt Left" "Ctrl Alt 9" { GoToPreviousTab; }
+        bind "Ctrl Alt Right" "Ctrl Alt 0" { GoToNextTab; }
+        bind "Ctrl Alt Shift Left" { MoveTab "Left"; }
+        bind "Ctrl Alt Shift Right" { MoveTab "Right"; }
+        bind "Ctrl Alt t" { NewTab; }
+        bind "Ctrl Alt q" { CloseTab; }
+        bind "Ctrl Alt r" { SwitchToMode "RenameTab"; TabNameInput 0; }
+
+        // Sessions
+        bind "Ctrl Alt s" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
+        bind "Ctrl Alt d" { Detach; }
+
+        // Modes
+        bind "Ctrl Alt n" { SwitchToMode "Resize"; }
+        bind "Ctrl Alt v" { SwitchToMode "Scroll"; }
+        bind "Ctrl Alt g" { SwitchToMode "Locked"; }
+    }
+
+    resize {
+        bind "Ctrl Alt n" { SwitchToMode "Normal"; }
+    }
+
+    scroll {
+        bind "Ctrl Alt v" { SwitchToMode "Normal"; }
+    }
+
+    locked {
+        unbind "Ctrl g"
+        bind "Ctrl Alt g" { SwitchToMode "Normal"; }
+    }
+}
