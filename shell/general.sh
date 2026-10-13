@@ -74,5 +74,7 @@ export ZELLIJ_CONFIG_DIR="${XDG_CONFIG_HOME}/zellij"
 
 if [[ "${OSTYPE}" == "darwin"* ]]; then
     # For CMake to poperly find package
-    export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
+    # export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
+    # Pin for Conda-forge compilers
+    export SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk"
 fi
