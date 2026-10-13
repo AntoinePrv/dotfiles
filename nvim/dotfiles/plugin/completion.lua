@@ -309,6 +309,7 @@ vim.lsp.config("r_language_server", {
 local servers = {
     -- Ruff does not provide completion
     "ruff",
+    "ty",
     "pylsp",
     "clangd",
     "neocmake",
