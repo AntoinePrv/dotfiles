@@ -30,6 +30,9 @@ pixi global install --environment datascience \
   pyarrow \
   python \
   seaborn \
+  matplotlib \
+  ipympl \
+  specta \
 
 pixi global install --environment conda-forge \
   conda-smithy \
