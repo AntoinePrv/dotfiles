@@ -27,6 +27,18 @@ function git-tree() {
 }
 alias gtree='git-tree'
 
+function pvim() {
+    local project="${1:-$(basename "$(dirname "$(dirname "${PWD}")")")/$(basename "$(dirname "${PWD}")")/$(basename "${PWD}")}"
+    [[ $# -gt 0 ]] && shift
+    local launcher=()
+    if pixi info 2> /dev/null | grep -qi 'environment: lsp'; then
+        launcher=(pixi run -e lsp)
+    elif pixi info 2> /dev/null | grep -qi 'environment: dev'; then
+        launcher=(pixi run -e dev)
+    fi
+    "${launcher[@]}" nvim --cmd "let g:project=\"${project}\"" "$@"
+}
+
 alias tinty='tinty -d "${USER_TINTED_THEMING_DIR}" -c "${XDG_CONFIG_HOME}/misc/tinty.toml"'
 
 function docker-shell() {
