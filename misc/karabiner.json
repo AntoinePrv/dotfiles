@@ -47,7 +47,7 @@
             ]
           },
           {
-            "description": "Terminals remap CapsLock to Ctrl+Option",
+            "description": "Terminals remap CapsLock to Ctrl+Option (not Super because tmux cannot bind it; switch to Super once tmux is no longer needed)",
             "manipulators": [
               {
                 "conditions": [

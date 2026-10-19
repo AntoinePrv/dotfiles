@@ -1,6 +1,8 @@
 // CapsLock is remapped by Karabiner to Ctrl+Option inside terminals, making
 // Ctrl+Alt a modifier that can never collide with the shell or Vim. Every
 // multiplexer binding lives there, so no prefix key is needed.
+// Ctrl+Alt rather than Super because tmux cannot bind Super; switch to Super
+// once tmux is no longer needed.
 
 
 // TODO zellij run --floating
