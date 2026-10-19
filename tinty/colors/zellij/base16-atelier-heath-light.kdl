@@ -1,0 +1,15 @@
+themes {
+    tinted-theming {
+        fg "#695d69"
+        bg "#f7f3f7"
+        black "#d8cad8"
+        red "#ca402b"
+        green "#918b3b"
+        yellow "#bb8a35"
+        blue "#516aec"
+        magenta "#7b59c0"
+        cyan "#159393"
+        white "#1b181b"
+        orange "#a65926"
+    }
+}
