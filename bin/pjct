@@ -90,6 +90,15 @@ function execute {
 }
 
 
+# Like execute, for full screen programs that indentation would garble.
+function execute_interactive {
+	echo_yellow "$@"
+	if [ "${dry_run}" = "false" ]; then
+		"$@"
+	fi
+}
+
+
 ###################
 #  Init commands  #
 ###################
@@ -199,6 +208,31 @@ function find_repo {
 }
 
 
+function zellij_session_exists {
+	# Exited sessions are listed too, attaching resurrects them
+	zellij list-sessions --short --no-formatting 2> /dev/null | grep -qxF "${1}"
+}
+
+
+function load_zellij {
+	local -r dir="${1}"
+
+	if zellij_session_exists "${PROJECT_NAME}"; then
+		status "Attaching to existing session ${PROJECT_NAME}"
+	else
+		status "Creating session ${PROJECT_NAME}"
+		# The layout has no cwd, it is inherited from the server
+		(cd "${dir}" && execute zellij attach --create-background "${PROJECT_NAME}" options --default-layout dev)
+	fi
+
+	if [[ -n "${ZELLIJ:-}" ]]; then
+		execute zellij action switch-session "${PROJECT_NAME}"
+	else
+		execute_interactive zellij attach "${PROJECT_NAME}"
+	fi
+}
+
+
 function load {
 	find_repo
 	status "Loading ${provider}/${org}/${repo}"
@@ -209,9 +243,14 @@ function load {
 	git -C "${dir}" remote | grep -E '(origin|upstream)' | while IFS="" read -r remote; do
 		execute git -C "${dir}" fetch --prune --tags --force "${remote}"
 	done
-	export PROJECT_NAME="${org//./_}/${repo//./_}"
 	export PROJECT="${org}/${repo}"
-	execute tmuxp load --yes gh
+	if [[ "${zellij}" = "true" ]]; then
+		export PROJECT_NAME="${PROJECT//\//|}"
+		load_zellij "${dir}"
+	else
+		export PROJECT_NAME="${PROJECT//./_}"
+		execute_interactive tmuxp load --yes gh
+	fi
 }
 
 function attach {
@@ -269,6 +308,10 @@ function parse_options {
 				set_option "${key}" "true"
 				shift
 				;;
+			-z)
+				set_option zellij "true"
+				shift
+				;;
 			*)
 				positional=("$@")
 				return 0
@@ -292,6 +335,10 @@ function parse_cmd {
 				;;
 			attach)
 				cmd="attach"
+				shift
+				;;
+			-z|--zellij)
+				set_option zellij "true"
 				shift
 				;;
 			*/*/*)
@@ -325,6 +372,8 @@ function run_main {
 	local org=""
 	# The name of the repo within the org
 	local repo=""
+	# Use zellij rather than tmux
+	local zellij="false"
 
 	# Parse all command line arguments.
 	parse_options "$@"
@@ -338,6 +387,13 @@ function run_main {
 
 	# Parse the argument to the command
 	parse_cmd "${positional[@]}"
+
+	# The multiplexer already running takes precedence
+	if [[ -n "${ZELLIJ:-}" ]]; then
+		zellij="true"
+	elif [[ -n "${TMUX:-}" ]]; then
+		zellij="false"
+	fi
 
 	# Execute command
 	"${cmd}"
