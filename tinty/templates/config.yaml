@@ -1,3 +1,7 @@
 starship-base16:
   filename: colors/starship/{{ scheme-system }}-{{ scheme-slug }}.toml
   supported-systems: [base16]
+
+zellij-base16:
+  filename: colors/zellij/{{ scheme-system }}-{{ scheme-slug }}.kdl
+  supported-systems: [base16]

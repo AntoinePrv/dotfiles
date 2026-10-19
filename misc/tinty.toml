@@ -41,3 +41,14 @@ hook = """
 command cat "${XDG_CONFIG_HOME}/shell/starship-base.toml" "${TINTY_THEME_FILE_PATH}" \
   > "${XDG_CONFIG_HOME}/shell/starship.toml"
 """
+
+[[items]]
+name = "zellij"
+# TODO find a way to not hardcode path
+path = "~/workspace/github.com/AntoinePrv/dotfiles/tinty"
+themes-dir = "colors/zellij"
+supported-systems = ["base16"]
+hook = """
+mkdir -p "${XDG_CONFIG_HOME}/zellij/themes"
+command cp -f "${TINTY_THEME_FILE_PATH}" "${XDG_CONFIG_HOME}/zellij/themes/tinted-theming.kdl"
+"""

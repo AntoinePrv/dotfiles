@@ -8,6 +8,7 @@
 // TODO zellij run --floating
 
 show_startup_tips false
+theme "tinted-theming"
 
 keybinds {
     shared_except "locked" {
