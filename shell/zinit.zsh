@@ -59,4 +59,5 @@ __generate_completion pixi completion --shell zsh
 __generate_completion rg --generate=complete-zsh
 __generate_completion gh completion --shell zsh
 __generate_completion rustup completions zsh rustup
+__generate_completion zellij setup --generate-completion zsh
 __generate_completion_for_exe cargo rustup completions zsh cargo

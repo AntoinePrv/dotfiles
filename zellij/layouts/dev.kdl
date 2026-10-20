@@ -14,7 +14,7 @@ layout {
     tab name="editor" focus=true {
         // Interactive shell so that the pvim function is defined
         pane command="zsh" {
-            args "-ic" "pvim"
+            args "-ic" "pvim; exec $SHELL"
         }
     }
 

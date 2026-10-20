@@ -70,7 +70,10 @@ fi
 # Tmuxp configuration directory (user-shell config, kept out of tool_storage_env)
 export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"
 
+# Zellij configuration
 export ZELLIJ_CONFIG_DIR="${XDG_CONFIG_HOME}/zellij"
+# Path must be short enough to be a socket
+export ZELLIJ_SOCKET_DIR="$HOME/.cache/zellij"
 
 if [[ "${OSTYPE}" == "darwin"* ]]; then
     # For CMake to poperly find package
