@@ -106,6 +106,44 @@
             ]
           },
           {
+            "description": "CapsLock+Space opens Raycast (matches both CapsLock remaps below)",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a Raycast"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a Raycast"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
             "description": "Terminals remap Cmd to Ctrl",
             "manipulators": [
               {
