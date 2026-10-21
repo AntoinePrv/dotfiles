@@ -3,7 +3,24 @@
 layout {
     default_tab_template {
         pane size=1 borderless=true {
-            plugin location="tab-bar"
+            plugin location="https://github.com/dj95/zjstatus/releases/download/v0.25.0/zjstatus.wasm" {
+                format_left    "{mode} #[fg=blue,bold]{session}"
+                format_center  "{tabs}"
+                format_right   "{datetime}"
+                format_space   ""
+
+                mode_normal          "#[bg=blue,fg=black] {name} "
+                mode_locked          "#[bg=red,fg=black] {name} "
+                mode_scroll          "#[bg=yellow,fg=black] {name} "
+                mode_default_to_mode "normal"
+
+                tab_normal   "#[fg=white,bg=8] {name} "
+                tab_active   "#[fg=black,bold,bg=white] {name} "
+
+                datetime          "{format}"
+                datetime_format   " %R   %a%e"
+                datetime_timezone "Europe/Paris"
+            }
         }
         children
         pane size=1 borderless=true {
@@ -13,7 +30,7 @@ layout {
 
     tab name="editor" focus=true {
         // Interactive shell so that the pvim function is defined
-        pane command="zsh" {
+        pane borderless=true command="zsh" {
             args "-ic" "pvim; exec $SHELL"
         }
     }

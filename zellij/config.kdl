@@ -9,6 +9,15 @@
 
 show_startup_tips false
 theme "tinted-theming"
+pane_frames true
+pane_frame_style "full"
+session_serialization false
+
+ui {
+    pane_frames {
+        hide_session_name true
+    }
+}
 
 keybinds {
     shared_except "locked" {
@@ -48,11 +57,22 @@ keybinds {
             }
         }
         bind "Ctrl Alt d" { Detach; }
+        bind "Ctrl Alt Up" {
+            Run "bash" "-c" "\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" previous-session" { name "Switching"; floating true; close_on_exit true; width "0"; height "0"; }
+        }
+        bind "Ctrl Alt Shift Up" {
+            Run "bash" "-c" "\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" start-session" { name "Switching"; floating true; close_on_exit true; width "0"; height "0"; x "1%"; y "1%"; }
+        }
+        bind "Ctrl Alt Down" {
+            Run "bash" "-c" "\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" next-session" { name "Switching"; floating true; close_on_exit true; width "0"; height "0"; x "1%"; y "1%"; }
+        }
+        bind "Ctrl Alt Shift Down" {
+            Run "bash" "-c" "\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" end-session" { name "Switching"; floating true; close_on_exit true; width "0"; height "0"; x "1%"; y "1%"; }
+        }
 
         // Modes
         bind "Ctrl Alt n" { SwitchToMode "Resize"; }
         bind "Ctrl Alt v" { SwitchToMode "Scroll"; }
-        bind "Ctrl Alt g" { SwitchToMode "Locked"; }
     }
 
     resize {
