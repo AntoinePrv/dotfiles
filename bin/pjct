@@ -221,8 +221,10 @@ function load_zellij {
 		status "Attaching to existing session ${PROJECT_NAME}"
 	else
 		status "Creating session ${PROJECT_NAME}"
-		# The layout has no cwd, it is inherited from the server
-		(cd "${dir}" && execute zellij attach --create-background "${PROJECT_NAME}" options --default-layout dev)
+		# The layout has no cwd, it is inherited from the server.
+		# The server can inherit macOS's default soft limit of 256 open files, which
+		# zjstatus command widgets exhaust, leaving the status bars empty.
+		(cd "${dir}" && ulimit -Sn "$(ulimit -Hn)" && execute zellij attach --create-background "${PROJECT_NAME}" options --default-layout dev)
 	fi
 
 	if [[ -n "${ZELLIJ:-}" ]]; then
