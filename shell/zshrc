@@ -26,6 +26,8 @@ source "${DIR}/editor.zsh"
 
 export STARSHIP_CONFIG="${DIR}/starship.toml"
 eval "$(starship init zsh)"
+# Need to be sourced after the prompt is defined
+source "${DIR}/semantic-prompt.sh"
 
 # Prompt
 if [[ -n "${TMUX}" ]]; then

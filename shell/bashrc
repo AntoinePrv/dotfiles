@@ -20,3 +20,4 @@ fi
 source "${DIR}/general.sh"
 source "${DIR}/isolation.sh"  # Need to be sourced before aliases
 source "${DIR}/aliases.sh"  # Need to be sourced after general
+source "${DIR}/semantic-prompt.sh"  # Need to be sourced after the prompt is defined
