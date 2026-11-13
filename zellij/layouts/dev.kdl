@@ -25,13 +25,13 @@ layout {
                 datetime_timezone "Europe/Paris"
 
                 command_docker_format   " {stdout}  "
-                command_docker_command  "bash -c 'docker info &>/dev/null && docker context show'"
+                command_docker_command  "sh -c 'docker info >/dev/null 2>&1 && docker context show'"
                 command_docker_hideonemptystdout "true"
                 command_docker_interval "10"
                 command_docker_rendermode "static"
 
                 command_ssh_format   " {stdout}  "
-                command_ssh_command  "bash -c '[ -n \"${SSH_CLIENT}${SSH_TTY}\" ] && hostname -s'"
+                command_ssh_command  "sh -c '[ -n \"${SSH_CLIENT}${SSH_TTY}\" ] && hostname -s'"
                 command_ssh_hideonemptystdout "true"
                 command_ssh_interval "3600"
                 command_ssh_rendermode "static"
@@ -39,7 +39,6 @@ layout {
         }
         children
         pane size=1 borderless=true {
-            // TODO also add GH PR (done) and CI checks, and rebase status?
             // TODO notification
             // TODO pipes
             // TODO this create  lot of subprocess, a better approach could be to push all this
@@ -49,7 +48,7 @@ layout {
                 format_right "{command_git_open}{command_git_status}{command_git_stashes}{command_git_ahead_behind}{command_gh_pr}{command_git_state}{command_git_branch}"
                 format_space ""
 
-                command_pixi_command    "bash -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" pixi-envs'"
+                command_pixi_command    "sh -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" pixi-envs'"
                 command_pixi_cwd        "{focused_pane_cwd}"
                 command_pixi_format     "#[fg=0,bg=2]  {stdout} #[fg=2,bg=default]"
                 command_pixi_interval   "5"
@@ -64,42 +63,43 @@ layout {
                 command_git_open_hideonemptystdout "true"
 
                 // gh hits the network and takes seconds, hence the long interval
-                command_gh_pr_command    "bash -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" gh-pr'"
+                command_gh_pr_command    "sh -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" gh-pr'"
                 command_gh_pr_cwd        "{focused_pane_cwd}"
                 command_gh_pr_format     "#[fg=7,bg=8] {stdout} "
                 command_gh_pr_interval   "30"
                 command_gh_pr_rendermode "static"
                 command_gh_pr_hideonemptystdout "true"
+                command_gh_pr_clickaction "gh pr view --web"
 
-                command_git_branch_command   "bash -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-branch'"
+                command_git_branch_command   "sh -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-branch'"
                 command_git_branch_cwd        "{focused_pane_cwd}"
                 command_git_branch_format     "#[fg=7,bg=8]  {stdout} "
                 command_git_branch_interval   "1"
                 command_git_branch_rendermode "static"
                 command_git_branch_hideonemptystdout "true"
 
-                command_git_state_command    "bash -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-state'"
+                command_git_state_command    "sh -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-state'"
                 command_git_state_cwd        "{focused_pane_cwd}"
                 command_git_state_format     "#[fg=7,bg=8] {stdout} "
                 command_git_state_interval   "1"
                 command_git_state_rendermode "static"
                 command_git_state_hideonemptystdout "true"
 
-                command_git_status_command    "bash -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-status'"
+                command_git_status_command    "sh -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-status'"
                 command_git_status_cwd        "{focused_pane_cwd}"
                 command_git_status_format     "#[fg=7,bg=8] {stdout} "
                 command_git_status_interval   "1"
                 command_git_status_rendermode "static"
                 command_git_status_hideonemptystdout "true"
 
-                command_git_stashes_command    "bash -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-stashes'"
+                command_git_stashes_command    "sh -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-stashes'"
                 command_git_stashes_cwd        "{focused_pane_cwd}"
                 command_git_stashes_format     "#[fg=7,bg=8]  {stdout} "
                 command_git_stashes_interval   "1"
                 command_git_stashes_rendermode "static"
                 command_git_stashes_hideonemptystdout "true"
 
-                command_git_ahead_behind_command    "bash -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-ahead-behind'"
+                command_git_ahead_behind_command    "sh -c '\"${ZELLIJ_CONFIG_DIR}/zellij-utils.sh\" git-ahead-behind'"
                 command_git_ahead_behind_cwd        "{focused_pane_cwd}"
                 command_git_ahead_behind_format     "#[fg=7,bg=8] {stdout} "
                 command_git_ahead_behind_interval   "1"
