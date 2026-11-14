@@ -115,9 +115,34 @@ git_ahead_behind () (
 	fi
 )
 
+git_all () (
+	sep=" "
+	for arg in "${@}"; do
+		case "${arg}" in
+			--sep=*) sep="${arg#--sep=}" ;;
+		esac
+	done
+	git rev-parse --git-dir > /dev/null 2>&1 || return 0
+	stashes="$(git_stashes)"
+	branch="$(git_branch)"
+	out=""
+	for segment in \
+		"$(git_status)" \
+		"${stashes:+ ${stashes}}" \
+		"$(git_ahead_behind)" \
+		"$(git_state)" \
+		"${branch:+ ${branch}}"
+	do
+		[ -z "${segment}" ] && continue
+		out="${out:+${out} ${sep} }${segment}"
+	done
+	echo "${out}"
+)
+
 gh_pr () {
-	gh pr view --json state,statusCheckRollup --jq '
+	gh pr view --json number,state,statusCheckRollup --jq '
 		select(.state == "OPEN")
+		| .number as $number
 		| [.statusCheckRollup[]
 			| (if .__typename == "StatusContext" then .state
 				elif .status != "COMPLETED" then "PENDING"
@@ -128,18 +153,16 @@ gh_pr () {
 		| (map(select(. == "pass")) | length) as $pass
 		| (map(select(. == "fail")) | length) as $fail
 		| (map(select(. == "pending")) | length) as $pending
-		| if ($fail > 0 or $pending > 0) then
-				[if $pass > 0 then "✔\($pass)" else empty end,
-				 if $fail > 0 then "✘\($fail)" else empty end,
-				 if $pending > 0 then "●\($pending)" else empty end]
-			elif $pass > 0 then ["󰄭"]
-			else [] end
+		| [if $pass > 0 then "✔\($pass)" else empty end,
+		   if $fail > 0 then "✘\($fail)" else empty end,
+		   if $pending > 0 then "●\($pending)" else empty end]
+		| ["#\($number)"] + .
 		| [""] + . | join(" ")
 	' 2> /dev/null
 }
 
 pixi_envs () {
-	pixi info --json 2> /dev/null | jq --raw-output '.environments_info | map(.name) | join("|")'
+	pixi info --json 2> /dev/null | jq --raw-output '.environments_info | map(.name) | if length > 5 then .[:4] + ["…"] + .[-1:] else . end | join("|")'
 }
 
 
