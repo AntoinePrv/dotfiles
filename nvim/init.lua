@@ -44,12 +44,6 @@ require("pckr").add({
         requires = { "nvim-tree/nvim-web-devicons" },
     },
     "ryanoasis/vim-devicons",
-    {
-        -- https://github.com/edluffy/specs.nvim/pull/30
-        -- https://github.com/edluffy/specs.nvim/issues/31
-        -- "edluffy/specs.nvim"
-        "AntoinePrv/specs.nvim",
-    },
     "lukas-reineke/indent-blankline.nvim",
     "lukas-reineke/virt-column.nvim",
     "luukvbaal/statuscol.nvim",

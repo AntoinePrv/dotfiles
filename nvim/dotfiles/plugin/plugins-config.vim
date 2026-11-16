@@ -38,23 +38,23 @@ require("virt-column").setup({
 	char="┋"
 })
 
-local specs = require("specs")
-specs.setup{
-	show_jumps  = true,
-	min_jump = 10,
-	popup = {
-		-- Delay before popup displays
-		delay_ms = 50,
-		-- Time increments used for fade/resize effects
-		inc_ms = 20,
-		-- starting blend, between 0-100 (fully transparent), see :h winblend
-		blend = 100,
-		width = 10,
-		winhl = "Search",
-		fader = nil,
-		resizer = specs.shrink_resizer,
-	},
-}
+-- local specs = require("specs")
+-- specs.setup{
+-- 	show_jumps  = true,
+-- 	min_jump = 10,
+-- 	popup = {
+-- 		-- Delay before popup displays
+-- 		delay_ms = 50,
+-- 		-- Time increments used for fade/resize effects
+-- 		inc_ms = 20,
+-- 		-- starting blend, between 0-100 (fully transparent), see :h winblend
+-- 		blend = 100,
+-- 		width = 10,
+-- 		winhl = "Search",
+-- 		fader = nil,
+-- 		resizer = specs.shrink_resizer,
+-- 	},
+-- }
 vim.keymap.set(
 	"n",
 	"n",
