@@ -31,12 +31,7 @@ require("pckr").add({
 
     -- Colors themes
     -- TODO consider echasnovski/mini.base16 when migrated to neovim 0.10
-    {
-        -- "tinted-theming/base16-vim"
-        -- https://github.com/tinted-theming/base16-vim/pull/82 but missing rerender
-        "AntoinePrv/fork-tinted-theming-base16-vim",
-        branch = "nvim-0.10-rendered",
-    },
+    "tinted-theming/base16-vim",
 
     -- Visual
     {
